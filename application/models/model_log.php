@@ -1,9 +1,9 @@
-<?php  
+<?php
 class model_log extends CI_Model
 {
 	public function tampil_data()
 	{
-		return $this->db->get(''); 
+		return $this->db->get('');
 	}
 	public function hapus_data($where,$table)
 	{
@@ -20,7 +20,7 @@ class model_log extends CI_Model
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}
-	
+
 	public function ver($username,$password)
 	{
 		$this->db->where('username',$username);
@@ -49,5 +49,15 @@ class model_log extends CI_Model
 			redirect('auth');
 		}
 	}
+	public function dropdown()
+  {
+    $query = $this->db->get('tahun_ajaran');
+    return $query;
+  }
+	public function prodi()
+  {
+    $query = $this->db->get('prodi');
+    return $query;
+  }
 }
 ?>
