@@ -59,5 +59,10 @@ class model_log extends CI_Model
     $query = $this->db->get('prodi');
     return $query;
   }
+	public function datatable_2a()
+  {
+    $query = $this->db->get('tabel_2a');
+    return $query;
+  }
 }
 ?>

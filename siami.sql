@@ -74,7 +74,7 @@ INSERT INTO `prodi` (`id_prodi`, `nama_prodi`) VALUES
 
 CREATE TABLE `tabel_2a` (
   `id_tabel2a` int(11) NOT NULL,
-  `id_tahun_ajaran` int(11) NOT NULL,
+  `id_tahun` int(11) NOT NULL,
   `daya_tampung` int(11) NOT NULL,
   `pendaftar` int(11) NOT NULL,
   `lulus_seleksi` int(11) NOT NULL,
@@ -129,7 +129,7 @@ ALTER TABLE `prodi`
 --
 ALTER TABLE `tabel_2a`
   ADD PRIMARY KEY (`id_tabel2a`),
-  ADD KEY `id_tahun_ajaran` (`id_tahun_ajaran`);
+  ADD KEY `tahun` (`id_tahun`);
 
 --
 -- Indeks untuk tabel `tahun_ajaran`
@@ -173,7 +173,7 @@ ALTER TABLE `tahun_ajaran`
 -- Ketidakleluasaan untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  ADD CONSTRAINT `tabel_2a_ibfk_1` FOREIGN KEY (`id_tahun_ajaran`) REFERENCES `tahun_ajaran` (`id_tahun_ajaran`);
+  ADD CONSTRAINT `tabel_2a_ibfk_1` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_ajaran` (`id_tahun_ajaran`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -7,7 +7,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 2b. Mahasiswa Asing</h4>
+      <h4>Table 8a. IPK Lulusan</h4>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <td align="right">Nama Program Studi :</td>
-          <td >
+          <td>
             <div class="">
               <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
               <option class="dropdown-item" selected> - pilih program studi - </option>
@@ -51,20 +51,13 @@
             <tr>
               <th rowspan="2">No.</th>
               <th rowspan="2">Program Studi</th>
-              <th colspan="3">Jumlah Mahasiswa Aktif</th>
-              <th colspan="3">Jumlah Mahasiswa Asing Penuh Waktu</th>
-              <th colspan="3">Jumlah Mahasiswa Asing Paruh Waktu</th>
+              <th rowspan="2">Jumlah Lulusan</th>
+              <th colspan="3">Indeks Prestasi Kumulatif</th>
             </tr>
             <tr>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
+              <th>Min.</th>
+              <th>Rata-rata</th>
+              <th>Maks</th>
             </tr>
             <tr align="center">
               <td>1</td>
@@ -73,38 +66,22 @@
               <td>4</td>
               <td>5</td>
               <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
-              <td>11</td>
             </tr>
           </thead>
           <tbody>
+
           </tbody>
-          <tfoot>
-            <tr>
-              <th colspan="2">Total</th>
-              <th colspan="3"></th>
-              <th colspan="3"></th>
-              <th colspan="3"></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </br>
       <table class="">
         <tr>
-          <td>Jumlah Mahasiswa Asing</td>
+          <td>Rata-rata</td>
           <td>:</td>
         </tr>
         <tr>
-          <td>Jumlah Total Mahasiswa</td>
-          <td>:</td>
-        </tr>
-        <tr>
-          <td>Persentase mahasiswa asing dan total mahasiswa</td>
-          <td>:</td>
+          <td></td>
+          <td></td>
         </tr>
       </table>
       <!-- End Data Table -->
