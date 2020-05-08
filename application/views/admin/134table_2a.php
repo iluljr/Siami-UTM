@@ -9,26 +9,20 @@
     <div class="card-body">
       <h4>Table 2a. Seleksi Mahasiswa Baru</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <table class="table-responsive mb-3">
-        <tr>
-          <td align="right">Tahun Ajaran :</td>
-          <td>
-            <div>
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-                <option class="dropdown-item" selected> - pilih tahun ajaran - </option>
-                <?php
-                  foreach ($dropdown as $dd):
-                ?>
-                  <option value="<?php echo $dd->id_tahun_ajaran;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
-                <?php endforeach;?>
-              </select>
-            </div>
-          </td>
-          <td>
-            <button class="btn btn-sm btn-primary">Tampil data</button>
-          </td>
-        </tr>
-      </table>
+
+      <form class="form-inline mb-2" action="<?= base_url('admin/table_2a'); ?>" method="post">
+        <p class="mr-2 pt-2">Tahun Ajaran :</p>
+        <select name="id_tahun" class="custom-select custom-select-sm">
+          <option value="id_tahun" class="dropdown-item"> - pilih tahun ajaran - </option>
+          <?php
+            foreach ($dropdown as $dd):
+
+          ?>
+            <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+          <?php endforeach;?>
+        </select>
+        <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+      </form>
 
       <!-- Data Table -->
       <div class="table-responsive">
@@ -61,15 +55,31 @@
             </tr>
           </thead>
           <tbody>
+            <?php
+            foreach ($view_table2a as $tb) :
+            ?>
+            <tr>
+              <td><?= $tb['tahun']?> / <?= $tb['tahun']+1?></td>
+              <td><?= $tb['daya_tampung']?></td>
+              <td><?= $tb['pendaftar']?></td>
+              <td><?= $tb['lulus_seleksi']?></td>
+              <td><?= $tb['jmb_reguler']?></td>
+              <td><?= $tb['jmb_transfer']?></td>
+              <td><?= $tb['jma_reguler']?></td>
+              <td><?= $tb['jma_transfer']?></td>
+            </tr>
+          <?php endforeach;?>
           </tbody>
           <tfoot>
             <tr>
               <th colspan="2">Jumlah</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <?php foreach ($jumlah_data as $jd): ?>
+              <th><?= $jd['pendaftar']?></th>
+              <th><?= $jd['lulus_seleksi']?></th>
+              <th><?= $jd['jmb_reguler']?></th>
+              <th><?= $jd['jmb_transfer']?></th>
               <th colspan="2"></th>
+            <?php endforeach;?>
             </tr>
           </tfoot>
         </table>
