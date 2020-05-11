@@ -14,6 +14,7 @@ class admin extends CI_Controller
 
 	public function index()
 	{
+<<<<<<< HEAD
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
@@ -23,6 +24,12 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/sidebar_admin");
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/dashboard",$data);
+=======
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/dashboard");
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 		$this->load->view("admin/layout/footer_admin");
 	}
 
@@ -49,9 +56,12 @@ class admin extends CI_Controller
 
 		$data['view_table2a'] = $this->model_log->gettable2a($config['per_page'], $data['start'],$data['id_tahun']);
 		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun']);
+<<<<<<< HEAD
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun']);
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun']);
+=======
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$this->load->view("admin/layout/header_admin");

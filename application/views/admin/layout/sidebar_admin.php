@@ -2,7 +2,11 @@
 <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
+<<<<<<< HEAD
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+=======
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url("admin")?>#">
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -30,9 +34,16 @@
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
+<<<<<<< HEAD
     <a class="nav-link " href="<?= base_url("admin")?>"><i class="fas fa-fw fa-table"></i><span>Data Audit</span></a>
     <a class="nav-link" href="<?= base_url("admin/table_2a")?>"><i class="fas fa-fw fa-table"></i><span>Table 2a</span></a>
     <a class="nav-link" href="<?= base_url("admin/table_2b")?>"><i class="fas fa-fw fa-table"></i><span>Table 2b</span></a>
+=======
+    <a class="nav-link" href="<?= base_url("admin")?>"><i class="fas fa-fw fa-table"></i><span>Data Audit</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_2a")?>"><i class="fas fa-fw fa-table"></i><span>Table 2a</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_2b")?>"><i class="fas fa-fw fa-table"></i><span>Table 2b</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8a")?>"><i class="fas fa-fw fa-table"></i><span>Table 8a</span></a>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
   </li>
 
   <!-- Divider -->

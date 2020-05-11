@@ -58,8 +58,13 @@
             <?php
             foreach ($view_table2a as $tb) :
             ?>
+<<<<<<< HEAD
             <tr align="center">
               <td><?= $tb['tahun']?>/<?= $tb['tahun']+1?></td>
+=======
+            <tr>
+              <td><?= $tb['tahun']?> / <?= $tb['tahun']+1?></td>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
               <td><?= $tb['daya_tampung']?></td>
               <td><?= $tb['pendaftar']?></td>
               <td><?= $tb['lulus_seleksi']?></td>
@@ -71,17 +76,26 @@
           <?php endforeach;?>
           </tbody>
           <tfoot>
+<<<<<<< HEAD
             <tr align="center">
+=======
+            <tr>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
               <th colspan="2">Jumlah</th>
               <?php foreach ($jumlah_data as $jd): ?>
               <th><?= $jd['pendaftar']?></th>
               <th><?= $jd['lulus_seleksi']?></th>
               <th><?= $jd['jmb_reguler']?></th>
               <th><?= $jd['jmb_transfer']?></th>
+<<<<<<< HEAD
               <?php endforeach;?>
                 <?php foreach ($jumlah_data_MA as $jd2): ?>
               <th colspan="2"><?= $jd2['mahasiswa_aktif']?></th>
                 <?php endforeach;?>
+=======
+              <th colspan="2"></th>
+            <?php endforeach;?>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
             </tr>
           </tfoot>
         </table>
@@ -89,6 +103,7 @@
     </br>
       <table class="">
         <tr>
+<<<<<<< HEAD
           <?php foreach ($jumlah_data as $jd): ?>
             <td>Rasio pendaftar dan mahasiswa baru</td>
             <td>:</td>
@@ -126,6 +141,26 @@
               <td><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
             <?php endforeach;?> 
           <?php endforeach;?>
+=======
+          <td>Rasio pendaftar dan mahasiswa baru</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td>Jumlah Mahasiswa Aktif</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td>Jumlah Dosen Tetap PS</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td>Rasio Dosen dan Mahasiswa</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
+          <td>:</td>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
         </tr>
       </table>
       <!-- End Data Table -->
@@ -140,6 +175,7 @@
 <!-- End of Main Content -->
 <!-- Modal Tambah Mahasiswa -->
 <div class="modal fade" id="databaru" tabindex="-1" role="dialog" aria-labelledby="DataBaru" aria-hidden="true">
+<<<<<<< HEAD
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -170,6 +206,38 @@
             <input type="text" class="form-control mb-2" name="pendaftar" id="pendaftar" placeholder="Pendaftar" required>
             <input type="text" class="form-control" name="lulusseleksi" id="lulusseleksi" placeholder="Lulus Seleksi" required>
           </div>
+=======
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin/table_2a'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukan Tahun Ajaran
+            </div>
+						<input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun Ajaran" required>
+					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah Daya Tampung
+            </div>
+						<input type="text" class="form-control" name="dayatampung" id="dayatampung" placeholder="Daya Tampung" required>
+					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah Calon Mahasiswa
+            </div>
+						<input type="text" class="form-control mb-2" name="pendaftar" id="pendaftar" placeholder="Pendaftar" required>
+						<input type="text" class="form-control" name="lulusseleksi" id="lulusseleksi" placeholder="Lulus Seleksi" required>
+					</div>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
             <div class="form-group">
               <div class="invalid-feedback>">
                 Jumlah Mahasiswa Baru
@@ -184,6 +252,7 @@
             <input type="text" class="form-control mb-2" name="regulera" id="regulera" placeholder="Reguler" required>
             <input type="text" class="form-control" name="transfera" id="transfera" placeholder="Transfer" required>
           </div>
+<<<<<<< HEAD
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Tambah</button>
@@ -193,4 +262,15 @@
 
     </div>
   </div>
+=======
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 </div>

@@ -73,7 +73,11 @@ class model_log extends CI_Model
 		} else {
 			$query =
 							"
+<<<<<<< HEAD
 		SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer'
+=======
+		SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer', SUM(tb.jma_reguler) AS 'jma_reguler', SUM(tb.jma_transfer) AS 'jma_transfer'
+>>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 		FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun
 		";
 		}
