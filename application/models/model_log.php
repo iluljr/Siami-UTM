@@ -1,15 +1,17 @@
-<?php  
+<?php
 class model_log extends CI_Model
 {
 	public function tampil_data()
 	{
-		return $this->db->get(''); 
+		return $this->db->get('');
 	}
+
 	public function hapus_data($where,$table)
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
 	}
+
 	public function edit_data($where,$table)
 	{
 		return $this->db->get_where($table,$where);
@@ -20,7 +22,7 @@ class model_log extends CI_Model
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}
-	
+
 	public function ver($username,$password)
 	{
 		$this->db->where('username',$username);
@@ -49,5 +51,60 @@ class model_log extends CI_Model
 			redirect('auth');
 		}
 	}
+	public function dropdown()
+  {
+    $query = $this->db->get('tahun_ajaran');
+    return $query;
+  }
+	public function prodi()
+  {
+    $query = $this->db->get('prodi');
+    return $query;
+  }
+
+	public function datatable_2a($id_tahun = null)
+  {
+		if ($id_tahun !== null) {
+				$query =
+								"
+			SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer', (SELECT tb.jma_reguler+tb.jma_transfer FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun = $id_tahun) AS 'mahasiswa_aktif'
+			FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun <= $id_tahun
+			";
+		} else {
+			$query =
+							"
+		SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer'
+		FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun
+		";
+		}
+		return $this->db->query($query)->result_array();
+  }
+
+	public function gettable2a($limit, $start, $id_tahun = null)
+	 {
+			 if ($id_tahun !== null) {
+
+					 $query =
+							 "
+		 SELECT t.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
+		 FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun <= $id_tahun limit $start, $limit
+			 ";
+			 } else {
+					 $query =
+							 "
+		 SELECT t.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
+		 FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun limit $start, $limit
+	 ";
+			 }
+			 return $this->db->query($query, $limit, $start, $id_tahun)->result_array();
+	 }
+
+	public function HitungSearch($id_tahun)
+    {
+        return $this->db
+            ->SELECT('id_tahun', $id_tahun)
+            ->from('tabel_2a')
+            ->count_all_results();
+    }
 }
 ?>
