@@ -49,7 +49,7 @@ class admin extends CI_Controller
 				$data['start'] = $nn;
 			} else{
 				$data['start'] = 0;
-			} 
+			}
 		}
 
 		$data['view_table2a'] = $this->model_log->gettable2a($config['per_page'], $data['start'],$data['id_tahun']);
@@ -69,7 +69,7 @@ class admin extends CI_Controller
 
 	public function tambah_data2a()
 	{
-		
+
 		 $tahun = $this->input->post('tahun');
 		 $dayatampung = $this->input->post('dayatampung');
 		 $pendaftar = $this->input->post('pendaftar');
@@ -78,7 +78,7 @@ class admin extends CI_Controller
 		 $transferb = $this->input->post('transferb');
 		 $regulera = $this->input->post('regulera');
 		 $transfera = $this->input->post('transfera');
-		 
+
 		 $data = array(
 		 	'tahun' => $tahun,
 		 	'daya_tampung' => $dayatampung,
@@ -155,6 +155,18 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/sidebar_admin");
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/5table_8a",$data);
+		$this->load->view("admin/layout/footer_admin");
+
+	}
+
+	public function table_8b()
+	{
+		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['prodi']=$this->model_log->prodi()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/5table_8b",$data);
 		$this->load->view("admin/layout/footer_admin");
 
 	}
