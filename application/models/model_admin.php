@@ -20,11 +20,11 @@ class model_admin extends CI_Model
 			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT ta.jma_reguler+ta.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a ta WHERE ta.tahun = $id_tahun
+		SELECT t.jma_reguler+t.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a t WHERE t.tahun = $id_tahun
 		";} else {
 			$query =
 							"
-		SELECT ta.jma_reguler+ta.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a ta WHERE ta.tahun = (SELECT date_format(curdate(),'%Y'))
+		SELECT t.jma_reguler+t.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a t WHERE t.tahun = (SELECT date_format(curdate(),'%Y'))
 		";
 		}
 		return $this->db->query($query)->result_array();

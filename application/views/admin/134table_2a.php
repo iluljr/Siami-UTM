@@ -113,7 +113,7 @@
             <td>Jumlah Dosen Tetap PS</td>
             <td>: </td>
             <td><?= $jdosen['jumlah_dosen']?></td>
-          <?php endforeach;?> 
+          <?php endforeach;?>
         </tr>
         <tr>
           <?php foreach ($jumlah_data_MA as $jd2): ?>
@@ -121,8 +121,8 @@
               <td>Rasio Dosen dan Mahasiswa</td>
               <td>: </td>
               <td><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
-            <?php endforeach;?> 
-          <?php endforeach;?> 
+            <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
           <?php foreach ($jumlah_data_MA as $jdA): ?>
@@ -130,7 +130,7 @@
               <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
               <td>: </td>
               <td><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
-            <?php endforeach;?> 
+            <?php endforeach;?>
           <?php endforeach;?>
         </tr>
       </table>

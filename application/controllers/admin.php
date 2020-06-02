@@ -52,7 +52,7 @@ class admin extends CI_Controller
 			}
 		}
 
-		$data['view_table2a'] = $this->model_log->gettable2a($config['per_page'], $data['start'],$data['id_tahun']);
+		$data['view_table2a'] = $this->model_log->gettable2a($data['id_tahun']);
 		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun']);
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun']);
@@ -119,7 +119,7 @@ class admin extends CI_Controller
 		 	'pendaftar' => $pendaftar,
 		 	'lulus_seleksi' => $lulusseleksi,
 		 	'jmb_reguler' => $regulerb,
-		 	'jmb_transfer' => $regulerb,
+		 	'jmb_transfer' => $transferb,
 		 	'jma_reguler' => $regulera,
 		 	'jma_transfer' => $transfera,
 		);
