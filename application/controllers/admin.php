@@ -182,5 +182,41 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/footer_admin");
 
 	}
+
+	public function table_8d1()
+	{
+		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['prodi']=$this->model_log->prodi()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/10table_8d1",$data);
+		$this->load->view("admin/layout/footer_admin");
+
+	}
+
+	public function table_8d2()
+	{
+		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['prodi']=$this->model_log->prodi()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/11table_8d2",$data);
+		$this->load->view("admin/layout/footer_admin");
+
+	}
+
+	public function table_8e1()
+	{
+		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['prodi']=$this->model_log->prodi()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/12table_8e1",$data);
+		$this->load->view("admin/layout/footer_admin");
+
+	}
 }
 ?>
