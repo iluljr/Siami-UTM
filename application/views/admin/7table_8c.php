@@ -7,7 +7,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
+      <h4>Table 8.c Masa Studi Lulusan</h4>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -49,57 +49,85 @@
         <table class="table table-bordered" width="1600px" cellspacing="0">
           <thead align="center">
             <tr>
-              <th rowspan="2">No.</th>
-              <th rowspan="2">Nama Kegiatan</th>
-              <th rowspan="2">Waktu Perolehan (YYYY)</th>
-              <th colspan="3">Tingkat</th>
-              <th rowspan="2">Prestasi Yang Dicapai</th>
+              <th rowspan="2">Tahun Masuk</th>
+              <th rowspan="2">Jumlah Mahasiswa Diterima</th>
+              <th colspan="7">Jumlah Mahasiswa Yang Lulus Pada</th>
+              <th rowspan="2">Jumlah Lulusan s.d. akhir TS</th>
+              <th rowspan="2">Rata-rata Masa Studi</th>
             </tr>
             <tr>
-              <th>Lokal/Wilayah</th>
-              <th>Nasional</th>
-              <th>Internasional</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
             <tr align="center">
               <td>1</td>
+              <td></td>
               <td>2</td>
               <td>3</td>
               <td>4</td>
               <td>5</td>
               <td>6</td>
               <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
             </tr>
           </thead>
           <tbody>
 
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="9"></td>
+              <td>Rata-rata Masa Studi</td>
+              <td></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </br>
       <table class="">
         <tr>
-          <td>Jumlah mahasiswa aktif pada saat TS (NM)</td>
+          <td colspan="4">Jumlah mahasiswa yang diterima saat TS-3</td>
           <td>:</td>
           <td></td>
-          <td>NIM</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik internasional (NI)</td>
+          <td colspan="4">Jumlah mahasiswa yang diterima saat TS-3 dan lulus pada akhir TS</td>
           <td>:</td>
           <td></td>
-          <td>NI</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik nasional (NN)</td>
+          <td>&nbsp;</td>
+          <td colspan="3">Persentase kelulusan tepat waktu</td>
           <td>:</td>
           <td></td>
-          <td>NN</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik wilayah (NW)</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td>IKU No.8</td>
+          <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td></td>
-          <td>NW</td>
+          <td>50%</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PTW < 50% , tuliskan 0</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PTW >= 50%  tuliskan nilainya</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -108,42 +136,54 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td>RI</td>
+          <td colspan="4">Data dari tahun masuk TS-3 sampai TS-6 </td>
+          <td colspan="2">&nbsp;</td>
+          <td>Skor Terbobot</td>
+        </tr>
+        <tr>
+          <td colspan="4">Jumlah mahasiswa dengan masa studi <= 4 tahun</td>
           <td>:</td>
-          <td></td>
-          <td>NI/NIM</td>
-        </tr>
-        <tr>
-          <td>RN</td>
+          <td>B dibobot 1.0</td>
           <td>:</td>
-          <td></td>
-          <td>NN/NIM</td>
         </tr>
         <tr>
-          <td>RW</td>
+          <td colspan="4">Jumlah mahasiswa dengan masa studi > 4 tahun sampai < 7 tahun</td>
           <td>:</td>
-          <td></td>
-          <td>NW/NIM</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>Pemenuhan IKU</td>
+          <td>C dibobot 0.5</td>
           <td>:</td>
-          <td></td>
-          <td>RI >= 0.1% (0.001)</td>
+        </tr>
+        <tr>
+          <td colspan="4">Jumlah mahasiswa</td>
+          <td>:</td>
+          <td>A</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td>Persentase Keberhasislan Studi</td>
+          <td>:</td>
+          <td>(B+C)/A</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td colspan="3">Jika RI < IKU, tuliskan 0</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Jika RI ≥IKU, tuliskan nilainya</td>
+          <td colspan="2">&nbsp;</td>
+          <td>IKU No. 9</td>
+          <td>Pemenuhan IKU </td>
+          <td>:</td>
+          <td>85%</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PPS < 85% , tuliskan 0</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PPS >=85%  tuliskan nilainya </td>
         </tr>
       </table>
       <!-- End Data Table -->

@@ -37,7 +37,7 @@
                   <td align="center"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
                   <td align="center"> 4 </td>
                   <td></td>
-                <?php endforeach;?> 
+                <?php endforeach;?>
               </tr>
               <tr>
                 <td>2</td>
@@ -48,7 +48,9 @@
                 <td></td>
                 <td bgcolor="yellow">Persentase jumlah mahasiswa asing terhadap jumlah seluruh mahasiswa adalah 0 %</td>
                 <td></td>
-                <td></td>
+                <?php foreach ($view_table2a_jumlahmhs as $jmblh) : ?>
+                  <td><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
+                <?php endforeach;?>
                 <td align="center">1</td>
                 <td></td>
               </tr>
@@ -66,8 +68,8 @@
                     <td><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
                     <td></td>
                     <td></td>
-                  <?php endforeach;?> 
-                <?php endforeach;?> 
+                  <?php endforeach;?>
+                <?php endforeach;?>
               </tr>
               <tr>
                 <?php foreach ($jumlah_data_MA as $jdA): ?>
@@ -83,8 +85,8 @@
                     <td><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
                     <td></td>
                     <td></td>
-                  <?php endforeach;?> 
-                <?php endforeach;?> 
+                  <?php endforeach;?>
+                <?php endforeach;?>
               </tr>
             </tbody>
           </table>

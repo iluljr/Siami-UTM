@@ -7,7 +7,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
+      <h4>Table 8.d.2 Kesesuaian Bidang Kerja Kuliah</h4>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -49,16 +49,15 @@
         <table class="table table-bordered" width="1600px" cellspacing="0">
           <thead align="center">
             <tr>
-              <th rowspan="2">No.</th>
-              <th rowspan="2">Nama Kegiatan</th>
-              <th rowspan="2">Waktu Perolehan (YYYY)</th>
-              <th colspan="3">Tingkat</th>
-              <th rowspan="2">Prestasi Yang Dicapai</th>
+              <th rowspan="2">Tahun Lulus</th>
+              <th rowspan="2">Jumlah Lulusan</th>
+              <th rowspan="2">Jumlah Lulusan yang Terlacak</th>
+              <th colspan="3">Jumlah lulusan dengan waktu tunggu mendapatkan pekerjaan</th>
             </tr>
             <tr>
-              <th>Lokal/Wilayah</th>
-              <th>Nasional</th>
-              <th>Internasional</th>
+              <th>Rendah</th>
+              <th>Sedang</th>
+              <th>Tinggi</th>
             </tr>
             <tr align="center">
               <td>1</td>
@@ -67,85 +66,70 @@
               <td>4</td>
               <td>5</td>
               <td>6</td>
-              <td>7</td>
             </tr>
           </thead>
           <tbody>
 
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Jumlah</td>
+              <td></td>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </br>
       <table class="">
         <tr>
-          <td>Jumlah mahasiswa aktif pada saat TS (NM)</td>
+          <td colspan="4">Jumlah lulusan yang sesuai bidang kategori tinggi</td>
           <td>:</td>
           <td></td>
-          <td>NIM</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik internasional (NI)</td>
+          <td colspan="4">Jumlah lulusan terlacak</td>
           <td>:</td>
           <td></td>
-          <td>NI</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik nasional (NN)</td>
+          <td>&nbsp;</td>
+          <td colspan="3">Persentase lulusan yang sesuai bidang</td>
           <td>:</td>
           <td></td>
-          <td>NN</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik wilayah (NW)</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td>IKU No.11</td>
+          <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td></td>
-          <td>NW</td>
+          <td>PBS > = 60%</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PBS < 60% , tuliskan 0</td>
         </tr>
         <tr>
-          <td>RI</td>
-          <td>:</td>
-          <td></td>
-          <td>NI/NIM</td>
-        </tr>
-        <tr>
-          <td>RN</td>
-          <td>:</td>
-          <td></td>
-          <td>NN/NIM</td>
-        </tr>
-        <tr>
-          <td>RW</td>
-          <td>:</td>
-          <td></td>
-          <td>NW/NIM</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>Pemenuhan IKU</td>
-          <td>:</td>
-          <td></td>
-          <td>RI >= 0.1% (0.001)</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Jika RI < IKU, tuliskan 0</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Jika RI ≥IKU, tuliskan nilainya</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="2">Jika PBS >= 60%  tuliskan nilainya</td>
         </tr>
       </table>
+      </br>
+      <p>RENDAH: jenis pekerjaan/posisi jabatan dalam pekerjaan tidak sesuai atau kurang sesuai
+        dengan profil lulusan yang direncanakan dalam dokumen kurikulum.
+        <br>SEDANG : Jenis pekerjaan/posisi jabatan dalam pekerjaan cukup sesuai dengan profil lulusan
+        yang direncanakan dalam dokumen kurikulum.
+        <br>TINGGI:  Jenis pekerjaan/posisi jabatan dalam pekerjaan sesuai atau sangat sesuai dengan
+        profil lulusan yang direncanakan dalam dokumen kurikulum</p>
       <!-- End Data Table -->
 
     </div>

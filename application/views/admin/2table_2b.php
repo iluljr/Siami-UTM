@@ -13,14 +13,21 @@
           <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih tahun ajaran - </option>
+              <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
+              <select name="id_tahun" id="id_tahun" class="custom-select custom-select-sm">
+                <?php
+                  foreach ($tahunsekarang_2b as $ts):
+                ?>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+              <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
               ?>
                 <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
               <?php endforeach;?>
             </select>
+            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+          </form>
           </div>
           </td>
         </tr>
@@ -55,19 +62,23 @@
               <th colspan="3">Jumlah Mahasiswa Aktif</th>
               <th colspan="3">Jumlah Mahasiswa Asing Penuh Waktu</th>
               <th colspan="3">Jumlah Mahasiswa Asing Paruh Waktu</th>
+              <th rowspan="2" colspan="3">Update</th>
             </tr>
             <tr>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
-              <th>ts-2</th>
-              <th>ts-1</th>
-              <th>ts</th>
+              <?php foreach ($tahunsekarang_2b as $ts): ?>
+              <th><?= $ts['tahun']-2?></th>
+              <th><?= $ts['tahun']-1?></th>
+              <th><?= $ts['tahun']?></th>
+              <th><?= $ts['tahun']-2?></th>
+              <th><?= $ts['tahun']-1?></th>
+              <th><?= $ts['tahun']?></th>
+              <th><?= $ts['tahun']-2?></th>
+              <th><?= $ts['tahun']-1?></th>
+              <th><?= $ts['tahun']?></th>
+              <?php endforeach;?>
             </tr>
             <tr align="center">
+              <?php foreach ($tahunsekarang_2b as $ts): ?>
               <td>1</td>
               <td>2</td>
               <td>3</td>
@@ -79,34 +90,69 @@
               <td>9</td>
               <td>10</td>
               <td>11</td>
+              <th><?= $ts['tahun']-2?></th>
+              <th><?= $ts['tahun']-1?></th>
+              <th><?= $ts['tahun']?></th>
+              <?php endforeach;?>
             </tr>
           </thead>
           <tbody>
+            <?php foreach ($view_table2a as $tb) : ?>
+              <?php foreach ($view_table2a_min1 as $tb1) : ?>
+                <?php foreach ($view_table2a_min2 as $tb2) : ?>
+            <tr align="center">
+              <td> </td>
+              <td><?= $tb['nama_prodi']?></td>
+              <td><?= $tb2['jma_reguler']?></td>
+              <td><?= $tb1['jma_reguler']?></td>
+              <td><?= $tb['jma_reguler']?></td>
+              <td><?= $tb2['jma_penuh']?></td>
+              <td><?= $tb1['jma_penuh']?></td>
+              <td><?= $tb['jma_penuh']?></td>
+              <td><?= $tb2['jma_paruh']?></td>
+              <td><?= $tb1['jma_paruh']?></td>
+              <td><?= $tb['jma_paruh']?></td>
+              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-2),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-1),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('admin/edit_tabel2b/'.$tb['tahun'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              </td>
+            </tr>
+              <?php endforeach;?>
+            <?php endforeach;?>
+          <?php endforeach;?>
           </tbody>
           <tfoot>
-            <tr>
+            <?php foreach ($view_table2a_jumlahmhs as $jmblh) : ?>
+            <tr align="center">
               <th colspan="2">Total</th>
-              <th colspan="3"></th>
-              <th colspan="3"></th>
-              <th colspan="3"></th>
+              <th colspan="3"><?= $jmblh['jmblh_jma_reg']?></th>
+              <th colspan="3"><?= $jmblh['jmblh_jma_penuh']?></th>
+              <th colspan="3"><?= $jmblh['jmblh_jma_paruh']?></th>
+              <th colspan="3">Update</th>
             </tr>
+            <?php endforeach;?>
           </tfoot>
         </table>
       </div>
     </br>
       <table class="">
+        <?php foreach ($view_table2a_jumlahmhs as $jmblh) : ?>
         <tr>
           <td>Jumlah Mahasiswa Asing</td>
           <td>:</td>
+          <td><?= $jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh']?></td>
         </tr>
         <tr>
           <td>Jumlah Total Mahasiswa</td>
           <td>:</td>
+          <td><?= $jmblh['jmblh_jma_reg']?></td>
         </tr>
         <tr>
           <td>Persentase mahasiswa asing dan total mahasiswa</td>
           <td>:</td>
+          <td><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
         </tr>
+        <?php endforeach;?>
       </table>
       <!-- End Data Table -->
 

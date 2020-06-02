@@ -31,10 +31,14 @@
   <!-- Nav Item - Tables -->
   <li class="nav-item">
     <a class="nav-link" href="<?= base_url("admin")?>"><i class="fas fa-fw fa-table"></i><span>Data Audit</span></a>
-    <a class="nav-link" href="<?= base_url("admin/table_2a")?>"><i class="fas fa-fw fa-table"></i><span>Table 2a</span></a>
-    <a class="nav-link" href="<?= base_url("admin/table_2b")?>"><i class="fas fa-fw fa-table"></i><span>Table 2b</span></a>
-    <a class="nav-link" href="<?= base_url("admin/table_8a")?>"><i class="fas fa-fw fa-table"></i><span>Table 8a</span></a>
-    <a class="nav-link" href="<?= base_url("admin/table_8b")?>"><i class="fas fa-fw fa-table"></i><span>Table 8b</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_2a")?>"><i class="fas fa-fw fa-table"></i><span>Table 2.a</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_2b")?>"><i class="fas fa-fw fa-table"></i><span>Table 2.b</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8a")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.a</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8b")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.b</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8c")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.c</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8d1")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.d.1</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8d2")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.d.2</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8e1")?>"><i class="fas fa-fw fa-table"></i><span>Table 8.e.1</span></a>
   </li>
 
   <!-- Divider -->

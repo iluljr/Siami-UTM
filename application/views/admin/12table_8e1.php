@@ -7,7 +7,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
+      <h4>Table 8.e.1 Tempat Kerja Lulusan</h4>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -49,16 +49,16 @@
         <table class="table table-bordered" width="1600px" cellspacing="0">
           <thead align="center">
             <tr>
-              <th rowspan="2">No.</th>
-              <th rowspan="2">Nama Kegiatan</th>
-              <th rowspan="2">Waktu Perolehan (YYYY)</th>
-              <th colspan="3">Tingkat</th>
-              <th rowspan="2">Prestasi Yang Dicapai</th>
+              <th rowspan="2">Tahun Lulus</th>
+              <th rowspan="2">Jumlah Lulusan</th>
+              <th rowspan="2">Jumlah Lulusan yang Terlacak</th>
+              <th rowspan="2">Jumlah Lulusan yang Telah Bekerja/ Berwirausaha</th>
+              <th colspan="3">Jumlah Lulusan yang Bekerja Berdasarkan Tingkat/Ukuran Tempat Kerja/Berwirausa</th>
             </tr>
             <tr>
-              <th>Lokal/Wilayah</th>
-              <th>Nasional</th>
-              <th>Internasional</th>
+              <th>Lokal/ Wilayah/ Berwirausaha tidak Berbadan Hukum</th>
+              <th>Nasional/ Berwirausaha Berbadan Hukum</th>
+              <th>Multinasiona/ Internasional</th>
             </tr>
             <tr align="center">
               <td>1</td>
@@ -73,57 +73,85 @@
           <tbody>
 
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Jumlah</td>
+              <td></td>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </br>
       <table class="">
         <tr>
-          <td>Jumlah mahasiswa aktif pada saat TS (NM)</td>
-          <td>:</td>
-          <td></td>
-          <td>NIM</td>
-        </tr>
-        <tr>
-          <td>Jumlah prestasi akademik internasional (NI)</td>
-          <td>:</td>
-          <td></td>
+          <td colspan="6">Persentase lulusan terlacak dari total lulusan</td>
           <td>NI</td>
+          <td>:</td>
         </tr>
         <tr>
-          <td>Jumlah prestasi akademik nasional (NN)</td>
-          <td>:</td>
-          <td></td>
+          <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat internasional/multi nasional.</td>
           <td>NN</td>
-        </tr>
-        <tr>
-          <td>Jumlah prestasi akademik wilayah (NW)</td>
           <td>:</td>
-          <td></td>
-          <td>NW</td>
+          <td>RI = (NI / NA) x 100%</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>RI</td>
+          <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat nasional atau berwirausaha yang berizin.</td>
+          <td>NL</td>
           <td>:</td>
-          <td></td>
-          <td>NI/NIM</td>
+          <td>RN = (NN / NA) x 100%</td>
         </tr>
         <tr>
+          <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat wilayah/lokal atau berwirausaha tidak berijin</td>
+          <td>NA</td>
+          <td>:</td>
+          <td>RL = (NL / NA) x 100% </td>
+        </tr>
+        <tr>
+          <td colspan="6">Jumlah lulusan terlacak</td>
+          <td>NA</td>
+          <td>:</td>
+          <td>Faktor: a = 5% , b = 20% , c = 90% .</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="9"> NI = Jumlah lulusan yang bekerja di badan usaha tingkat internasional/multi nasional.</td>
+        </tr>
+        <tr>
+          <td colspan="9"> NN = Jumlah lulusan yang bekerja di badan usaha tingkat nasional atau berwirausaha yang berizin.</td>
+        </tr>
+        <tr>
+          <td colspan="9"> NL = Jumlah lulusan yang bekerja di badan usaha tingkat wilayah/lokal atau berwirausaha tidak berijin</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td>R1</td>
+          <td>:</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
           <td>RN</td>
           <td>:</td>
-          <td></td>
-          <td>NN/NIM</td>
         </tr>
         <tr>
-          <td>RW</td>
+          <td colspan="2">&nbsp;</td>
+          <td>RL</td>
           <td>:</td>
-          <td></td>
-          <td>NW/NIM</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -132,18 +160,19 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td>Pemenuhan IKU</td>
+          <td colspan="2">&nbsp;</td>
+          <td>IKU No.12</td>
+          <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td></td>
-          <td>RI >= 0.1% (0.001)</td>
+          <td>RI >= 5%</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Jika RI < IKU, tuliskan 0</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="1">Jika RI < 5% , tuliskan 0</td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Jika RI ≥IKU, tuliskan nilainya</td>
+          <td colspan="3">&nbsp;</td>
+          <td colspan="">Jika RI >=5% tuliskan nilai dari RI</td>
         </tr>
       </table>
       <!-- End Data Table -->

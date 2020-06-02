@@ -147,5 +147,51 @@ class model_admin extends CI_Model
  				 return $this->db->query($query)->result_array();
  		 }
 
+		 //table table_8d1
+		 public function gettable8d1($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+					 $dd = $id_tahun-2;
+
+	 					 $query =
+	 							 "
+								 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebihFROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 999
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
+
+	 	public function datatable_8d1($id_tahun = null,$id_prodi = null)
+	   {
+	 		if ($id_tahun !== null) {
+
+				$dd = $id_tahun-2;
+
+	 				$query =
+	 								"SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi
+	 			";
+	 		} else {
+				$query =
+								"
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-5) AND t.id_prodi = 999
+				";
+	 		}
+
+	 		return $this->db->query($query)->result_array();
+	   }
 }
 ?>
