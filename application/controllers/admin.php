@@ -170,5 +170,17 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/footer_admin");
 
 	}
+
+	public function table_8c()
+	{
+		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['prodi']=$this->model_log->prodi()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view("admin/7table_8c",$data);
+		$this->load->view("admin/layout/footer_admin");
+
+	}
 }
 ?>

@@ -35,6 +35,7 @@
     <a class="nav-link" href="<?= base_url("admin/table_2b")?>"><i class="fas fa-fw fa-table"></i><span>Table 2b</span></a>
     <a class="nav-link" href="<?= base_url("admin/table_8a")?>"><i class="fas fa-fw fa-table"></i><span>Table 8a</span></a>
     <a class="nav-link" href="<?= base_url("admin/table_8b")?>"><i class="fas fa-fw fa-table"></i><span>Table 8b</span></a>
+    <a class="nav-link" href="<?= base_url("admin/table_8c")?>"><i class="fas fa-fw fa-table"></i><span>Table 8c</span></a>
   </li>
 
   <!-- Divider -->
