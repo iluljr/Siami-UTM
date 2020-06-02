@@ -5,16 +5,19 @@ class model_admin extends CI_Model
 	{
 		return $this->db->get_where($table,$where);
 	}
+
 		public function hapus_data($where,$table)
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
 	}
+
 	public function update_data($where,$data,$table)
 	{
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}
+
 	public function datatable_2a_MA($id_tahun = null)
   	{
 			if ($id_tahun !== null) {
@@ -163,8 +166,9 @@ class model_admin extends CI_Model
 			 }else{
 					 $query =
 							 "
-							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebihFROM table_8d1 t, prodi p
-				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 999
+							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+							 FROM table_8d1 t, prodi p
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 999
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -172,20 +176,71 @@ class model_admin extends CI_Model
 
 
 	 	public function datatable_8d1($id_tahun = null,$id_prodi = null)
+		{
+				if ($id_tahun !== null && $id_prodi !== null) {
+
+					$dd = $id_tahun-2;
+
+						$query =
+								"
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+								FROM table_8d1 t, prodi p
+								WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = 1
+				";
+	 		} else {
+				$query =
+								"
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-5) AND t.id_prodi = 999
+				";
+	 		}
+
+
+	 		return $this->db->query($query)->result_array();
+	   }
+
+		 //table table_8d2
+		 public function gettable8d2($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+					 $dd = $id_tahun-2;
+
+	 					 $query =
+	 							 "
+								 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 999
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
+
+	 	public function datatable_8d2($id_tahun = null,$id_prodi = null)
 	   {
 	 		if ($id_tahun !== null) {
 
 				$dd = $id_tahun-2;
 
 	 				$query =
-	 								"SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+	 								"
+									SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.rendah) AS 'rendah', SUM(t.sedang) AS 'sedang', SUM(t.tinggi) AS 'tinggi'
 					FROM table_8d1 t, prodi p
 					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi
 	 			";
 	 		} else {
 				$query =
 								"
-								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.rendah) AS 'rendah', SUM(t.sedang) AS 'sedang', SUM(t.tinggi) AS 'tinggi'
 				FROM table_8d1 t, prodi p
 				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-5) AND t.id_prodi = 999
 				";
