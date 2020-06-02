@@ -49,10 +49,10 @@ class admin extends CI_Controller
 				$data['start'] = $nn;
 			} else{
 				$data['start'] = 0;
-			} 
+			}
 		}
 
-		$data['view_table2a'] = $this->model_log->gettable2a($config['per_page'], $data['start'],$data['id_tahun']);
+		$data['view_table2a'] = $this->model_log->gettable2a($data['id_tahun']);
 		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun']);
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun']);
@@ -69,7 +69,7 @@ class admin extends CI_Controller
 
 	public function tambah_data2a()
 	{
-		
+
 		 $tahun = $this->input->post('tahun');
 		 $dayatampung = $this->input->post('dayatampung');
 		 $pendaftar = $this->input->post('pendaftar');
@@ -78,7 +78,7 @@ class admin extends CI_Controller
 		 $transferb = $this->input->post('transferb');
 		 $regulera = $this->input->post('regulera');
 		 $transfera = $this->input->post('transfera');
-		 
+
 		 $data = array(
 		 	'tahun' => $tahun,
 		 	'daya_tampung' => $dayatampung,
@@ -119,7 +119,7 @@ class admin extends CI_Controller
 		 	'pendaftar' => $pendaftar,
 		 	'lulus_seleksi' => $lulusseleksi,
 		 	'jmb_reguler' => $regulerb,
-		 	'jmb_transfer' => $regulerb,
+		 	'jmb_transfer' => $transferb,
 		 	'jma_reguler' => $regulera,
 		 	'jma_transfer' => $transfera,
 		);
