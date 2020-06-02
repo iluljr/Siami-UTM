@@ -18,7 +18,7 @@
               <?php
                 foreach ($dropdown as $dd):
               ?>
-                <option value="<?php echo $dd->id_tahun_ajaran;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
               <?php endforeach;?>
             </select>
           </div>
