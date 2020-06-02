@@ -7,7 +7,7 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 8a. IPK Lulusan</h4>
+      <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -18,7 +18,7 @@
               <?php
                 foreach ($dropdown as $dd):
               ?>
-                <option value="<?php echo $dd->id_tahun_ajaran;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
               <?php endforeach;?>
             </select>
           </div>
@@ -81,40 +81,58 @@
           <td>Jumlah mahasiswa aktif pada saat TS (NM)</td>
           <td>:</td>
           <td></td>
+          <td>NIM</td>
         </tr>
         <tr>
           <td>Jumlah prestasi akademik internasional (NI)</td>
           <td>:</td>
           <td></td>
+          <td>NI</td>
         </tr>
         <tr>
           <td>Jumlah prestasi akademik nasional (NN)</td>
           <td>:</td>
           <td></td>
+          <td>NN</td>
         </tr>
         <tr>
           <td>Jumlah prestasi akademik wilayah (NW)</td>
           <td>:</td>
           <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>NW</td>
         </tr>
         <tr>
           <td>RI</td>
           <td>:</td>
           <td></td>
+          <td>NI/NIM</td>
         </tr>
         <tr>
           <td>RN</td>
           <td>:</td>
           <td></td>
+          <td>NN/NIM</td>
         </tr>
         <tr>
           <td>RW</td>
           <td>:</td>
+          <td></td>
+          <td>NW/NIM</td>
+        </tr>
+        <tr>
+          <td>Pemenuhan IKU</td>
+          <td>:</td>
+          <td></td>
+          <td>RI >= 0.1% (0.001)</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Jika RI < IKU, tuliskan 0</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Jika RI ≥IKU, tuliskan nilainya</td>
           <td></td>
         </tr>
       </table>
