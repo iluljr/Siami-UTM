@@ -54,21 +54,147 @@ class model_admin extends CI_Model
 		return $this->db->query($query)->result_array();
   	}
 
-		//table 2b
+		//TABEL 2B
 		public function tahunsekarang_2b($id_tahun = null)
   	{
 			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun
-		";} else {
+							SELECT  tb.tahun
+							FROM tabel_2a tb WHERE tb.tahun = $id_tahun
+		";}
+		else {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y'))
+							SELECT  tb.tahun
+							FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y'))
 		";
 		}
 		return $this->db->query($query)->result_array();
   	}
+
+		public function gettable2b($id_tahun = null)
+		 {
+				 if ($id_tahun !== null) {
+
+						 $query =
+								 "
+			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = $id_tahun and tb.id_prodi=pd.id_prodi
+				 ";
+				 } else {
+						 $query =
+								 "
+			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')) and tb.id_prodi=pd.id_prodi
+		 ";
+				 }
+				 return $this->db->query($query)->result_array();
+		 }
+
+		 public function gettable2b_min1($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = ($id_tahun-1) and tb.id_prodi=pd.id_prodi
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')-1) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
+		 public function gettable2b_min2($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = ($id_tahun-2) and tb.id_prodi=pd.id_prodi
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')-2) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
+		 public function gettable2b_jumlahmhs($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = ($id_tahun-2) and tb.id_prodi=pd.id_prodi
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')-2) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
+
+		 //table table_8d1
+		 public function gettable8d1($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+					 $dd = $id_tahun-2;
+
+	 					 $query =
+	 							 "
+								 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 999
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
+
+	 	public function datatable_8d1($id_tahun = null,$id_prodi = null)
+	   {
+	 		if ($id_tahun !== null) {
+
+				$dd = $id_tahun-2;
+
+	 				$query =
+	 								"
+									SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi
+	 			";
+	 		} else {
+				$query =
+								"
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-5) AND t.id_prodi = 999
+				";
+	 		}
+
+	 		return $this->db->query($query)->result_array();
+	   }
 
 }
 ?>

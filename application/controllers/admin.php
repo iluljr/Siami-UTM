@@ -26,6 +26,7 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/footer_admin");
 	}
 
+	//table 2a
 	public function table_2a()
 	{
 		$this->session->unset_userdata('id_tahun');
@@ -135,6 +136,7 @@ class admin extends CI_Controller
 		redirect('admin/table_2a');
 	}
 
+	//table 2b
 	public function table_2b()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -147,6 +149,7 @@ class admin extends CI_Controller
 
 	}
 
+	//table 8a
 	public function table_8a()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -159,6 +162,7 @@ class admin extends CI_Controller
 
 	}
 
+	//table 8b
 	public function table_8b()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -171,6 +175,7 @@ class admin extends CI_Controller
 
 	}
 
+	//table 8c
 	public function table_8c()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -183,8 +188,40 @@ class admin extends CI_Controller
 
 	}
 
+	//table 8d1
 	public function table_8d1()
 	{
+		$this->session->unset_userdata('id_tahun');
+		$this->session->unset_userdata('id_prodi');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$data['id_prodi'] = $this->input->post('id_prodi');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+			$this->session->set_userdata('id_prodi', $data['id_prodi']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+			$data['id_prodi'] = $this->session->userdata('id_prodi');
+		}
+
+		$config['total_rows'] = $this->model_log->HitungSearch($data['id_tahun']);
+		$data['total_rows'] = $config['total_rows'];
+
+		$config['per_page'] = 5;
+
+		if ($this->uri->segment(3) !== null) {
+			$data['start'] = $this->uri->segment(3);
+		} else {
+			if($data['id_tahun'] > 2019) {
+				$nn = $data['id_tahun'] -  2019 ;
+				$data['start'] = $nn;
+			} else{
+				$data['start'] = 0;
+			}
+		}
+
+		$data['view_table8d1'] = $this->model_admin->gettable8d1($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data'] = $this->model_admin->datatable_8d1($data['id_tahun'],$data['id_prodi']);
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -195,6 +232,31 @@ class admin extends CI_Controller
 
 	}
 
+	public function tambah_data8d1()
+	{
+
+		 $tahun = $this->input->post('tahun');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $jml_lulus = $this->input->post('jml_lulusan');
+		 $jml_lulus_ter = $this->input->post('jml_terlacak');
+		 $wt_6 = $this->input->post('wt_6');
+		 $wt_18 = $this->input->post('wt_18');
+		 $wt_lebih = $this->input->post('wt_lebih');
+
+		 $data = array(
+		 	'tahun' => $tahun,
+		 	'id_prodi' => $id_prodi,
+		 	'jml_lulus' => $jml_lulus,
+		 	'jml_lulus_ter' => $jml_lulus_ter,
+		 	'wt_6' => $wt_6,
+		 	'wt_18' => $wt_18,
+		 	'wt_lebih' => $wt_lebih,
+		 );
+		 $this->db->insert('table_8d1',$data);
+		 redirect('admin/table_8d1');
+	}
+
+	//table 8d2
 	public function table_8d2()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -207,6 +269,7 @@ class admin extends CI_Controller
 
 	}
 
+	//table 8e1
 	public function table_8e1()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
