@@ -14,10 +14,14 @@ class admin extends CI_Controller
 
 	public function index()
 	{
+		//TABEL 2a
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB();
+
+		//TABEL 2b
+		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs();
 
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar_admin");
@@ -69,7 +73,6 @@ class admin extends CI_Controller
 
 	public function tambah_data2a()
 	{
-
 		 $tahun = $this->input->post('tahun');
 		 $dayatampung = $this->input->post('dayatampung');
 		 $pendaftar = $this->input->post('pendaftar');
@@ -81,6 +84,7 @@ class admin extends CI_Controller
 
 		 $data = array(
 		 	'tahun' => $tahun,
+			'id_prodi' => 1,
 		 	'daya_tampung' => $dayatampung,
 		 	'pendaftar' => $pendaftar,
 		 	'lulus_seleksi' => $lulusseleksi,
@@ -88,6 +92,8 @@ class admin extends CI_Controller
 		 	'jmb_transfer' => $regulerb,
 		 	'jma_reguler' => $regulera,
 		 	'jma_transfer' => $transfera,
+			'jma_penuh' => 0,
+			'jma_paruh' => 0,
 		 );
 		 $this->db->insert('tabel_2a',$data);
 		 redirect('admin/table_2a');
@@ -137,8 +143,24 @@ class admin extends CI_Controller
 
 	public function table_2b()
 	{
+		$this->session->unset_userdata('id_tahun');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+		}
+		$config['total_rows'] = $this->model_log->HitungSearch($data['id_tahun']);
+		$data['total_rows'] = $config['total_rows'];
+
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
+		$data['view_table2a'] = $this->model_admin->gettable2b($data['id_tahun']);
+		$data['view_table2a_min1'] = $this->model_admin->gettable2b_min1($data['id_tahun']);
+		$data['view_table2a_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun']);
+		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
+		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun']);
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar_admin");
 		$this->load->view("admin/layout/topbar_admin");
@@ -147,6 +169,33 @@ class admin extends CI_Controller
 
 	}
 
+	public function edit_tabel2b($tahun)
+	{
+		$where = array('tahun' => $tahun );
+		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel2b', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+
+	public function update_tabel2b()
+	{
+		$tahun = $this->input->post('tahun');
+		$jma_reguler = $this->input->post('jma_reguler');
+		$jma_penuh = $this->input->post('jma_penuh');
+		$jma_paruh = $this->input->post('jma_paruh');
+		$data = array(
+		 	'jma_reguler' => $jma_reguler,
+		 	'jma_penuh' => $jma_penuh,
+		 	'jma_paruh' => $jma_paruh,
+		);
+
+		$where = array('tahun' => $tahun);
+		$this->model_admin->update_data($where,$data,'tabel_2a');
+		redirect('admin/table_2b');
+	}
 	public function table_8a()
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();

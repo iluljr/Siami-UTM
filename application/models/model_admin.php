@@ -54,21 +54,98 @@ class model_admin extends CI_Model
 		return $this->db->query($query)->result_array();
   	}
 
-		//table 2b
+		//TABEL 2B
 		public function tahunsekarang_2b($id_tahun = null)
   	{
 			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun
-		";} else {
+							SELECT  tb.tahun
+							FROM tabel_2a tb WHERE tb.tahun = $id_tahun ORDER BY tb.tahun
+		";}
+		else {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y'))
+							SELECT  tb.tahun
+							FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')) ORDER BY tb.tahun
 		";
 		}
 		return $this->db->query($query)->result_array();
   	}
+
+		public function gettable2b($id_tahun = null)
+		 {
+				 if ($id_tahun !== null) {
+
+						 $query =
+								 "
+			 SELECT  tb.id_tabel2a, tb.tahun, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = $id_tahun and tb.id_prodi=pd.id_prodi
+				 ";
+				 } else {
+						 $query =
+								 "
+			 SELECT  tb.id_tabel2a, tb.tahun, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')) and tb.id_prodi=pd.id_prodi
+		 ";
+				 }
+				 return $this->db->query($query)->result_array();
+		 }
+
+		 public function gettable2b_min1($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = ($id_tahun-1) and tb.id_prodi=pd.id_prodi
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')-1) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
+		 public function gettable2b_min2($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = ($id_tahun-2) and tb.id_prodi=pd.id_prodi
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, pd.nama_prodi, tb.jma_reguler, tb.jma_penuh, tb.jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun = (SELECT date_format(curdate(),'%Y')-2) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
+		 public function gettable2b_jumlahmhs($id_tahun = null)
+ 		 {
+ 				 if ($id_tahun !== null) {
+
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, SUM(tb.jma_reguler) AS 'jmblh_jma_reg' , SUM(tb.jma_penuh) jmblh_jma_penuh, SUM(tb.jma_paruh) jmblh_jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE tb.tahun <= $id_tahun and tb.tahun >= ($id_tahun-2) and tb.id_prodi=pd.id_prodi ORDER BY tb.tahun
+ 				 ";
+ 				 } else {
+ 						 $query =
+ 								 "
+ 			 SELECT  tb.id_tabel2a, SUM(tb.jma_reguler) AS 'jmblh_jma_reg' , SUM(tb.jma_penuh) jmblh_jma_penuh, SUM(tb.jma_paruh) jmblh_jma_paruh
+ 			 FROM tabel_2a tb, prodi pd WHERE (tb.tahun <= (SELECT date_format(curdate(),'%Y')) and tb.tahun >= (SELECT date_format(curdate(),'%Y')-2)) and tb.id_prodi=pd.id_prodi
+ 		 ";
+ 				 }
+ 				 return $this->db->query($query)->result_array();
+ 		 }
 
 }
 ?>
