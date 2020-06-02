@@ -41,11 +41,34 @@ class model_admin extends CI_Model
 
   	public function datatable_2a_MB($id_tahun = null)
   	{
+			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb LIMIT 4,1
+		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun
+		";} else {
+			$query =
+							"
+		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y'))
 		";
+		}
 		return $this->db->query($query)->result_array();
   	}
+
+		//table 2b
+		public function tahunsekarang_2b($id_tahun = null)
+  	{
+			if ($id_tahun !== null) {
+			$query =
+							"
+		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun
+		";} else {
+			$query =
+							"
+		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = (SELECT date_format(curdate(),'%Y'))
+		";
+		}
+		return $this->db->query($query)->result_array();
+  	}
+
 }
 ?>
