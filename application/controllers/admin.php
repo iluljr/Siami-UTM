@@ -14,7 +14,6 @@ class admin extends CI_Controller
 
 	public function index()
 	{
-<<<<<<< HEAD
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
@@ -24,12 +23,6 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/sidebar_admin");
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/dashboard",$data);
-=======
-		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
-		$this->load->view("admin/layout/topbar_admin");
-		$this->load->view("admin/dashboard");
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 		$this->load->view("admin/layout/footer_admin");
 	}
 
@@ -51,17 +44,19 @@ class admin extends CI_Controller
 		if ($this->uri->segment(3) !== null) {
 			$data['start'] = $this->uri->segment(3);
 		} else {
-			$data['start'] = 0;
+			if($data['id_tahun'] > 2019) {
+				$nn = $data['id_tahun'] -  2019 ;
+				$data['start'] = $nn;
+			} else{
+				$data['start'] = 0;
+			} 
 		}
 
 		$data['view_table2a'] = $this->model_log->gettable2a($config['per_page'], $data['start'],$data['id_tahun']);
 		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun']);
-<<<<<<< HEAD
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun']);
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun']);
-=======
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -70,6 +65,74 @@ class admin extends CI_Controller
 		$this->load->view("admin/134table_2a",$data);
 		$this->load->view("admin/layout/footer_admin");
 
+	}
+
+	public function tambah_data2a()
+	{
+		
+		 $tahun = $this->input->post('tahun');
+		 $dayatampung = $this->input->post('dayatampung');
+		 $pendaftar = $this->input->post('pendaftar');
+		 $lulusseleksi = $this->input->post('lulusseleksi');
+		 $regulerb = $this->input->post('regulerb');
+		 $transferb = $this->input->post('transferb');
+		 $regulera = $this->input->post('regulera');
+		 $transfera = $this->input->post('transfera');
+		 
+		 $data = array(
+		 	'tahun' => $tahun,
+		 	'daya_tampung' => $dayatampung,
+		 	'pendaftar' => $pendaftar,
+		 	'lulus_seleksi' => $lulusseleksi,
+		 	'jmb_reguler' => $regulerb,
+		 	'jmb_transfer' => $regulerb,
+		 	'jma_reguler' => $regulera,
+		 	'jma_transfer' => $transfera,
+		 );
+		 $this->db->insert('tabel_2a',$data);
+		 redirect('admin/table_2a');
+	}
+	public function edit_tabel2a($id)
+	{
+		$where = array('id_tabel2a' => $id );
+		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel2a', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_tabel2a()
+	{
+		$id = $this->input->post('id_tabel2a');
+		$tahun = $this->input->post('tahun');
+		$dayatampung = $this->input->post('dayatampung');
+		$pendaftar = $this->input->post('pendaftar');
+		$lulusseleksi = $this->input->post('lulusseleksi');
+		$regulerb = $this->input->post('regulerb');
+		$transferb = $this->input->post('transferb');
+		$regulera = $this->input->post('regulera');
+		$transfera = $this->input->post('transfera');
+		$data = array(
+			'tahun' => $tahun,
+		 	'daya_tampung' => $dayatampung,
+		 	'pendaftar' => $pendaftar,
+		 	'lulus_seleksi' => $lulusseleksi,
+		 	'jmb_reguler' => $regulerb,
+		 	'jmb_transfer' => $regulerb,
+		 	'jma_reguler' => $regulera,
+		 	'jma_transfer' => $transfera,
+		);
+
+		$where = array('id_tabel2a' => $id);
+		$this->model_admin->update_data($where,$data,'tabel_2a');
+		redirect('admin/table_2a');
+	}
+	public function hapus_tabel2a($id)
+	{
+		$where = array('id_tabel2a' => $id);
+		$this->model_admin->hapus_data($where,'tabel_2a');
+		redirect('admin/table_2a');
 	}
 
 	public function table_2b()

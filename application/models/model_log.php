@@ -53,7 +53,8 @@ class model_log extends CI_Model
 	}
 	public function dropdown()
   {
-    $query = $this->db->get('tahun_ajaran');
+  	$this->db->order_by('tahun', 'DESC');
+    $query = $this->db->get('tabel_2a');
     return $query;
   }
 	public function prodi()
@@ -67,18 +68,14 @@ class model_log extends CI_Model
 		if ($id_tahun !== null) {
 				$query =
 								"
-			SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer', (SELECT tb.jma_reguler+tb.jma_transfer FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun = $id_tahun) AS 'mahasiswa_aktif'
-			FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun <= $id_tahun
+			SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer'
+			FROM tabel_2a tb WHERE tb.tahun <= $id_tahun 
 			";
 		} else {
 			$query =
 							"
-<<<<<<< HEAD
-		SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer'
-=======
 		SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer', SUM(tb.jma_reguler) AS 'jma_reguler', SUM(tb.jma_transfer) AS 'jma_transfer'
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
-		FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun
+		FROM tahun_ajaran t, tabel_2a tb 
 		";
 		}
 		return $this->db->query($query)->result_array();
@@ -90,14 +87,14 @@ class model_log extends CI_Model
 
 					 $query =
 							 "
-		 SELECT t.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
-		 FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun and t.tahun <= $id_tahun limit $start, $limit
+		 SELECT tb.id_tabel2a AS 'id_tabel2a', tb.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
+		 FROM tabel_2a tb WHERE tb.tahun <= $id_tahun ORDER BY tahun limit $start, $limit
 			 ";
 			 } else {
 					 $query =
 							 "
-		 SELECT t.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
-		 FROM tahun_ajaran t, tabel_2a tb WHERE t.id_tahun_ajaran = tb.id_tahun limit $start, $limit
+		 SELECT  tb.id_tabel2a, tb.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
+		 FROM tabel_2a tb WHERE tb.tahun <= (SELECT date_format(curdate(),'%Y')) limit $start, $limit
 	 ";
 			 }
 			 return $this->db->query($query, $limit, $start, $id_tahun)->result_array();

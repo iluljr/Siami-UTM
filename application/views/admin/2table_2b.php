@@ -29,11 +29,7 @@
         </tr>
         <tr>
           <td align="right">Nama Program Studi :</td>
-<<<<<<< HEAD
           <td>
-=======
-          <td >
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
             <div class="">
               <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
               <option class="dropdown-item" selected> - pilih program studi - </option>
@@ -51,11 +47,8 @@
       <!-- Data Table -->
       <div class="table-responsive">
         <table class="table table-bordered" width="1600px" cellspacing="0">
-<<<<<<< HEAD
           <thead>
-=======
           <thead align="center">
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
             <tr>
               <th rowspan="2">No.</th>
               <th rowspan="2">Program Studi</th>
@@ -89,10 +82,6 @@
             </tr>
           </thead>
           <tbody>
-<<<<<<< HEAD
-
-=======
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
           </tbody>
           <tfoot>
             <tr>
@@ -100,11 +89,8 @@
               <th colspan="3"></th>
               <th colspan="3"></th>
               <th colspan="3"></th>
-<<<<<<< HEAD
-=======
             </tr>
           </tfoot>
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
         </table>
       </div>
     </br>

@@ -25,7 +25,6 @@
             </thead>
             <tbody>
               <tr>
-<<<<<<< HEAD
                 <?php foreach ($jumlah_data as $jd): ?>
                   <td>1</td>
                   <td>K3</td>
@@ -39,24 +38,10 @@
                   <td align="center"> 4 </td>
                   <td></td>
                 <?php endforeach;?> 
-=======
-                <td>1</td>
-                <td>K3</td>
-                <td><a href="<?= base_url("admin/table_2a")?>">C.3. Mahasiswa <br>C.3.4 Indikator Kinerja Utama <br>C.3.4 a) Kualitas input Mahasiswa <br>Tabel 2.a LKA </a></td>
-                <td>Rasio jumlah pendaftar terhadap jumlah mahasiswa baru</td>
-                <td>Rasio >= 5</td>
-                <td></td>
-                <td>Rasio jumlah pendaftar terhadap jumlah mahasiswa baru adalah 11.3</td>
-                <td></td>
-                <td></td>
-                <td bgcolor='blue'></td>
-                <td></td>
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
               </tr>
               <tr>
                 <td>2</td>
                 <td>K3</td>
-<<<<<<< HEAD
                 <td><a href="<?= base_url("admin/table_2b")?>">Tabel 2.b Mahasiswa Asing</a></td>
                 <td>Persentase jumlah mahasiswa asing terhadap jumlah seluruh mahasiswa</td>
                 <td>PMA >=1%</td>
@@ -100,30 +85,6 @@
                     <td></td>
                   <?php endforeach;?> 
                 <?php endforeach;?> 
-=======
-                <td><a href="#">Tabel 2.b Mahasiswa Asing</a></td>
-                <td>Persentase jumlah mahasiswa asing terhadap jumlah seluruh mahasiswa</td>
-                <td>PMA >=1%</td>
-                <td></td>
-                <td>Persentase jumlah mahasiswa asing terhadap jumlah seluruh mahasiswa adalah 0 %</td>
-                <td></td>
-                <td></td>
-                <td bgcolor='red'>1</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>K3</td>
-                <td><a href="#">C.4. Sumber Daya Manusia <br> C.4.4. Indikator Kinerja Utama <br> C.4.4.a) Profil Dosen <br> Tabel 3.a. LKA Dosen</a></td>
-                <td>Rasio jumlah mahasiswa PS terhadap jumlah DTPS. </td>
-                <td>15 <= RMD <= 25 (eksakta/sains tehnologi) 25 <= RMD <= 35 (sosial humaniora)</td>
-                <td></td>
-                <td>Rasio jumlah mahasiswa PS terhadap jumlah DTPS adalah 21 </td>
-                <td>Pasal 49 ayat 2 (tetapi fakultas bukan PS)</td>
-                <td></td>
-                <td bgcolor='blue'></td>
-                <td></td>
->>>>>>> 77dda7c1e91d6a70445dd512f62a807b445ee188
               </tr>
             </tbody>
           </table>
