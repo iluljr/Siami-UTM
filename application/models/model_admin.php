@@ -188,7 +188,7 @@ class model_admin extends CI_Model
 							 "
 							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
 							 FROM table_8d1 t, prodi p
-							 WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.tahun
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -238,7 +238,7 @@ class model_admin extends CI_Model
 							 "
 							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
 				FROM table_8d1 t, prodi p
-				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.tahun
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();

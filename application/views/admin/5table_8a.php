@@ -50,9 +50,10 @@
           <thead align="center">
             <tr>
               <th rowspan="2">No.</th>
-              <th rowspan="2">Program Studi</th>
+              <th rowspan="2">Tahun Lulus</th>
               <th rowspan="2">Jumlah Lulusan</th>
               <th colspan="3">Indeks Prestasi Kumulatif</th>
+              <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
               <th>Min.</th>
@@ -66,10 +67,26 @@
               <td>4</td>
               <td>5</td>
               <td>6</td>
+              <td> </td>
+              <td> </td>
             </tr>
           </thead>
           <tbody>
-
+            <?php
+            foreach ($view_table8a as $tb) :
+            ?>
+            <tr align="center">
+              <td> </td>
+              <td><?= $tb['tahun_lulus']?></td>
+              <td><?= $tb['jumlah_lulusan']?></td>
+              <td><?= $tb['ipk_min']?></td>
+              <td><?= $tb['ipk_rata']?></td>
+              <td><?= $tb['ipk_max']?></td>
+              <td><?php echo anchor('admin/edit_tabel2a/'.$tb['id_tabel8a'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel2a/'.$tb['id_tabel8a'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              </td>
+            </tr>
+          <?php endforeach;?>
           </tbody>
         </table>
       </div>
