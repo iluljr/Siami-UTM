@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2020 pada 21.06
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Waktu pembuatan: 04 Jun 2020 pada 00.30
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -244,12 +244,11 @@ CREATE TABLE `table_8d1` (
 --
 
 INSERT INTO `table_8d1` (`id_table8d1`, `tahun`, `id_prodi`, `jml_lulus`, `jml_lulus_ter`, `wt_6`, `wt_18`, `wt_lebih`, `rendah`, `sedang`, `tinggi`, `berwirausaha`, `lokal`, `nasional`, `internasional`) VALUES
-(1, 2016, 1, 120, 84, 8, 46, 30, 28, 45, 11, 74, 26, 45, 2),
+(1, 2016, 1, 124, 89, 10, 46, 33, 25, 48, 16, 76, 41, 46, 2),
 (2, 2015, 1, 101, 74, 13, 38, 23, 21, 39, 14, 65, 35, 38, 1),
 (3, 2014, 1, 120, 84, 8, 46, 30, 28, 45, 11, 74, 26, 45, 2),
 (4, 2016, 3, 200, 108, 42, 13, 8, 0, 0, 0, 0, 0, 0, 0),
-(6, 2018, 1, 124, 89, 10, 46, 33, 25, 48, 16, 76, 41, 46, 2),
-(7, 2017, 1, 105, 74, 13, 38, 23, 21, 39, 14, 65, 35, 38, 1);
+(6, 2018, 1, 124, 89, 10, 46, 33, 12, 15, 6, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -274,6 +273,103 @@ INSERT INTO `tahun_ajaran` (`id_tahun_ajaran`, `tahun`) VALUES
 (5, 2020),
 (6, 2015),
 (7, 2014);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_access_menu`
+--
+
+CREATE TABLE `user_access_menu` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user_access_menu`
+--
+
+INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
+(1, 1, 1),
+(10, 2, 10),
+(11, 3, 11),
+(12, 4, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_level`
+--
+
+CREATE TABLE `user_level` (
+  `id` int(11) NOT NULL,
+  `level` varchar(255) NOT NULL,
+  `ket` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `user_level`
+--
+
+INSERT INTO `user_level` (`id`, `level`, `ket`) VALUES
+(1, 'admin', 'Akses level tertinggi'),
+(2, 'Adminprodi', 'Akses level admin prodi'),
+(3, 'Dosen', 'Akses level dosen'),
+(4, 'Mahasiswa', 'Akses level mahasiswa');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_menu`
+--
+
+CREATE TABLE `user_menu` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user_menu`
+--
+
+INSERT INTO `user_menu` (`id`, `menu`) VALUES
+(1, 'Administrator'),
+(2, 'Menu'),
+(9, 'User'),
+(10, 'Admin'),
+(11, 'Dosen'),
+(12, 'Mahasiswa');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_sub_menu`
+--
+
+CREATE TABLE `user_sub_menu` (
+  `id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `url` varchar(128) NOT NULL,
+  `icon` varchar(128) NOT NULL,
+  `is_active` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `user_sub_menu`
+--
+
+INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
+(34, 1, 'Data Audit', 'admin', 'fas fa-fw fa-table', 1),
+(35, 1, 'Table 2.a', 'admin/table_2a', 'fas fa-fw fa-table', 1),
+(36, 1, 'Table 2.b', 'admin/table_2b', 'fas fa-fw fa-table', 1),
+(37, 1, 'Table 8.a', 'admin/table_8a', 'fas fa-fw fa-table', 1),
+(38, 1, 'Table 8.b', 'admin/table_8b', 'fas fa-fw fa-table', 1),
+(39, 1, 'Table 8.c', 'admin/table_8c', 'fas fa-fw fa-table', 1),
+(40, 1, 'Table 8.d.1', 'admin/table_8d1', 'fas fa-fw fa-table', 1),
+(41, 1, 'Table 8.d.2', 'admin/table_8d2', 'fas fa-fw fa-table', 1),
+(42, 1, 'Table 8.e.1', 'admin/table_8e1', 'fas fa-fw fa-table', 1);
 
 --
 -- Indexes for dumped tables
@@ -340,6 +436,33 @@ ALTER TABLE `tahun_ajaran`
   ADD PRIMARY KEY (`id_tahun_ajaran`);
 
 --
+-- Indeks untuk tabel `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_access_menu_ibfk_2` (`menu_id`),
+  ADD KEY `menu_id` (`role_id`) USING BTREE;
+
+--
+-- Indeks untuk tabel `user_level`
+--
+ALTER TABLE `user_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `user_menu`
+--
+ALTER TABLE `user_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_id` (`menu_id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -389,13 +512,37 @@ ALTER TABLE `tabel_8a`
 -- AUTO_INCREMENT untuk tabel `table_8d1`
 --
 ALTER TABLE `table_8d1`
-  MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`
 --
 ALTER TABLE `tahun_ajaran`
   MODIFY `id_tahun_ajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_level`
+--
+ALTER TABLE `user_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_menu`
+--
+ALTER TABLE `user_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -431,6 +578,19 @@ ALTER TABLE `tabel_8a`
 --
 ALTER TABLE `table_8d1`
   ADD CONSTRAINT `table_8d1_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
+
+--
+-- Ketidakleluasaan untuk tabel `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD CONSTRAINT `user_access_menu_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_level` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_access_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `user_menu` (`id`) ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  ADD CONSTRAINT `user_sub_menu_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `user_menu` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
