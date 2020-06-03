@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2020 pada 17.40
+-- Waktu pembuatan: 03 Jun 2020 pada 21.06
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -232,19 +232,24 @@ CREATE TABLE `table_8d1` (
   `wt_lebih` int(11) NOT NULL,
   `rendah` int(11) NOT NULL,
   `sedang` int(11) NOT NULL,
-  `tinggi` int(11) NOT NULL
+  `tinggi` int(11) NOT NULL,
+  `berwirausaha` int(11) NOT NULL,
+  `lokal` int(11) NOT NULL,
+  `nasional` int(11) NOT NULL,
+  `internasional` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `table_8d1`
 --
 
-INSERT INTO `table_8d1` (`id_table8d1`, `tahun`, `id_prodi`, `jml_lulus`, `jml_lulus_ter`, `wt_6`, `wt_18`, `wt_lebih`, `rendah`, `sedang`, `tinggi`) VALUES
-(1, 2016, 1, 124, 89, 10, 46, 33, 25, 48, 16),
-(2, 2015, 1, 101, 74, 13, 38, 23, 21, 39, 14),
-(3, 2014, 1, 120, 84, 8, 46, 30, 28, 45, 11),
-(4, 2016, 3, 200, 108, 42, 13, 8, 0, 0, 0),
-(6, 2018, 1, 124, 89, 10, 46, 33, 0, 0, 0);
+INSERT INTO `table_8d1` (`id_table8d1`, `tahun`, `id_prodi`, `jml_lulus`, `jml_lulus_ter`, `wt_6`, `wt_18`, `wt_lebih`, `rendah`, `sedang`, `tinggi`, `berwirausaha`, `lokal`, `nasional`, `internasional`) VALUES
+(1, 2016, 1, 120, 84, 8, 46, 30, 28, 45, 11, 74, 26, 45, 2),
+(2, 2015, 1, 101, 74, 13, 38, 23, 21, 39, 14, 65, 35, 38, 1),
+(3, 2014, 1, 120, 84, 8, 46, 30, 28, 45, 11, 74, 26, 45, 2),
+(4, 2016, 3, 200, 108, 42, 13, 8, 0, 0, 0, 0, 0, 0, 0),
+(6, 2018, 1, 124, 89, 10, 46, 33, 25, 48, 16, 76, 41, 46, 2),
+(7, 2017, 1, 105, 74, 13, 38, 23, 21, 39, 14, 65, 35, 38, 1);
 
 -- --------------------------------------------------------
 
@@ -384,7 +389,7 @@ ALTER TABLE `tabel_8a`
 -- AUTO_INCREMENT untuk tabel `table_8d1`
 --
 ALTER TABLE `table_8d1`
-  MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`

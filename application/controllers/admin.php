@@ -215,6 +215,8 @@ class admin extends CI_Controller
 		}
 
 		$data['view_table8a'] = $this->model_admin->gettable8a($data['id_tahun'],$data['id_prodi']);
+		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
+		$data['table8a_rata']=$this->model_admin->table8a_rata($data['id_tahun'],$data['id_prodi']);
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
@@ -224,6 +226,64 @@ class admin extends CI_Controller
 		$this->load->view("admin/5table_8a",$data);
 		$this->load->view("admin/layout/footer_admin");
 
+	}
+	public function tambah_data8a()
+	{
+
+		 $tahun_lulus = $this->input->post('tahun_lulus');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $jml_lulus = $this->input->post('jml_lulusan');
+		 $ipk_min = $this->input->post('ipk_min');
+		 $ipk_rata = $this->input->post('ipk_rata');
+		 $ipk_max = $this->input->post('ipk_max');
+
+		 $data = array(
+		 	'tahun_lulus' => $tahun_lulus,
+		 	'id_prodi' => $id_prodi,
+		 	'jumlah_lulusan' => $jml_lulus,
+		 	'ipk_min' => $ipk_min,
+		 	'ipk_rata' => $ipk_rata,
+		 	'ipk_max' => $ipk_max,
+		 );
+		 $this->db->insert('tabel_8a',$data);
+		 redirect('admin/table_8a');
+	}
+	public function hapus_tabel8a($id)
+	{
+		$where = array('id_tabel8a' => $id);
+		$this->model_admin->hapus_data($where,'tabel_8a');
+		redirect('admin/table_8a');
+	}
+
+	public function edit_tabel8a($id)
+	{
+		$where = array('id_tabel8a' => $id );
+		$data['tabel_8a'] = $this->model_admin->edit_data($where,'tabel_8a')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8a', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_tabel8a()
+	{
+		$id = $this->input->post('id_tabel8a');
+		$tahun_lulus = $this->input->post('tahun_lulus');
+		$jumlah_lulusan = $this->input->post('jumlah_lulusan');
+		$ipk_min = $this->input->post('ipk_min');
+		$ipk_rata = $this->input->post('ipk_rata');
+		$ipk_max = $this->input->post('ipk_max');
+		$data = array(
+			'tahun_lulus' => $tahun_lulus,
+		 	'jumlah_lulusan' => $jumlah_lulusan,
+		 	'ipk_min' => $ipk_min,
+		 	'ipk_rata' => $ipk_rata,
+		 	'ipk_max' => $ipk_max,
+		);
+
+		$where = array('id_tabel8a' => $id);
+		$this->model_admin->update_data($where,$data,'tabel_8a');
+		redirect('admin/table_8a');
 	}
 
 	//table 8b
@@ -278,6 +338,46 @@ class admin extends CI_Controller
 		$this->load->view("admin/10table_8d1",$data);
 		$this->load->view("admin/layout/footer_admin");
 
+	}
+
+	public function hapus_table8d1($id)
+	{
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->hapus_data($where,'table_8d1');
+		redirect('admin/table_8d1');
+	}
+
+	public function edit_table8d1($id)
+	{
+		$where = array('id_table8d1' => $id );
+		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8d1', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_table8d1()
+	{
+		$id = $this->input->post('id_table8d1');
+		$tahun = $this->input->post('tahun');
+		$jml_lulus = $this->input->post('jml_lulus');
+		$jml_lulus_ter = $this->input->post('jml_lulus_ter');
+		$wt_6 = $this->input->post('wt_6');
+		$wt_18 = $this->input->post('wt_18');
+		$wt_lebih = $this->input->post('wt_lebih');
+		$data = array(
+			'tahun' => $tahun,
+		 	'jml_lulus' => $jml_lulus,
+			'jml_lulus_ter' => $jml_lulus_ter,
+		 	'wt_6' => $wt_6,
+		 	'wt_18' => $wt_18,
+		 	'wt_lebih' => $wt_lebih,
+		);
+
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->update_data($where,$data,'table_8d1');
+		redirect('admin/table_8d1');
 	}
 
 	public function tambah_data8d1()
@@ -355,9 +455,64 @@ class admin extends CI_Controller
 		 redirect('admin/table_8d1');
 	}
 
+	public function hapus_table8d2($id)
+	{
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->hapus_data($where,'table_8d1');
+		redirect('admin/table_8d2');
+	}
+
+	public function edit_table8d2($id)
+	{
+		$where = array('id_table8d1' => $id );
+		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8d2', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_table8d2()
+	{
+		$id = $this->input->post('id_table8d1');
+		$tahun = $this->input->post('tahun');
+		$jml_lulus = $this->input->post('jml_lulus');
+		$jml_lulus_ter = $this->input->post('jml_lulus_ter');
+		$rendah = $this->input->post('rendah');
+		$sedang = $this->input->post('sedang');
+		$tinggi = $this->input->post('tinggi');
+		$data = array(
+			'tahun' => $tahun,
+			'jml_lulus' => $jml_lulus,
+			'jml_lulus_ter' => $jml_lulus_ter,
+			'rendah' => $rendah,
+			'sedang' => $sedang,
+			'tinggi' => $tinggi,
+		);
+
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->update_data($where,$data,'table_8d1');
+		redirect('admin/table_8d2');
+	}
+
 	//table 8e1
 	public function table_8e1()
 	{
+		$this->session->unset_userdata('id_tahun');
+		$this->session->unset_userdata('id_prodi');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$data['id_prodi'] = $this->input->post('id_prodi');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+			$this->session->set_userdata('id_prodi', $data['id_prodi']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+			$data['id_prodi'] = $this->session->userdata('id_prodi');
+		}
+
+		$data['view_table8e1'] = $this->model_admin->gettable8e1($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data'] = $this->model_admin->datatable_8e1($data['id_tahun'],$data['id_prodi']);
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -366,6 +521,74 @@ class admin extends CI_Controller
 		$this->load->view("admin/12table_8e1",$data);
 		$this->load->view("admin/layout/footer_admin");
 
+	}
+
+	public function tambah_data8e1()
+	{
+
+		 $tahun = $this->input->post('tahun');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $jml_lulus = $this->input->post('jml_lulusan');
+		 $jml_lulus_ter = $this->input->post('jml_terlacak');
+		 $jml_berwirausaha = $this->input->post('jml_berwirausaha');
+		 $lokal = $this->input->post('lokal');
+		 $nasional = $this->input->post('nasional');
+		 $internasional = $this->input->post('internasional');
+
+		 $data = array(
+		 	'tahun' => $tahun,
+		 	'id_prodi' => $id_prodi,
+		 	'jml_lulus' => $jml_lulus,
+		 	'jml_lulus_ter' => $jml_lulus_ter,
+		 	'berwirausaha' => $jml_berwirausaha,
+		 	'lokal' => $lokal,
+		 	'nasional' => $nasional,
+		 	'internasional' => $internasional,
+		 );
+		 $this->db->insert('table_8d1',$data);
+		 redirect('admin/table_8d1');
+	}
+
+	public function hapus_table8e1($id)
+	{
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->hapus_data($where,'table_8d1');
+		redirect('admin/table_8e1');
+	}
+
+	public function edit_table8e1($id)
+	{
+		$where = array('id_table8d1' => $id );
+		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8e1', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_table8e1()
+	{
+		$id = $this->input->post('id_table8d1');
+		$tahun = $this->input->post('tahun');
+		$jml_lulus = $this->input->post('jml_lulus');
+		$jml_lulus_ter = $this->input->post('jml_lulus_ter');
+		$berwirausaha = $this->input->post('berwirausaha');
+		$lokal = $this->input->post('lokal');
+		$nasional = $this->input->post('nasional');
+		$internasional = $this->input->post('internasional');
+		$data = array(
+			'tahun' => $tahun,
+			'jml_lulus' => $jml_lulus,
+			'jml_lulus_ter' => $jml_lulus_ter,
+			'berwirausaha' => $berwirausaha,
+			'lokal' => $lokal,
+			'nasional' => $nasional,
+			'internasional' => $internasional,
+		);
+
+		$where = array('id_table8d1' => $id);
+		$this->model_admin->update_data($where,$data,'table_8d1');
+		redirect('admin/table_8e1');
 	}
 }
 ?>

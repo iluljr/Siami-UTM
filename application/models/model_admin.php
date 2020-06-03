@@ -158,7 +158,7 @@ class model_admin extends CI_Model
 	 					 $query =
 	 							 "
 	 		 SELECT tb.id_tabel8a, tb.tahun_lulus, tb.jumlah_lulusan, tb.ipk_min, tb.ipk_rata, tb.ipk_max
-	 		 FROM tabel_8a tb, prodi p WHEREtb.id_prodi=p.id_prodi and tb.tahun_lulus <= $id_tahun and tb.tahun_lulus >= ($id_tahun-2) and tb.id_prodi = $id_prodi ORDER BY tb.tahun_lulus
+	 		 FROM tabel_8a tb, prodi p WHERE tb.id_prodi=p.id_prodi and tb.tahun_lulus <= $id_tahun and tb.tahun_lulus >= ($id_tahun-2) and tb.id_prodi = $id_prodi ORDER BY tb.tahun_lulus
 	 			 ";
 	 			 } else {
 	 					 $query =
@@ -166,6 +166,25 @@ class model_admin extends CI_Model
 	 		 SELECT  tb.id_tabel8a, tb.id_prodi, tb.tahun_lulus, tb.jumlah_lulusan, tb.ipk_min, tb.ipk_rata, tb.ipk_max
 	 		 FROM tabel_8a tb,prodi p WHERE tb.id_prodi=p.id_prodi and (tb.tahun_lulus <= (SELECT date_format(curdate(),'%Y')) and tb.tahun_lulus >= (SELECT date_format(curdate(),'%Y')-2)) and tb.id_prodi = 1 ORDER BY tb.tahun_lulus
 	 	 ";
+	 			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
+		 public function table8a_rata($id_tahun = null, $id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT (sum(a.ipk_rata)/3) AS 'IPK_rata'
+								 FROM tabel_8a a, prodi p WHERE a.id_prodi=p.id_prodi and a.tahun_lulus <= $id_tahun and a.tahun_lulus >= ($id_tahun-2) and a.id_prodi = $id_prodi
+	 			 ";
+	 			 } else {
+	 					 $query =
+	 							 "
+								 SELECT (sum(a.ipk_rata)/3) AS 'IPK_rata'
+								 FROM tabel_8a a, prodi p WHERE a.id_prodi=p.id_prodi and (a.tahun_lulus <= (SELECT date_format(curdate(),'%Y')) and a.tahun_lulus >= (SELECT date_format(curdate(),'%Y')-2)) and a.id_prodi = 1
+	 	 			";
 	 			 }
 	 			 return $this->db->query($query)->result_array();
 	 	 }
@@ -179,16 +198,16 @@ class model_admin extends CI_Model
 
 	 					 $query =
 	 							 "
-								 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+								 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
 					FROM table_8d1 t, prodi p
 					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
 	 			 ";
 			 }else{
 					 $query =
 							 "
-							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
+							 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.wt_6, t.wt_18, t.wt_lebih
 							 FROM table_8d1 t, prodi p
-							 WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.tahun
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1 ORDER BY t.tahun
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -212,7 +231,7 @@ class model_admin extends CI_Model
 								"
 								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.wt_6) AS 'wt_6', SUM(t.wt_18) AS 'wt_18', SUM(t.wt_lebih) AS 'wt_lebih'
 				FROM table_8d1 t, prodi p
-				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1
 				";
 	 		}
 
@@ -229,16 +248,16 @@ class model_admin extends CI_Model
 
 	 					 $query =
 	 							 "
-								 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
+								 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
 					FROM table_8d1 t, prodi p
 					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
 	 			 ";
 			 }else{
 					 $query =
 							 "
-							 SELECT t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
+							 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.rendah, t.sedang, t.tinggi
 				FROM table_8d1 t, prodi p
-				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.tahun
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1 ORDER BY t.tahun
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -262,7 +281,56 @@ class model_admin extends CI_Model
 								"
 								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.rendah) AS 'rendah', SUM(t.sedang) AS 'sedang', SUM(t.tinggi) AS 'tinggi'
 				FROM table_8d1 t, prodi p
-				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1
+				";
+	 		}
+
+	 		return $this->db->query($query)->result_array();
+	   }
+
+		 //table table_8e1
+		 public function gettable8e1($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+					 $dd = $id_tahun-2;
+
+	 					 $query =
+	 							 "
+								 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.berwirausaha, t.lokal, t.nasional, t.internasional
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi ORDER BY t.tahun
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.id_table8d1, t.tahun, t.jml_lulus, t.jml_lulus_ter, t.berwirausaha, t.lokal, t.nasional, t.internasional
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1 ORDER BY t.tahun
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
+
+	 	public function datatable_8e1($id_tahun = null,$id_prodi = null)
+	   {
+	 		if ($id_tahun !== null) {
+
+				$dd = $id_tahun-2;
+
+	 				$query =
+	 								"
+									SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.berwirausaha) AS 'berwirausaha', SUM(t.lokal) AS 'lokal', SUM(t.nasional) AS 'nasional', SUM(t.internasional) AS 'internasional'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_prodi=p.id_prodi AND t.tahun <= $dd AND t.tahun >= ($dd-2) AND t.id_prodi = $id_prodi
+	 			";
+	 		} else {
+				$query =
+								"
+								SELECT SUM(t.jml_lulus) AS 'jml_lulus', SUM(t.jml_lulus_ter) AS 'jml_lulus_ter', SUM(t.berwirausaha) AS 'berwirausaha', SUM(t.lokal) AS 'lokal', SUM(t.nasional) AS 'nasional', SUM(t.internasional) AS 'internasional'
+				FROM table_8d1 t, prodi p
+				WHERE t.id_prodi=p.id_prodi AND t.tahun <= (SELECT date_format(curdate(),'%Y')-2) AND t.tahun >= (SELECT date_format(curdate(),'%Y')-4) AND t.id_prodi = 1
 				";
 	 		}
 

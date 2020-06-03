@@ -94,8 +94,8 @@
               <td><?= $tb['wt_6']?></td>
               <td><?= $tb['wt_18']?></td>
               <td><?= $tb['wt_lebih']?></td>
-              <td><div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div></div>
+              <td><?php echo anchor('admin/edit_table8d1/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_table8d1/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>

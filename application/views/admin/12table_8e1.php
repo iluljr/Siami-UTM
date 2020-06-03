@@ -8,41 +8,54 @@
     </div>
     <div class="card-body">
       <h4>Table 8.e.1 Tempat Kerja Lulusan</h4>
-      <table align="center">
-        <tr>
-          <td align="right">Tahun Ajaran :</td>
-          <td>
-            <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih tahun ajaran - </option>
-              <?php
-                foreach ($dropdown as $dd):
-              ?>
-                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
-              <?php endforeach;?>
-            </select>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td align="right">Nama Program Studi :</td>
-          <td>
-            <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih program studi - </option>
-              <?php
-                foreach ($prodi as $ps):
-              ?>
-                <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
-              <?php endforeach;?>
-            </select>
-          </div>
-          </td>
-        </tr>
-      </table>
+      <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
+
+      <form class="form-inline mb-2" action="<?= base_url('admin/table_8e1'); ?>" method="post">
+        <table align="center">
+          <tr>
+            <td align="right">Tahun Ajaran :</td>
+            <td>
+              <div class="">
+                <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
+                <option class="dropdown-item" selected> - pilih tahun ajaran - </option>
+                <?php
+                  foreach ($dropdown as $dd):
+                ?>
+                  <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+                <?php endforeach;?>
+                </select>
+              </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td align="right">Nama Program Studi :</td>
+              <td>
+                <div class="">
+                  <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
+                  <?php endforeach;?>
+                </select>
+              </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+              </td>
+            </tr>
+          </table>
+      </form>
 
       <!-- Data Table -->
       <div class="table-responsive">
@@ -54,6 +67,7 @@
               <th rowspan="2">Jumlah Lulusan yang Terlacak</th>
               <th rowspan="2">Jumlah Lulusan yang Telah Bekerja/ Berwirausaha</th>
               <th colspan="3">Jumlah Lulusan yang Bekerja Berdasarkan Tingkat/Ukuran Tempat Kerja/Berwirausa</th>
+              <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
               <th>Lokal/ Wilayah/ Berwirausaha tidak Berbadan Hukum</th>
@@ -68,53 +82,73 @@
               <td>5</td>
               <td>6</td>
               <td>7</td>
+              <td colspan="2">8</td>
             </tr>
           </thead>
           <tbody>
-
+            <?php
+            foreach ($view_table8e1 as $tb) :
+            ?>
+            <tr>
+              <td width="150px"><?= $tb['tahun']?> / <?= $tb['tahun']+1?></td>
+              <td><?= $tb['jml_lulus']?></td>
+              <td><?= $tb['jml_lulus_ter']?></td>
+              <td><?= $tb['berwirausaha']?></td>
+              <td><?= $tb['lokal']?></td>
+              <td><?= $tb['nasional']?></td>
+              <td><?= $tb['internasional']?></td>
+              <td><?php echo anchor('admin/edit_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              </td>
+            </tr>
+          <?php endforeach;?>
           </tbody>
           <tfoot>
             <tr>
               <td>Jumlah</td>
-              <td></td>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <?php foreach ($jumlah_data as $jd): ?>
+              <th><?= $jd['jml_lulus']?></th>
+              <th><?= $jd['jml_lulus_ter']?></th>
+              <th><?= $jd['berwirausaha']?></th>
+              <th><?= $jd['lokal']?></th>
+              <th><?= $jd['nasional']?></th>
+              <th><?= $jd['internasional']?></th>
+              <?php endforeach;?>
+              <th colspan="2">&nbsp;</th>
             </tr>
           </tfoot>
         </table>
       </div>
     </br>
+    <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
           <td colspan="6">Persentase lulusan terlacak dari total lulusan</td>
-          <td>NI</td>
-          <td>:</td>
+          <td>&nbsp;</td>
+          <td>: <?= ($jd['jml_lulus_ter']/$jd['jml_lulus'])*100/100?></td>
         </tr>
         <tr>
           <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat internasional/multi nasional.</td>
-          <td>NN</td>
-          <td>:</td>
+          <td>NI</td>
+          <td>: <?= $jd['internasional']?></td>
           <td>RI = (NI / NA) x 100%</td>
         </tr>
         <tr>
           <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat nasional atau berwirausaha yang berizin.</td>
-          <td>NL</td>
-          <td>:</td>
+          <td>NN</td>
+          <td>: <?= $jd['nasional']?></td>
           <td>RN = (NN / NA) x 100%</td>
         </tr>
         <tr>
-          <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat wilayah/lokal atau berwirausaha tidak berijin</td>
-          <td>NA</td>
-          <td>:</td>
+          <td colspan="6" width="50%">Jumlah lulusan yang bekerja di badan usaha tingkat wilayah/lokal atau berwirausaha tidak berijin</td>
+          <td>NL</td>
+          <td>: <?= $jd['lokal']?></td>
           <td>RL = (NL / NA) x 100% </td>
         </tr>
         <tr>
           <td colspan="6">Jumlah lulusan terlacak</td>
           <td>NA</td>
-          <td>:</td>
+          <td>: <?= $jd['jml_lulus_ter']?></td>
           <td>Faktor: a = 5% , b = 20% , c = 90% .</td>
         </tr>
         <tr>
@@ -141,17 +175,17 @@
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>R1</td>
-          <td>:</td>
+          <td>: <?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>RN</td>
-          <td>:</td>
+          <td>: <?= ($jd['nasional']/$jd['jml_lulus_ter'])*100/100?></td>
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>RL</td>
-          <td>:</td>
+          <td>: <?= ($jd['lokal']/$jd['jml_lulus_ter'])*100/100?></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -164,6 +198,7 @@
           <td>IKU No.12</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
+          <td><?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
           <td>RI >= 5%</td>
         </tr>
         <tr>
@@ -175,6 +210,7 @@
           <td colspan="">Jika RI >=5% tuliskan nilai dari RI</td>
         </tr>
       </table>
+      <?php endforeach;?>
       <!-- End Data Table -->
 
     </div>
@@ -185,3 +221,72 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal Tambah data table_8d2 -->
+<div class="modal fade" id="databaru" tabindex="-1" role="dialog" aria-labelledby="DataBaru" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin/tambah_data8e1'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukan Tahun Lulus
+            </div>
+						<input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun Lulus" required>
+					</div>
+  				<div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
+                  <?php endforeach;?>
+                </select>
+  					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah Lulusan
+            </div>
+						<input type="text" class="form-control" name="jml_lulusan" id="jml_lulusan" placeholder="Jumlah Lulusan" required>
+					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah Lulus Yang Terlacak
+            </div>
+						<input type="text" class="form-control mb-2" name="jml_terlacak" id="jml_terlacak" placeholder="Jumlah Lulus Yang Terlacak" required>
+					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah Lulusan yang Telah Bekerja/ Berwirausaha
+            </div>
+						<input type="text" class="form-control mb-2" name="jml_berwirausaha" id="jml_terlacak" placeholder="Jumlah Lulus Yang Terlacak" required>
+					</div>
+            <div class="form-group">
+              <div class="invalid-feedback>">
+                Jumlah Lulusan yang Bekerja Berdasarkan Tingkat/Ukuran Tempat Kerja/Berwirausaha
+              </div>
+              <input type="text" class="form-control mb-2" name="lokal" id="wt_6" placeholder="Lokal" required>
+              <input type="text" class="form-control mb-2" name="nasional" id="wt_18" placeholder="Nasional" required>
+              <input type="text" class="form-control" name="internasional" id="wt_lebih" placeholder="Internasional" required>
+            </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
