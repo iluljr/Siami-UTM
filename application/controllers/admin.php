@@ -14,17 +14,18 @@ class admin extends CI_Controller
 
 	public function index()
 	{
-		//TABEL 2a
+
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB();
+		$data['judul'] = 'Data Audit';
 
-		//TABEL 2b
+
 		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs();
 
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/dashboard",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -62,10 +63,11 @@ class admin extends CI_Controller
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun']);
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun']);
+		$data['judul'] = 'Table 2.a';
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/134table_2a",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -104,7 +106,7 @@ class admin extends CI_Controller
 		$where = array('id_tabel2a' => $id );
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel2a', $data);
 		$this->load->view("admin/layout/footer_admin");
@@ -163,8 +165,10 @@ class admin extends CI_Controller
 		$data['view_table2a_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun']);
+		$data['judul'] = 'Table 2.b';
+
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/2table_2b",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -176,7 +180,7 @@ class admin extends CI_Controller
 		$where = array('tahun' => $tahun );
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel2b', $data);
 		$this->load->view("admin/layout/footer_admin");
@@ -217,11 +221,12 @@ class admin extends CI_Controller
 		$data['view_table8a'] = $this->model_admin->gettable8a($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['table8a_rata']=$this->model_admin->table8a_rata($data['id_tahun'],$data['id_prodi']);
+		$data['judul'] = 'Table 8.a';
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/5table_8a",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -260,7 +265,7 @@ class admin extends CI_Controller
 		$where = array('id_tabel8a' => $id );
 		$data['tabel_8a'] = $this->model_admin->edit_data($where,'tabel_8a')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel8a', $data);
 		$this->load->view("admin/layout/footer_admin");
@@ -291,8 +296,10 @@ class admin extends CI_Controller
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
+		$data['judul'] = 'Table 8.b';
+
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/5table_8b",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -304,8 +311,10 @@ class admin extends CI_Controller
 	{
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
+		$data['judul'] = 'Table 8.c';
+
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/7table_8c",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -329,11 +338,12 @@ class admin extends CI_Controller
 
 		$data['view_table8d1'] = $this->model_admin->gettable8d1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8d1($data['id_tahun'],$data['id_prodi']);
+		$data['judul'] = 'Table 8.d.1';
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/10table_8d1",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -352,7 +362,7 @@ class admin extends CI_Controller
 		$where = array('id_table8d1' => $id );
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel8d1', $data);
 		$this->load->view("admin/layout/footer_admin");
@@ -421,10 +431,12 @@ class admin extends CI_Controller
 
 		$data['view_table8d2'] = $this->model_admin->gettable8d2($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8d2($data['id_tahun'],$data['id_prodi']);
+		$data['judul'] = 'Table 8.d.2';
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/11table_8d2",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -467,7 +479,7 @@ class admin extends CI_Controller
 		$where = array('id_table8d1' => $id );
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel8d2', $data);
 		$this->load->view("admin/layout/footer_admin");
@@ -512,11 +524,12 @@ class admin extends CI_Controller
 
 		$data['view_table8e1'] = $this->model_admin->gettable8e1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8e1($data['id_tahun'],$data['id_prodi']);
+		$data['judul'] = 'Table 8.e.1';
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/12table_8e1",$data);
 		$this->load->view("admin/layout/footer_admin");
@@ -561,7 +574,7 @@ class admin extends CI_Controller
 		$where = array('id_table8d1' => $id );
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar_admin");
+		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view('admin/edit_tabel8e1', $data);
 		$this->load->view("admin/layout/footer_admin");
