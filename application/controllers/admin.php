@@ -202,6 +202,20 @@ class admin extends CI_Controller
 	//table 8a
 	public function table_8a()
 	{
+		$this->session->unset_userdata('id_tahun');
+		$this->session->unset_userdata('id_prodi');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$data['id_prodi'] = $this->input->post('id_prodi');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+			$this->session->set_userdata('id_prodi', $data['id_prodi']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+			$data['id_prodi'] = $this->session->userdata('id_prodi');
+		}
+
+		$data['view_table8a'] = $this->model_admin->gettable8a($data['id_tahun'],$data['id_prodi']);
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$this->load->view("admin/layout/header_admin");

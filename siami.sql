@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jun 2020 pada 13.32
+-- Waktu pembuatan: 03 Jun 2020 pada 16.22
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -165,27 +165,87 @@ INSERT INTO `prodi` (`id_prodi`, `nama_prodi`, `id_fakultas`, `id_jenjang`) VALU
 CREATE TABLE `tabel_2a` (
   `id_tabel2a` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
+  `id_prodi` int(11) NOT NULL,
   `daya_tampung` int(11) NOT NULL,
   `pendaftar` int(11) NOT NULL,
   `lulus_seleksi` int(11) NOT NULL,
   `jmb_reguler` int(11) NOT NULL,
   `jmb_transfer` int(11) NOT NULL,
   `jma_reguler` int(11) NOT NULL,
-  `jma_transfer` int(11) NOT NULL
+  `jma_transfer` int(11) NOT NULL,
+  `jma_penuh` int(11) NOT NULL,
+  `jma_paruh` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tabel_2a`
 --
 
-INSERT INTO `tabel_2a` (`id_tabel2a`, `tahun`, `daya_tampung`, `pendaftar`, `lulus_seleksi`, `jmb_reguler`, `jmb_transfer`, `jma_reguler`, `jma_transfer`) VALUES
-(1, 2016, 149, 1130, 144, 114, 10, 434, 19),
-(2, 2017, 174, 1529, 174, 147, 3, 584, 17),
-(3, 2018, 139, 2081, 139, 126, 13, 585, 22),
-(4, 2019, 240, 1960, 247, 187, 6, 631, 26),
-(5, 2020, 120, 1403, 166, 141, 141, 645, 30),
-(7, 2015, 654, 343, 235, 532, 235, 674, 45),
-(8, 2021, 550, 3123, 3131, 532, 532, 674, 46);
+INSERT INTO `tabel_2a` (`id_tabel2a`, `tahun`, `id_prodi`, `daya_tampung`, `pendaftar`, `lulus_seleksi`, `jmb_reguler`, `jmb_transfer`, `jma_reguler`, `jma_transfer`, `jma_penuh`, `jma_paruh`) VALUES
+(1, 2016, 1, 149, 1130, 144, 114, 10, 434, 19, 0, 0),
+(2, 2017, 1, 174, 1529, 174, 147, 3, 584, 17, 0, 0),
+(3, 2018, 1, 139, 2081, 139, 126, 13, 585, 22, 0, 0),
+(4, 2019, 1, 240, 1960, 247, 187, 6, 631, 26, 0, 0),
+(5, 2020, 1, 120, 1403, 166, 141, 18, 645, 30, 0, 0),
+(7, 2015, 1, 654, 343, 235, 532, 235, 674, 45, 0, 0),
+(8, 2021, 1, 550, 3123, 3131, 321, 17, 674, 46, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tabel_8a`
+--
+
+CREATE TABLE `tabel_8a` (
+  `id_tabel8a` int(11) NOT NULL,
+  `id_prodi` int(11) NOT NULL,
+  `tahun_lulus` int(11) NOT NULL,
+  `jumlah_lulusan` int(11) NOT NULL,
+  `ipk_min` float NOT NULL,
+  `ipk_rata` float NOT NULL,
+  `ipk_max` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tabel_8a`
+--
+
+INSERT INTO `tabel_8a` (`id_tabel8a`, `id_prodi`, `tahun_lulus`, `jumlah_lulusan`, `ipk_min`, `ipk_rata`, `ipk_max`) VALUES
+(1, 1, 2020, 92, 1.9, 3.2, 3.86),
+(2, 1, 2019, 100, 2.71, 3.35, 3.36),
+(3, 1, 2018, 128, 1.9, 3.2, 3.85);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `table_8d1`
+--
+
+CREATE TABLE `table_8d1` (
+  `id_table8d1` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `id_prodi` int(11) NOT NULL,
+  `jml_lulus` int(11) NOT NULL,
+  `jml_lulus_ter` int(11) NOT NULL,
+  `wt_6` int(11) NOT NULL,
+  `wt_18` int(11) NOT NULL,
+  `wt_lebih` int(11) NOT NULL,
+  `rendah` int(11) NOT NULL,
+  `sedang` int(11) NOT NULL,
+  `tinggi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `table_8d1`
+--
+
+INSERT INTO `table_8d1` (`id_table8d1`, `tahun`, `id_prodi`, `jml_lulus`, `jml_lulus_ter`, `wt_6`, `wt_18`, `wt_lebih`, `rendah`, `sedang`, `tinggi`) VALUES
+(1, 2016, 1, 124, 89, 10, 46, 33, 25, 48, 16),
+(2, 2015, 1, 101, 74, 13, 38, 23, 21, 39, 14),
+(3, 2014, 1, 120, 84, 8, 46, 30, 28, 45, 11),
+(4, 2016, 3, 200, 108, 42, 13, 8, 0, 0, 0),
+(5, 2016, 3, 200, 108, 0, 0, 0, 26, 9, 12),
+(6, 2018, 1, 124, 89, 10, 46, 33, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -252,7 +312,22 @@ ALTER TABLE `prodi`
 -- Indeks untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  ADD PRIMARY KEY (`id_tabel2a`);
+  ADD PRIMARY KEY (`id_tabel2a`),
+  ADD KEY `prodi` (`id_prodi`);
+
+--
+-- Indeks untuk tabel `tabel_8a`
+--
+ALTER TABLE `tabel_8a`
+  ADD PRIMARY KEY (`id_tabel8a`),
+  ADD KEY `prodi_tabel8a` (`id_prodi`);
+
+--
+-- Indeks untuk tabel `table_8d1`
+--
+ALTER TABLE `table_8d1`
+  ADD PRIMARY KEY (`id_table8d1`),
+  ADD KEY `id_prodi` (`id_prodi`);
 
 --
 -- Indeks untuk tabel `tahun_ajaran`
@@ -298,7 +373,19 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT untuk tabel `tabel_8a`
+--
+ALTER TABLE `tabel_8a`
+  MODIFY `id_tabel8a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_8d1`
+--
+ALTER TABLE `table_8d1`
+  MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`
@@ -322,6 +409,24 @@ ALTER TABLE `dosen`
 ALTER TABLE `prodi`
   ADD CONSTRAINT `prodi_ibfk_1` FOREIGN KEY (`id_fakultas`) REFERENCES `fakultas` (`id_fakultas`) ON UPDATE CASCADE,
   ADD CONSTRAINT `prodi_ibfk_2` FOREIGN KEY (`id_jenjang`) REFERENCES `jenjang` (`id_jenjang`);
+
+--
+-- Ketidakleluasaan untuk tabel `tabel_2a`
+--
+ALTER TABLE `tabel_2a`
+  ADD CONSTRAINT `prodi` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
+
+--
+-- Ketidakleluasaan untuk tabel `tabel_8a`
+--
+ALTER TABLE `tabel_8a`
+  ADD CONSTRAINT `prodi_tabel8a` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`) ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `table_8d1`
+--
+ALTER TABLE `table_8d1`
+  ADD CONSTRAINT `table_8d1_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

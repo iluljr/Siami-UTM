@@ -116,22 +116,23 @@
         </table>
       </div>
     </br>
+      <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
           <td colspan="4">Jumlah lulusan yang sesuai bidang kategori tinggi</td>
           <td>:</td>
-          <td></td>
+          <td><?= $jd['tinggi']?></td>
         </tr>
         <tr>
           <td colspan="4">Jumlah lulusan terlacak</td>
           <td>:</td>
-          <td></td>
+          <td><?= $jd['jml_lulus_ter']?></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
           <td colspan="3">Persentase lulusan yang sesuai bidang</td>
           <td>:</td>
-          <td></td>
+          <td><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -144,7 +145,8 @@
           <td>IKU No.11</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td>PBS > = 60%</td>
+          <td><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+          <td>(PBS > = 60%)</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
@@ -155,6 +157,7 @@
           <td colspan="2">Jika PBS >= 60%  tuliskan nilainya</td>
         </tr>
       </table>
+      <?php endforeach;?>
       </br>
       <p>RENDAH: jenis pekerjaan/posisi jabatan dalam pekerjaan tidak sesuai atau kurang sesuai
         dengan profil lulusan yang direncanakan dalam dokumen kurikulum.

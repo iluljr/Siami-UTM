@@ -116,26 +116,27 @@
         </table>
       </div>
     </br>
+    <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
           <td colspan="4">Jumlah lulusan dengan waktu tunggu mendapatkan pekerjaan </td>
           <td>:</td>
-          <td></td>
+          <td><?= $jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']?></td>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+          <td>:</td>
+          <td><?= (($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih'])?></td>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+          <td>:</td>
+          <td><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
         </tr>
         <tr>
           <td colspan="4">Persentase lulusan dengan waktu tunggu < 6 bulan</td>
           <td>:</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td colspan="4">Persentase lulusan dengan waktu tunggu < 6 bulan</td>
-          <td>:</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td colspan="4">Persentase lulusan dengan waktu tunggu < 6 bulan</td>
-          <td>:</td>
-          <td></td>
+          <td><?= ($jd['wt_6']/$jd['jml_lulus_ter'])*100?></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -148,7 +149,8 @@
           <td>IKU No.11</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td>100%</td>
+          <td><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <td>(100%)</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
@@ -168,8 +170,15 @@
           <td colspan="3">&nbsp;</td>
           <td>Persentase responden minimum</td>
           <td>:</td>
+          <td><?php if ($jd['jml_lulus'] >= 300): ?>
+            30%
+          <?php elseif($jd['jml_lulus'] < 300): ?>
+            <?= 50-(($jd['jml_lulus']/300)*20) ?>%
+          <?php endif; ?>
+          </td>
         </tr>
       </table>
+      <?php endforeach;?>
     </br>
     <p>Ketentuan persentase responden lulusan:
         <br>- untuk program studi dengan jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) ≥ 300 orang, maka Prmin = 30%.
