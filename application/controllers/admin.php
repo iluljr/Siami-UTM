@@ -294,16 +294,83 @@ class admin extends CI_Controller
 	//table 8b
 	public function table_8b()
 	{
+		$this->session->unset_userdata('id_tahun');
+		$this->session->unset_userdata('id_prodi');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$data['id_prodi'] = $this->input->post('id_prodi');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+			$this->session->set_userdata('id_prodi', $data['id_prodi']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+			$data['id_prodi'] = $this->session->userdata('id_prodi');
+		}
+
+		$data['view_table8b'] = $this->model_admin->gettable8b($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NW'] = $this->model_admin->gettable8b_jumlah_NW($data['id_tahun'],$data['id_prodi']);
+
 		$data['dropdown']=$this->model_log->dropdown()->result();
+		$data['tingkat']=$this->model_log->tingkat()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
 		$data['judul'] = 'Table 8.b';
+		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/5table_8b",$data);
 		$this->load->view("admin/layout/footer_admin");
+	}
+	public function tambah_data8b()
+	{
 
+		 $nama_kegiatan = $this->input->post('nama_kegiatan');
+		 $waktu_perolehan = $this->input->post('waktu_perolehan');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $id_tingkat = $this->input->post('id_tingkat');
+		 $prestasi = $this->input->post('prestasi');
+
+		 $data = array(
+		 	'nama_kegiatan' => $nama_kegiatan,
+		 	'waktu_perolehan' => $waktu_perolehan,
+		 	'id_prodi' => $id_prodi,
+		 	'id_tingkat' => $id_tingkat,
+		 	'prestasi' => $prestasi,
+		 );
+		 $this->db->insert('tabel_8b',$data);
+		 redirect('admin/table_8b');
+	}
+
+	public function edit_tabel8b($id)
+	{
+		$where = array('id_tabel8b' => $id );
+		$data['tabel_8b'] = $this->model_admin->edit_data($where,'tabel_8b')->result();
+		$data['tingkat']=$this->model_log->tingkat()->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar",$data);
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8b', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+	public function update_tabel8b()
+	{
+		$id = $this->input->post('id_tabel8b');
+		$nama_kegiatan = $this->input->post('nama_kegiatan');
+		$waktu_perolehan = $this->input->post('waktu_perolehan');
+		$id_tingkat = $this->input->post('id_tingkat');
+		$prestasi = $this->input->post('prestasi');
+		$data = array(
+			'nama_kegiatan' => $nama_kegiatan,
+			'waktu_perolehan' => $waktu_perolehan,
+			'id_tingkat' => $id_tingkat,
+			'prestasi' => $prestasi,
+		);
+
+		$where = array('id_tabel8b' => $id);
+		$this->model_admin->update_data($where,$data,'tabel_8b');
+		redirect('admin/table_8b');
 	}
 
 	//table 8c

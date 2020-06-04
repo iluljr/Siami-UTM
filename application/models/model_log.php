@@ -62,6 +62,11 @@ class model_log extends CI_Model
     $query = $this->db->get('prodi');
     return $query;
   }
+	public function tingkat()
+  {
+    $query = $this->db->get('tingkat_prestasi');
+    return $query;
+  }
 
 	public function datatable_2a($id_tahun = null)
   {

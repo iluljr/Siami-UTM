@@ -189,6 +189,89 @@ class model_admin extends CI_Model
 	 			 return $this->db->query($query)->result_array();
 	 	 }
 
+		 //TABEL 8b
+		 public function gettable8b($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
+								 FROM tabel_8b t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
+							 FROM tabel_8b t, prodi p
+							 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= (SELECT date_format(curdate(),'%Y')) AND t.waktu_perolehan >= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.waktu_perolehan
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+		 								//JUMLAH
+		 public function gettable8b_jumlah_NI($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT COUNT(t.id_tingkat) AS 'jumlah_ni'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT COUNT(t.id_tingkat) AS 'jumlah_ni'
+							 FROM tabel_8b t, prodi p
+							 WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= (SELECT date_format(curdate(),'%Y')) AND t.waktu_perolehan >= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+		 public function gettable8b_jumlah_NN($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT COUNT(t.id_tingkat) AS 'jumlah_nn'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_tingkat=2 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT COUNT(t.id_tingkat) AS 'jumlah_nn'
+							 FROM tabel_8b t, prodi p
+							 WHERE t.id_tingkat=2 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= (SELECT date_format(curdate(),'%Y')) AND t.waktu_perolehan >= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+		 public function gettable8b_jumlah_NW($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT COUNT(t.id_tingkat) AS 'jumlah_nw'
+					FROM table_8d1 t, prodi p
+					WHERE t.id_tingkat=1 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT COUNT(t.id_tingkat) AS 'jumlah_nw'
+							 FROM tabel_8b t, prodi p
+							 WHERE t.id_tingkat=1 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= (SELECT date_format(curdate(),'%Y')) AND t.waktu_perolehan >= (SELECT date_format(curdate(),'%Y')-2) AND t.id_prodi = 1 ORDER BY t.waktu_perolehan
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
 		 //table table_8d1
 		 public function gettable8d1($id_tahun = null,$id_prodi = null)
 	 	 {

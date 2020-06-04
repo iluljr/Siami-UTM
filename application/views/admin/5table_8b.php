@@ -8,6 +8,7 @@
     </div>
     <div class="card-body">
       <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
+      <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -54,6 +55,7 @@
               <th rowspan="2">Waktu Perolehan (YYYY)</th>
               <th colspan="3">Tingkat</th>
               <th rowspan="2">Prestasi Yang Dicapai</th>
+              <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
               <th>Lokal/Wilayah</th>
@@ -68,38 +70,125 @@
               <td>5</td>
               <td>6</td>
               <td>7</td>
+              <td> </td>
+              <td> </td>
             </tr>
           </thead>
           <tbody>
+            <?php
+            foreach ($view_table8b as $tb) :
+            ?>
+            <tr align="center">
+              <td> </td>
+              <td><?= $tb['nama_kegiatan']?></td>
+              <td><?= $tb['waktu_perolehan']?></td>
+              <td>
+                <?php if ($tb['id_tingkat'] == 1): ?>
+                  <a><img src="<?php echo base_url('asset/image/centang.png')?>" title="centang" /></a>
+                <?php elseif($tb['id_tingkat'] == 2): ?>
 
+                <?php elseif($tb['id_tingkat'] == 3): ?>
+
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($tb['id_tingkat'] == 1): ?>
+
+                <?php elseif($tb['id_tingkat'] == 2): ?>
+                  <a><img src="<?php echo base_url('asset/image/centang.png')?>" title="centang" /></a>
+                <?php elseif($tb['id_tingkat'] == 3): ?>
+
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($tb['id_tingkat'] == 1): ?>
+
+                <?php elseif($tb['id_tingkat'] == 2): ?>
+
+                <?php elseif($tb['id_tingkat'] == 3): ?>
+                  <a><img src="<?php echo base_url('asset/image/centang.png')?>" title="centang" /></a>
+                <?php endif; ?>
+              </td>
+              <td><?= $tb['prestasi']?></td>
+              <td><?php echo anchor('admin/edit_tabel8b/'.$tb['id_tabel8b'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel8b/'.$tb['id_tabel8b'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              </td>
+            </tr>
+          <?php endforeach;?>
           </tbody>
         </table>
       </div>
     </br>
       <table class="">
         <tr>
+          <?php foreach ($jumlah_data_MA as $jd2): ?>
           <td>Jumlah mahasiswa aktif pada saat TS (NM)</td>
           <td>:</td>
-          <td></td>
-          <td>NIM</td>
+          <td align="center" width="45px"><?= $jd2['mahasiswa_aktif']?></td>
+          <td align="left">NIM</td>
+          <?php endforeach;?>
         </tr>
         <tr>
+          <?php foreach ($view_table8b_jumlah_NI as $tb) : ?>
           <td>Jumlah prestasi akademik internasional (NI)</td>
           <td>:</td>
-          <td></td>
+          <td align="center"><?= $tb['jumlah_ni']?></td>
           <td>NI</td>
+          <?php endforeach;?>
         </tr>
         <tr>
+          <?php foreach ($view_table8b_jumlah_NN as $tb) : ?>
           <td>Jumlah prestasi akademik nasional (NN)</td>
           <td>:</td>
-          <td></td>
+          <td align="center"><?= $tb['jumlah_nn']?></td>
           <td>NN</td>
+          <?php endforeach;?>
         </tr>
         <tr>
+          <?php foreach ($view_table8b_jumlah_NW as $tb) : ?>
           <td>Jumlah prestasi akademik wilayah (NW)</td>
           <td>:</td>
-          <td></td>
+          <td align="center"><?= $tb['jumlah_nw']?></td>
           <td>NW</td>
+          <?php endforeach;?>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <table class="">
+        <tr>
+          <?php foreach ($view_table8b_jumlah_NI as $tb) : ?>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+              <td>RI</td>
+              <td>:</td>
+              <td align="center" width="200px"><?= ($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])*100?></td>
+              <td align="left">NI/NIM</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
+        </tr>
+        <tr>
+          <?php foreach ($view_table8b_jumlah_NN as $tb) : ?>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+              <td>RN</td>
+              <td>:</td>
+              <td align="center"><?= ($tb['jumlah_nn']/$jd2['mahasiswa_aktif'])?></td>
+              <td align="left">NN/NIM</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
+        </tr>
+        <tr>
+          <?php foreach ($view_table8b_jumlah_NW as $tb) : ?>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+              <td>RW</td>
+              <td>:</td>
+              <td align="center"><?= ($tb['jumlah_nw']/$jd2['mahasiswa_aktif'])?></td>
+              <td align="left">NW/NIM</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -108,34 +197,18 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td>RI</td>
-          <td>:</td>
-          <td></td>
-          <td>NI/NIM</td>
-        </tr>
-        <tr>
-          <td>RN</td>
-          <td>:</td>
-          <td></td>
-          <td>NN/NIM</td>
-        </tr>
-        <tr>
-          <td>RW</td>
-          <td>:</td>
-          <td></td>
-          <td>NW/NIM</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
+          <?php foreach ($view_table8b_jumlah_NI as $tb) : ?>
+          <?php foreach ($view_table8b_jumlah_NN as $tb2) : ?>
+          <?php foreach ($view_table8b_jumlah_NW as $tb3) : ?>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
           <td>Pemenuhan IKU</td>
-          <td>:</td>
-          <td></td>
-          <td>RI >= 0.1% (0.001)</td>
+          <td> : </td>
+          <td align="center"><?= (($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])*100)+($tb2['jumlah_nn']/$jd2['mahasiswa_aktif'])+($tb3['jumlah_nw']/$jd2['mahasiswa_aktif'])?></td>
+          <td align="left">RI >= 0.1% (0.001)</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
+          <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -156,3 +229,71 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal Tambah Mahasiswa -->
+<div class="modal fade" id="databaru" tabindex="-1" role="dialog" aria-labelledby="DataBaru" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin/tambah_data8b'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukan Nama Kegiatan
+            </div>
+						<input type="text" class="form-control" name="nama_kegiatan" placeholder="Nama Kegiatan" required>
+					</div>
+  					<div class="form-group">
+              <div class="invalid-feedback>">
+                Masukan Tahun Waktu Perolehan
+              </div>
+  						<input type="number" class="form-control" name="waktu_perolehan" placeholder="Tahun Waktu Perolehan" required>
+  					</div>
+  				<div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
+                  <?php endforeach;?>
+                </select>
+  				</div>
+          <div class="form-group">
+              <div class="invalid-feedback>">
+                Tingkat (*Lokal/wilayah , Nasional , Internasional)
+              </div>
+                <select name="id_tingkat" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih Tingkat Prestasi - </option>
+                  <?php
+                    foreach ($tingkat as $ps):
+                  ?>
+                    <option value="<?php echo $ps->id_tingkat;?>" class="dropdown-item"><?php echo $ps->tingkat; ?></option>
+                  <?php endforeach;?>
+                </select>
+  				</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Prestasi yang dicapai
+            </div>
+						<input type="textarea" class="form-control" name="prestasi" placeholder="prestasi" required>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
