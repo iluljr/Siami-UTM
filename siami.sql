@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2020 pada 05.05
+-- Waktu pembuatan: 04 Jun 2020 pada 09.22
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -238,9 +238,40 @@ INSERT INTO `tabel_8b` (`id_tabel8b`, `id_prodi`, `nama_kegiatan`, `waktu_perole
 (1, 1, 'A', 2020, 1, NULL),
 (2, 1, 'B', 2018, 3, NULL),
 (3, 1, 'C', 2018, 3, NULL),
-(4, 1, 'D', 2018, 2, ''),
+(4, 1, 'D', 2018, 2, 'Juara 2 Membuat Game sederhana dengan Unity3D'),
 (5, 1, 'A', 2017, 3, ''),
 (6, 1, 'A', 2019, 3, '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tabel_8c`
+--
+
+CREATE TABLE `tabel_8c` (
+  `id_tabel8c` int(11) NOT NULL,
+  `tahun_masuk` int(11) NOT NULL,
+  `id_prodi` int(11) NOT NULL,
+  `mhs_diterima` int(11) NOT NULL,
+  `ts_6` int(11) DEFAULT NULL,
+  `ts_5` int(11) DEFAULT NULL,
+  `ts_4` int(11) DEFAULT NULL,
+  `ts_3` int(11) DEFAULT NULL,
+  `ts_2` int(11) DEFAULT NULL,
+  `ts_1` int(11) DEFAULT NULL,
+  `ts` int(11) DEFAULT NULL,
+  `rata_studi` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tabel_8c`
+--
+
+INSERT INTO `tabel_8c` (`id_tabel8c`, `tahun_masuk`, `id_prodi`, `mhs_diterima`, `ts_6`, `ts_5`, `ts_4`, `ts_3`, `ts_2`, `ts_1`, `ts`, `rata_studi`) VALUES
+(1, 2017, 1, 134, NULL, NULL, NULL, NULL, NULL, NULL, 11, 4),
+(2, 2016, 1, 174, NULL, NULL, NULL, NULL, NULL, 2, 29, 4.94),
+(3, 2015, 1, 149, NULL, NULL, NULL, NULL, 5, 40, 27, 5.31),
+(4, 2014, 1, 124, NULL, NULL, NULL, 2, 83, 18, 16, 5.4);
 
 -- --------------------------------------------------------
 
@@ -479,6 +510,13 @@ ALTER TABLE `tabel_8b`
   ADD KEY `tingkat_prestasi` (`id_tingkat`);
 
 --
+-- Indeks untuk tabel `tabel_8c`
+--
+ALTER TABLE `tabel_8c`
+  ADD PRIMARY KEY (`id_tabel8c`),
+  ADD KEY `prodi_tabel8c` (`id_prodi`);
+
+--
 -- Indeks untuk tabel `table_8d1`
 --
 ALTER TABLE `table_8d1`
@@ -577,6 +615,12 @@ ALTER TABLE `tabel_8b`
   MODIFY `id_tabel8b` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT untuk tabel `tabel_8c`
+--
+ALTER TABLE `tabel_8c`
+  MODIFY `id_tabel8c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `table_8d1`
 --
 ALTER TABLE `table_8d1`
@@ -629,6 +673,12 @@ ALTER TABLE `tabel_8a`
 ALTER TABLE `tabel_8b`
   ADD CONSTRAINT `prodi_tabel8b` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`),
   ADD CONSTRAINT `tingkat_prestasi` FOREIGN KEY (`id_tingkat`) REFERENCES `tingkat_prestasi` (`id_tingkat`);
+
+--
+-- Ketidakleluasaan untuk tabel `tabel_8c`
+--
+ALTER TABLE `tabel_8c`
+  ADD CONSTRAINT `prodi_tabel8c` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
 
 --
 -- Ketidakleluasaan untuk tabel `table_8d1`
