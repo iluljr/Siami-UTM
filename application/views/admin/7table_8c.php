@@ -50,17 +50,17 @@
         <table class="table table-bordered" width="1600px" cellspacing="0">
           <thead align="center">
             <tr>
+              <?php
+                foreach ($tahun_ms as $ts):
+              ?>
               <th rowspan="2">Tahun Masuk</th>
               <th rowspan="2">Jumlah Mahasiswa Diterima</th>
               <th colspan="7">Jumlah Mahasiswa Yang Lulus Pada</th>
-              <th rowspan="2">Jumlah Lulusan s.d. akhir TS</th>
+              <th rowspan="2">Jumlah Lulusan s.d. akhir <?= $ts['tahun_masuk']?></th>
               <th rowspan="2">Rata-rata Masa Studi</th>
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
-              <?php
-                foreach ($tahun_ms as $ts):
-              ?>
               <th>Akhir<br><?= $ts['tahun_masuk']-2?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-1?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']?></th>

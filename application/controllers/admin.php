@@ -14,13 +14,27 @@ class admin extends CI_Controller
 
 	public function index()
 	{
-
+		$data['judul'] = 'Data Audit';
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB();
-		$data['judul'] = 'Data Audit';
-
+		$data['table8a_rata']=$this->model_admin->table8a_rata();
+		//table_8b
+		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI();
+		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN();
+		$data['view_table8b_jumlah_NW'] = $this->model_admin->gettable8b_jumlah_NW();
+		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
+		//table_8c
+		$data['view_table8c_jml'] = $this->model_admin->gettable8c_jml_rata();
+		$data['view_table8c_jml_ts3'] = $this->model_admin->gettable8c_jml_ts3();
+		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin->gettable8c_jml_ts3_ts6();
+		//table_8d1
+		$data['jumlah_data_8d1'] = $this->model_admin->datatable_8d1();
+		//table_8d2
+		$data['jumlah_data_8d2'] = $this->model_admin->datatable_8d2();
+		//table_8e1
+		$data['jumlah_data_8e'] = $this->model_admin->datatable_8e1();
 
 		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs();
 
