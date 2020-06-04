@@ -35,6 +35,7 @@
                   <td bgcolor="yellow">Rasio jumlah pendaftar terhadap jumlah mahasiswa baru adalah 11.3</td>
                   <td></td>
                   <td align="center"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
+                  
                   <td align="center"> 4 </td>
                   <td></td>
                 <?php endforeach;?>

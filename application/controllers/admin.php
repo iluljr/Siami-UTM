@@ -103,6 +103,7 @@ class admin extends CI_Controller
 	}
 	public function edit_tabel2a($id)
 	{
+		$data['judul'] = 'Table 2.a';
 		$where = array('id_tabel2a' => $id );
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
@@ -178,6 +179,7 @@ class admin extends CI_Controller
 	public function edit_tabel2b($tahun)
 	{
 		$where = array('tahun' => $tahun );
+		$data['judul'] = 'Table 2.b';
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -263,6 +265,7 @@ class admin extends CI_Controller
 	public function edit_tabel8a($id)
 	{
 		$where = array('id_tabel8a' => $id );
+		$data['judul'] = 'Table 8.a';
 		$data['tabel_8a'] = $this->model_admin->edit_data($where,'tabel_8a')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -346,6 +349,7 @@ class admin extends CI_Controller
 	public function edit_tabel8b($id)
 	{
 		$where = array('id_tabel8b' => $id );
+		$data['judul'] = 'Table 8.b';
 		$data['tabel_8b'] = $this->model_admin->edit_data($where,'tabel_8b')->result();
 		$data['tingkat']=$this->model_log->tingkat()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -391,6 +395,8 @@ class admin extends CI_Controller
 		$data['view_table8c'] = $this->model_admin->gettable8c($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml'] = $this->model_admin->gettable8c_jml_rata($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml_ts3'] = $this->model_admin->gettable8c_jml_ts3($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin->gettable8c_jml_ts3_ts6($data['id_tahun'],$data['id_prodi']);
+		$data['tahun_ms'] = $this->model_admin->tahun_ms($data['id_tahun'],$data['id_prodi']);
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['prodi']=$this->model_log->prodi()->result();
@@ -401,7 +407,86 @@ class admin extends CI_Controller
 		$this->load->view("admin/layout/topbar_admin");
 		$this->load->view("admin/7table_8c",$data);
 		$this->load->view("admin/layout/footer_admin");
+	}
 
+	public function tambah_data8c()
+	{
+		 $tahun_masuk = $this->input->post('tahun_masuk');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $waktu_perolehan = $this->input->post('mhs_diterima');
+		 $ts_6 = $this->input->post('ts_6');
+		 $ts_5 = $this->input->post('ts_5');
+		 $ts_4 = $this->input->post('ts_4');
+		 $ts_3 = $this->input->post('ts_3');
+		 $ts_2 = $this->input->post('ts_2');
+		 $ts_1 = $this->input->post('ts_1');
+		 $ts = $this->input->post('ts');
+		 $rata_studi = $this->input->post('rata_studi');
+
+		 $data = array(
+		 	'tahun_masuk' => $tahun_masuk,
+		 	'id_prodi' => $id_prodi,
+		 	'mhs_diterima' => $waktu_perolehan,
+		 	'ts_6' => $ts_6,
+		 	'ts_5' => $ts_5,
+			'ts_4' => $ts_4,
+			'ts_3' => $ts_3,
+			'ts_2' => $ts_2,
+			'ts_1' => $ts_1,
+			'ts' => $ts,
+			'rata_studi' => $rata_studi,
+		 );
+		 $this->db->insert('tabel_8c',$data);
+		 redirect('admin/table_8c');
+	}
+
+	public function edit_tabel8c($id)
+	{
+		$where = array('id_tabel8c' => $id );
+		$data['tabel_8c'] = $this->model_admin->edit_data($where,'tabel_8c')->result();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar",$data);
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/edit_tabel8c', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+
+	public function update_tabel8c()
+	{
+		$id = $this->input->post('id_tabel8c');
+		$tahun_masuk = $this->input->post('tahun_masuk');
+		$waktu_perolehan = $this->input->post('mhs_diterima');
+		$ts_6 = $this->input->post('ts_6');
+		$ts_5 = $this->input->post('ts_5');
+		$ts_4 = $this->input->post('ts_4');
+		$ts_3 = $this->input->post('ts_3');
+		$ts_2 = $this->input->post('ts_2');
+		$ts_1 = $this->input->post('ts_1');
+		$ts = $this->input->post('ts');
+		$rata_studi = $this->input->post('rata_studi');
+		$data = array(
+			'tahun_masuk' => $tahun_masuk,
+		 	'mhs_diterima' => $waktu_perolehan,
+		 	'ts_6' => $ts_6,
+		 	'ts_5' => $ts_5,
+			'ts_4' => $ts_4,
+			'ts_3' => $ts_3,
+			'ts_2' => $ts_2,
+			'ts_1' => $ts_1,
+			'ts' => $ts,
+			'rata_studi' => $rata_studi,
+		);
+
+		$where = array('id_tabel8c' => $id);
+		$this->model_admin->update_data($where,$data,'tabel_8c');
+		redirect('admin/table_8c');
+	}
+
+	public function hapus_tabel8c($id)
+	{
+		$where = array('id_tabel8c' => $id);
+		$this->model_admin->hapus_data($where,'tabel_8c');
+		redirect('admin/table_8c');
 	}
 
 	//table 8d1
@@ -443,6 +528,7 @@ class admin extends CI_Controller
 	public function edit_table8d1($id)
 	{
 		$where = array('id_table8d1' => $id );
+		$data['judul'] = 'Table 8.d.1';
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -560,6 +646,7 @@ class admin extends CI_Controller
 	public function edit_table8d2($id)
 	{
 		$where = array('id_table8d1' => $id );
+		$data['judul'] = 'Table 8.d.2';
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -655,6 +742,7 @@ class admin extends CI_Controller
 	public function edit_table8e1($id)
 	{
 		$where = array('id_table8d1' => $id );
+		$data['judul'] = 'Table 8.e.1';
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -686,5 +774,94 @@ class admin extends CI_Controller
 		$this->model_admin->update_data($where,$data,'table_8d1');
 		redirect('admin/table_8e1');
 	}
+
+	//tampil untuk user_akun
+
+	function user_akun()
+	{
+		$this->session->unset_userdata('keyword');
+
+		$data['judul'] = 'Manajemen User';
+		$data['user'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
+		$data['profil'] = $data['user'];
+		$data['profil']['nama'] = 'administrator';
+		$data['profil']['gambar'] = 'default.jpg';
+
+		$this->load->model('user_model', 'userM');
+		$data['level'] = $this->db->get('user_level')->result_array();
+		//$data['user'] = $this->db->from('user');
+
+		if ($this->input->post('submit')) {
+			$data['keyword'] = $this->input->post('keyword');
+			$this->session->set_userdata('keyword', $data['keyword']);
+		} else {
+			$data['keyword'] = $this->session->userdata('keyword');
+		}
+
+		$this->db->like('username', $data['keyword']);
+		$this->db->from('akun');
+		$config['total_rows'] = $this->db->count_all_results();
+		$data['total_rows'] = $config['total_rows'];
+		//$config['base_url'] = 'http://localhost/Siami-UTM/admin/user_akun';
+
+		$config['per_page'] = 5;
+
+		//$this->pagination->initialize($config);
+
+		if ($this->uri->segment(3) !== null) {
+			$data['start'] = $this->uri->segment(3);
+		} else {
+			$data['start'] = 0;
+		}
+
+		$data['users'] = $this->userM->getUsers($config['per_page'], $data['start'], $data['keyword'], $data['user']['level']);
+
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar",$data);
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/user_akun', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
+
+	public function tambah_akun()
+	{
+	   $username = $this->input->post('username');
+	   $password = md5($this->input->post('password'));
+		 $level = $this->input->post('level');
+
+		 $data = array(
+		 	'username' => $username,
+		 	'password' => $password,
+		 	'level' => $level,
+		 );
+		 $this->db->insert('akun',$data);
+		 redirect('admin/user_akun');
+	}
+
+	public function hapus_akun($id)
+	{
+		$where = array('id_user' => $id);
+		$this->model_admin->hapus_data($where,'akun');
+		redirect('admin/user_akun');
+	}
+
+	public function edit_akun($id)
+	{
+		$id = $this->input->post('id_user');
+	  $username = $this->input->post('username');
+	  $password = md5($this->input->post('password'));
+		$level = $this->input->post('level');
+
+		$data = array(
+			'username' => $username,
+		 	'password' => $password,
+		 	'level' => $level,
+		);
+
+		$where = array('id_user' => $id);
+		$this->model_admin->update_data($where,$data,'akun');
+		redirect('admin/user_akun');
+	}
+
 }
 ?>

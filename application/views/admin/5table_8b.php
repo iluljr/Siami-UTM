@@ -47,14 +47,14 @@
 
       <!-- Data Table -->
       <div class="table-responsive">
-        <table class="table table-bordered" width="1600px" cellspacing="0">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
           <thead align="center">
             <tr>
               <th rowspan="2">No.</th>
               <th rowspan="2">Nama Kegiatan</th>
               <th rowspan="2">Waktu Perolehan (YYYY)</th>
               <th colspan="3">Tingkat</th>
-              <th rowspan="2">Prestasi Yang Dicapai</th>
+              <th rowspan="2" width="25%">Prestasi Yang Dicapai</th>
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>

@@ -8,6 +8,7 @@
     </div>
     <div class="card-body">
       <h4>Table 8.c Masa Studi Lulusan</h4>
+            <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -57,13 +58,17 @@
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <?php
+                foreach ($tahun_ms as $ts):
+              ?>
+              <th>Akhir<br><?= $ts['tahun_masuk']-2?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']-1?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+1?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+1?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+2?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+3?></th>
+              <?php endforeach;?>
             </tr>
             <tr align="center">
               <td>1</td>
@@ -170,32 +175,50 @@
         </tr>
         <tr>
           <td colspan="4">Data dari tahun masuk TS-3 sampai TS-6 </td>
-          <td colspan="2">&nbsp;</td>
+          <td colspan="4">&nbsp;</td>
           <td>Skor Terbobot</td>
         </tr>
         <tr>
-          <td colspan="4">Jumlah mahasiswa dengan masa studi <= 4 tahun</td>
-          <td>:</td>
-          <td>B dibobot 1.0</td>
-          <td>:</td>
+          <?php foreach ($view_table8c_jml_ts3_ts6 as $tss) : ?>
+            <td colspan="4">Jumlah mahasiswa dengan masa studi <= 4 tahun</td>
+            <td>:</td>
+            <td align="center" bgcolor="yellow"><?= $tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']?></td>
+            <td>B dibobot 1.0</td>
+            <td>:</td>
+            <td align="center" bgcolor="yellow"><?= $tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']?></td>
+          <?php endforeach;?>
         </tr>
         <tr>
-          <td colspan="4">Jumlah mahasiswa dengan masa studi > 4 tahun sampai < 7 tahun</td>
-          <td>:</td>
-          <td>C dibobot 0.5</td>
-          <td>:</td>
+          <?php foreach ($view_table8c_jml_ts3_ts6 as $tss) : ?>
+            <?php foreach ($view_table8c_jml as $tb) : ?>
+              <td colspan="4">Jumlah mahasiswa dengan masa studi > 4 tahun sampai < 7 tahun</td>
+              <td>:</td>
+              <td align="center" bgcolor="yellow"><?= $tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6'])?></td>
+              <td>C dibobot 0.5</td>
+              <td>:</td>
+              <td align="center" bgcolor="yellow"><?= ($tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']))*0.5?></td>
+            <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
-          <td colspan="4">Jumlah mahasiswa</td>
-          <td>:</td>
-          <td>A</td>
-          <td>:</td>
+            <?php foreach ($view_table8c_jml as $tb) : ?>
+              <td colspan="4">Jumlah mahasiswa</td>
+              <td>:</td>
+              <td align="center" bgcolor="yellow"><?= $tb['jumlah_mhs']?></td>
+              <td>A</td>
+              <td>:</td>
+            <?php endforeach;?>
         </tr>
         <tr>
-          <td colspan="3">&nbsp;</td>
-          <td>Persentase Keberhasislan Studi</td>
-          <td>:</td>
-          <td>(B+C)/A</td>
+          <?php foreach ($view_table8c_jml_ts3_ts6 as $tss) : ?>
+            <?php foreach ($view_table8c_jml as $tb) : ?>
+              <td colspan="3">&nbsp;</td>
+              <<td>Persentase Keberhasislan Studi</td>
+              <td>:</td>
+              <td align="center"><?= ((($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+($tss['jmb6'])+($tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']))*0.5))/$tb['jumlah_mhs'])*100?></td>
+              <td>(B+C)/A</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -204,11 +227,16 @@
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td colspan="2">&nbsp;</td>
-          <td>IKU No. 9</td>
-          <td>Pemenuhan IKU </td>
-          <td>:</td>
-          <td>85%</td>
+          <?php foreach ($view_table8c_jml_ts3_ts6 as $tss) : ?>
+            <?php foreach ($view_table8c_jml as $tb) : ?>
+              <td colspan="2">&nbsp;</td>
+              <td align="center" bgcolor="#FAEBD7">IKU No. 9</td>
+              <td>Pemenuhan IKU </td>
+              <td>:</td>
+              <td bgcolor="#00FF00" align="center"><?= ((($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+($tss['jmb6'])+($tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']))*0.5))/$tb['jumlah_mhs'])*100?></td>
+              <td align="right">85%</td>
+            <?php endforeach;?>
+          <?php endforeach;?>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
@@ -229,3 +257,70 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal Tambah Mahasiswa -->
+<div class="modal fade" id="databaru" tabindex="-1" role="dialog" aria-labelledby="DataBaru" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin/tambah_data8c'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukkan Tahun Masuk
+            </div>
+						<input type="number" class="form-control" name="tahun_masuk" placeholder="Tahun Masuk" required>
+					</div>
+  					<div class="form-group">
+              <div class="invalid-feedback>">
+                Masukkan Jumlah Mahasiswa Diterima
+              </div>
+  						<input type="number" class="form-control" name="mhs_diterima" placeholder="Jumlah mahasiswa diterima" required>
+  					</div>
+  				<div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
+                  <?php endforeach;?>
+                </select>
+  				</div>
+          <div class="form-group">
+              <div class="invalid-feedback>">
+                Jumlah Mahasiswa yang lulus pada
+              </div>
+              <input type="text" class="form-control" name="ts_6" placeholder="Akhir TahunSekarang-6" >
+              <input type="text" class="form-control" name="ts_5"  placeholder="Akhir TahunSekarang-5">
+              <input type="text" class="form-control" name="ts_4"  placeholder="Akhir TahunSekarang-4" >
+              <input type="text" class="form-control" name="ts_3" placeholder="Akhir TahunSekarang-3" >
+              <input type="text" class="form-control" name="ts_2" placeholder="Akhir TahunSekarang-2" >
+              <input type="text" class="form-control" name="ts_1" placeholder="Akhir TahunSekarang-1" >
+              <input type="text" class="form-control" name="ts" placeholder="Akhir TahunSekarang" >
+  				</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Rata-Rata Masa Studi
+            </div>
+						<input type="textarea" class="form-control" name="rata_studi" placeholder="Rata Rata Masa Studi" required>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
