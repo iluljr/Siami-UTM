@@ -272,6 +272,70 @@ class model_admin extends CI_Model
 	 			 return $this->db->query($query)->result_array();
 	 	 }
 
+		 //TABEL 8C
+		 public function gettable8c($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
+								 FROM tabel_8b t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.id_tabel8c, t.tahun_masuk, t.mhs_diterima, t.ts_6, t.ts_5, t.ts_4, t.ts_3, t.ts_2, t.ts_1, t.ts, t.rata_studi
+							 FROM tabel_8c t, prodi p
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')-3) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+		 				//JUMLAH
+		 public function gettable8c_jml_rata($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
+								 FROM tabel_8b t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.id_tabel8c, sum(t.rata_studi) AS 'rata_rata'
+							 FROM tabel_8c t, prodi p
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')-3) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+		 	//JUMLAH DITERIMA SAAT TS-3
+		 public function gettable8c_jml_ts3($id_tahun = null,$id_prodi = null)
+	 	 {
+	 			 if ($id_tahun !== null && $id_prodi !== null) {
+
+	 					 $query =
+	 							 "
+								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
+								 FROM tabel_8b t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+	 			 ";
+			 }else{
+					 $query =
+							 "
+							 SELECT t.id_tabel8c, t.mhs_diterima, t.ts
+							 FROM tabel_8c t, prodi p
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk = (SELECT date_format(curdate(),'%Y')-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+			 ";
+			 }
+	 			 return $this->db->query($query)->result_array();
+	 	 }
+
 		 //table table_8d1
 		 public function gettable8d1($id_tahun = null,$id_prodi = null)
 	 	 {

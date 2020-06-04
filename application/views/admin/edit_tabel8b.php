@@ -34,7 +34,7 @@
               </div>
               <div class="form-group">
                 <label>Prestasi yang dicapai</label>
-                <input type="number" name="prestasi" class="form-control" placeholder="Prestasi yangdicapai" value="<?php echo $tb->prestasi;?>">
+                <input type="textarea" name="prestasi" class="form-control" placeholder="Prestasi yang dicapai" value="<?php echo $tb->prestasi;?>">
               </div>
               <button type="reset" class="btn btn-denger" data-dismiss="modal">Reset</button>
               <button type="submit" class="btn btn-primary">Simpan</button>
