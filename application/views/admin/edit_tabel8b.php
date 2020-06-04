@@ -24,7 +24,7 @@
               <div class="form-group">
                 <label>Indeks Prestasi Kumulatif (*Min / Rata-rata / Max )</label>
                 <select name="id_tingkat" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" > - pilih Tingkat Prestasi - </option>
+                  <option value="<?php echo $tb->id_tingkat;?>" class="dropdown-item" selected> - pilih Tingkat Prestasi - </option>
                   <?php
                     foreach ($tingkat as $ps):
                   ?>
