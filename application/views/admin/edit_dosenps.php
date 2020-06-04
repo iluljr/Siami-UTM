@@ -111,12 +111,16 @@
           <?php endforeach;?>
         </tr>
         <tr>
-          <?php foreach ($jumlah_dosen as $jdosen): ?>
+            <?php
+              foreach ($jumlah_dosen as $jdosen ){
+            ?>
             <td>Jumlah Dosen Tetap PS</td>
             <td>: </td>
-            <td align="center"><?= $jdosen['jumlah_dosen']?></td>
+            <form method="post" action="<?php echo base_url('admin/update_dosen'); ?>">
+              <td align="center"><input type="text" name="z" class="form-control" placeholder="Jumlah Dosen" value="<?php echo $jdosen->jumlah_dosen;?>"> </td>
+            </form>
+            <?php } ?>
             <td align="center"><?php echo anchor('admin/edit_tabel2a_dosen/'.$jdosen['id_dosen'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-          <?php endforeach;?>
         </tr>
         <tr>
           <?php foreach ($jumlah_data_MA as $jd2): ?>

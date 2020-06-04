@@ -140,17 +140,19 @@
         <tr>
           <td>Jumlah Mahasiswa Asing</td>
           <td>:</td>
-          <td><?= $jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh']?></td>
+          <td align="center"><?= $jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh']?></td>
         </tr>
         <tr>
           <td>Jumlah Total Mahasiswa</td>
           <td>:</td>
-          <td><?= $jmblh['jmblh_jma_reg']?></td>
+          <td align="center"><?= $jmblh['jmblh_jma_reg']?></td>
         </tr>
         <tr>
           <td>Persentase mahasiswa asing dan total mahasiswa</td>
-          <td>:</td>
-          <td><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
+          <td >:</td>
+          <td align="center" bgcolor="#00FF00"><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
+          <td width="100px"></td>
+          <td align="center" bgcolor="#FAEBD7">IKU No.2</td>
         </tr>
         <?php endforeach;?>
       </table>

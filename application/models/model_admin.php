@@ -37,7 +37,7 @@ class model_admin extends CI_Model
   	{
 			$query =
 							"
-		SELECT ds.jumlah_dosen AS 'jumlah_dosen' FROM dosen ds
+		SELECT ds.id_dosen, ds.jumlah_dosen AS 'jumlah_dosen' FROM dosen ds
 		";
 		return $this->db->query($query)->result_array();
   	}
