@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2020 pada 09.22
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Waktu pembuatan: 04 Jun 2020 pada 09.34
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -458,7 +458,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 -- Indeks untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD KEY `user_ibfk_1` (`level`);
 
 --
 -- Indeks untuk tabel `dosen`
@@ -643,6 +644,12 @@ ALTER TABLE `tingkat_prestasi`
 --
 
 --
+-- Ketidakleluasaan untuk tabel `akun`
+--
+ALTER TABLE `akun`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`level`) REFERENCES `user_level` (`id`);
+
+--
 -- Ketidakleluasaan untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
@@ -685,6 +692,19 @@ ALTER TABLE `tabel_8c`
 --
 ALTER TABLE `table_8d1`
   ADD CONSTRAINT `table_8d1_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
+
+--
+-- Ketidakleluasaan untuk tabel `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD CONSTRAINT `user_access_menu_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_level` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_access_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `user_menu` (`id`) ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  ADD CONSTRAINT `user_sub_menu_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `user_menu` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
