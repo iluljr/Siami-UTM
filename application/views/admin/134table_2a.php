@@ -115,7 +115,7 @@
             <td>Jumlah Dosen Tetap PS</td>
             <td>: </td>
             <td align="center"><?= $jdosen['jumlah_dosen']?></td>
-            <td align="center"><?php echo anchor('admin/edit_tabel2a_dosen/'.$jdosen['id_dosen'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+            <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
           <?php endforeach;?>
         </tr>
         <tr>
@@ -126,7 +126,7 @@
               <td align="center" bgcolor="#00FF00"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
             <?php endforeach;?>
           <?php endforeach;?>
-          <td width="50px"></td>
+          <td></td>
           <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
         </tr>
         <tr height="15px">
@@ -142,7 +142,7 @@
               <td align="center" bgcolor="#00FF00"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
             <?php endforeach;?>
           <?php endforeach;?>
-          <td width="50px"></td>
+          <td></td>
           <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
         </tr>
       </table>
@@ -212,3 +212,32 @@
 		</div>
 	</div>
 </div>
+
+<?php foreach ($jumlah_dosen as $jdosen): ?>
+<!-- Modal Edit -->
+<div class="modal fade" id="dosenEdit<?= $jdosen['id_dosen'] ?>" tabindex="-1" role="dialog" aria-labelledby="pelamarEditLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pelamarEditLabel">Edit Data Pelamar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="<?= base_url('admin/edit_tabel2a_dosen/' . $jdosen['id_dosen']); ?>" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="username">Jumlah Dosen</label>
+            <input type="hidden" name="id_dosen" value="<?= $jdosen['id_dosen']?>">
+            <input type="text" class="form-control" id="jumlah_dosen" name="jumlah_dosen" value="<?= $jdosen['jumlah_dosen']; ?>">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach;?>

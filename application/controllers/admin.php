@@ -128,24 +128,13 @@ class admin extends CI_Controller
 	}
 	public function edit_tabel2a_dosen($id)
 	{
-		$data['judul'] = 'Table 2.a';
+		$id = $this->input->post('id_dosen');
+		$jml_dosen = $this->input->post('jumlah_dosen');
+
+		$data = array('jumlah_dosen' => $jml_dosen );
 		$where = array('id_dosen' => $id );
-		$data['dosen'] = $this->model_admin->edit_data($where,'dosen')->result();
-
-		$data['view_table2a'] = $this->model_log->gettable2a();
-		$data['jumlah_data'] = $this->model_log->datatable_2a();
-		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
-		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
-		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB();
-		$data['judul'] = 'Table 2.a';
-
-		$data['dropdown']=$this->model_log->dropdown()->result();
-
-		$this->load->view("admin/layout/header_admin");
-		$this->load->view("admin/layout/sidebar",$data);
-		$this->load->view("admin/layout/topbar_admin");
-		$this->load->view('admin/edit_dosenps', $data);
-		$this->load->view("admin/layout/footer_admin");
+		$this->model_admin->update_data($where,$data,'dosen');
+		redirect('admin/table_2a');
 	}
 	public function update_tabel2a()
 	{

@@ -66,7 +66,7 @@
     							<td><?= $u['username']; ?></td>
     							<td><?= $u['level']; ?></td>
     							<td>
-    								<a href="" data-toggle="modal" data-target="#pelamarEdit<?= $u['id_user'] ?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i>Edit</a>
+    								<a href="" data-toggle="modal" data-target="#Edit_akun<?= $u['id_user'] ?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i>Edit</a>
     								<a href="<?= base_url() . 'admin/hapus_akun/' . $u['id_user'] ?>" data-nama="<?= $u['username']; ?>" class="btn btn-danger btn-sm deleteU"><i class="fa fa-fw fa-trash"></i>Delete</a>
     							</td>
     						</tr>
@@ -89,7 +89,7 @@
 ?>
 
 	<!-- Modal Edit -->
-	<div class="modal fade" id="pelamarEdit<?= $u['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="pelamarEditLabel" aria-hidden="true">
+	<div class="modal fade" id="Edit_akun<?= $u['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="pelamarEditLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
