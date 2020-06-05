@@ -30,7 +30,8 @@ class model_log extends CI_Model
 		$query=$this->db->get('akun');
 		if ($query->num_rows()>0) {
 			foreach ($query->result() as $row) {
-				$sar= array('username' => $row->username,
+				$sar= array('id_user' => $row->id_user,
+					'username' => $row->username,
 					'password' => $row->password,
 					'level' => $row->level,
 					'login' => 1);
@@ -57,10 +58,16 @@ class model_log extends CI_Model
     $query = $this->db->get('tabel_2a');
     return $query;
   }
-	public function prodi()
+	public function prodi($id)
   {
-    $query = $this->db->get('prodi');
-    return $query;
+    $query = "
+		SELECT prodi.id_prodi, prodi.nama_prodi
+		FROM prodi JOIN user_access_data
+		ON prodi.id_prodi = user_access_data.prodi
+		WHERE user_access_data.akun = $id
+		ORDER BY user_access_data.prodi ASC
+		";
+    return $this->db->query($query)->result_array();
   }
 	public function tingkat()
   {

@@ -43,7 +43,7 @@
               <?php
                 foreach ($prodi as $ps):
               ?>
-                <option value="<?php echo $ps->id_prodi;?>" class="dropdown-item"><?php echo $ps->nama_prodi; ?></option>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
               <?php endforeach;?>
             </select>
           </div>

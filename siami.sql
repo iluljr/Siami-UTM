@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2020 pada 08.46
+-- Waktu pembuatan: 05 Jun 2020 pada 10.08
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.4
 
@@ -400,7 +400,10 @@ INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
 (41, 1, 26),
 (42, 1, 27),
 (43, 1, 28),
-(44, 1, 29);
+(44, 1, 29),
+(45, 4, 1),
+(47, 4, 3),
+(48, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -703,7 +706,7 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`

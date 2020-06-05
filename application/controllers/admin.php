@@ -184,7 +184,8 @@ class admin extends CI_Controller
 
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
-		$data['prodi']=$this->model_log->prodi()->result();
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['view_table2a'] = $this->model_admin->gettable2b($data['id_tahun']);
 		$data['view_table2a_min1'] = $this->model_admin->gettable2b_min1($data['id_tahun']);
 		$data['view_table2a_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun']);
