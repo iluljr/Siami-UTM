@@ -887,5 +887,88 @@ class admin extends CI_Controller
 		redirect('admin/user_akun');
 	}
 
+	//level_akses
+
+	public function level()
+	{
+		$data['judul'] = 'Level Akses';
+		$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
+
+		$data['level'] = $this->db->get('user_level')->result_array();
+
+		$this->form_validation->set_rules('level', 'level', 'required');
+
+		if ($this->form_validation->run() == false) {
+
+			$this->load->view("admin/layout/header_admin");
+			$this->load->view("admin/layout/sidebar",$data);
+			$this->load->view("admin/layout/topbar_admin");
+			$this->load->view('admin/level', $data);
+			$this->load->view("admin/layout/footer_admin");
+		} else {
+			$this->db->insert('user_level', ['level' => $this->input->post('level')]);
+			$this->session->set_flashdata('pesan', 'Level baru berhasil ditambahkan');
+			redirect('admin/level');
+		}
+	}
+
+	public function update_lvl($id)
+	{
+		$data = array(
+			'level' => $this->input->post('levelU')
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('user_level', $data);
+		$this->session->set_flashdata('pesan', 'Edit data Level');
+		redirect('administrator/level');
+	}
+
+	public function delete_lvl($id)
+	{
+		$this->db->delete('user_level', array('id' => $id));
+		$this->session->set_flashdata('pesan', 'Level berhasil dihapus');
+		redirect('administrator/level');
+	}
+
+
+		public function levelakses($id)
+		{
+			$data['judul'] = 'Level Akses';
+			$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
+
+			$data['level'] = $this->db->get_where('user_level', ['id' => $id])->row_array();
+
+			$this->db->where('id !=', 1);
+			$data['menu'] = $this->db->get('user_menu')->result_array();
+
+			$this->load->view("admin/layout/header_admin");
+			$this->load->view("admin/layout/sidebar",$data);
+			$this->load->view("admin/layout/topbar_admin");
+			$this->load->view('admin/level-akses', $data);
+			$this->load->view("admin/layout/footer_admin");
+		}
+
+		public function rubahakses()
+		{
+			$menu_id = $this->input->post('menuId');
+			$level_id = $this->input->post('levelId');
+
+			$data = [
+				'role_id' => $level_id,
+				'menu_id' => $menu_id
+			];
+
+			$hasil = $this->db->get_where('user_access_menu', $data);
+
+			if ($hasil->num_rows() < 1) {
+				$this->db->insert('user_access_menu', $data);
+			} else {
+				$this->db->delete('user_access_menu', $data);
+			}
+
+			$this->session->set_flashdata('pesan', 'Akses telah diganti');
+		}
+
 }
 ?>

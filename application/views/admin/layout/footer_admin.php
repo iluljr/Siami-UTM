@@ -54,6 +54,24 @@
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('asset/js/demo/'); ?>datatables-demo.js"></script>
+<script>
+  $('.form-check-input').on('click', function() {
+    const menuId = $(this).data('menu');
+    const levelId = $(this).data('level');
+
+    $.ajax({
+      url: "<?= base_url('admin/rubahakses'); ?>",
+      type: 'post',
+      data: {
+        menuId: menuId,
+        levelId: levelId
+      },
+      success: function() {
+        document.location.href = "<?= base_url('admin/levelakses/'); ?>" + levelId;
+      }
+    });
+  });
+</script>
 
 </body>
 
