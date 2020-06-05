@@ -56,18 +56,18 @@
 <script src="<?= base_url('asset/js/demo/'); ?>datatables-demo.js"></script>
 <script>
   $('.form-check-input').on('click', function() {
-    const menuId = $(this).data('menu');
-    const levelId = $(this).data('level');
+    const akun = $(this).data('akun');
+    const prodi = $(this).data('prodi');
 
     $.ajax({
       url: "<?= base_url('admin/rubahakses'); ?>",
       type: 'post',
       data: {
-        menuId: menuId,
-        levelId: levelId
+        akun: akun,
+        prodi: prodi
       },
       success: function() {
-        document.location.href = "<?= base_url('admin/levelakses/'); ?>" + levelId;
+        document.location.href = "<?= base_url('admin/levelakses/'); ?>" + akun;
       }
     });
   });

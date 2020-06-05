@@ -891,12 +891,12 @@ class admin extends CI_Controller
 
 	public function level()
 	{
-		$data['judul'] = 'Level Akses';
+		$data['judul'] = 'Data Akses';
 		$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
 
-		$data['level'] = $this->db->get('user_level')->result_array();
+		$this->load->model('user_model', 'userM');
 
-		$this->form_validation->set_rules('level', 'level', 'required');
+		$data['user'] = $this->userM->get_akun(null);
 
 		if ($this->form_validation->run() == false) {
 
@@ -931,44 +931,43 @@ class admin extends CI_Controller
 		redirect('administrator/level');
 	}
 
+	public function levelakses($id)
+	{
+		$data['judul'] = 'Data Akses';
+		$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
 
-		public function levelakses($id)
-		{
-			$data['judul'] = 'Level Akses';
-			$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
+		$this->load->model('user_model', 'userM');
 
-			$data['level'] = $this->db->get_where('user_level', ['id' => $id])->row_array();
+		$data['user'] = $this->db->get_where('akun', ['id_user' => $id])->row_array();
+		$data['menu'] = $this->db->get('prodi')->result_array();
 
-			$this->db->where('id !=', 1);
-			$data['menu'] = $this->db->get('user_menu')->result_array();
+		$this->load->view("admin/layout/header_admin");
+		$this->load->view("admin/layout/sidebar",$data);
+		$this->load->view("admin/layout/topbar_admin");
+		$this->load->view('admin/level-akses', $data);
+		$this->load->view("admin/layout/footer_admin");
+	}
 
-			$this->load->view("admin/layout/header_admin");
-			$this->load->view("admin/layout/sidebar",$data);
-			$this->load->view("admin/layout/topbar_admin");
-			$this->load->view('admin/level-akses', $data);
-			$this->load->view("admin/layout/footer_admin");
+	public function rubahakses()
+	{
+		$akun = $this->input->post('akun');
+		$prodi = $this->input->post('prodi');
+
+		$data = [
+			'akun' => $akun,
+			'prodi' => $prodi
+		];
+
+		$hasil = $this->db->get_where('user_access_data', $data);
+
+		if ($hasil->num_rows() < 1) {
+			$this->db->insert('user_access_data', $data);
+		} else {
+			$this->db->delete('user_access_data', $data);
 		}
 
-		public function rubahakses()
-		{
-			$menu_id = $this->input->post('menuId');
-			$level_id = $this->input->post('levelId');
-
-			$data = [
-				'role_id' => $level_id,
-				'menu_id' => $menu_id
-			];
-
-			$hasil = $this->db->get_where('user_access_menu', $data);
-
-			if ($hasil->num_rows() < 1) {
-				$this->db->insert('user_access_menu', $data);
-			} else {
-				$this->db->delete('user_access_menu', $data);
-			}
-
-			$this->session->set_flashdata('pesan', 'Akses telah diganti');
-		}
+		$this->session->set_flashdata('pesan', 'Akses telah diganti');
+	}
 
 }
 ?>

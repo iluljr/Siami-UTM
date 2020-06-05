@@ -35,4 +35,18 @@ class user_model extends CI_Model
         }
         return $this->db->query($query, $limit, $start, $keyword)->result_array();
     }
+    public function get_akun($id = null)
+    {
+      if ($id !== null) {
+        $query = "
+        SELECT a.id_user, a.username, l.level FROM akun a, user_level l WHERE a.level=l.id AND a.id_user = $id
+        ";
+      } else {
+        $query = "
+        SELECT a.id_user, a.username, l.level FROM akun a, user_level l WHERE a.level=l.id
+        ";
+      }
+
+      return $this->db->query($query)->result_array();
+    }
 }

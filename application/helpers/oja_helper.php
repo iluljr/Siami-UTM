@@ -25,9 +25,9 @@
 	{
 		$oja = get_instance();
 
-		$oja->db->where('role_id', $level_id);
-		$oja->db->where('menu_id', $menu_id);
-		$hasil = $oja->db->get('user_access_menu');
+		$oja->db->where('akun', $level_id);
+		$oja->db->where('prodi', $menu_id);
+		$hasil = $oja->db->get('user_access_data');
 
 		if ($hasil->num_rows() > 0) {
 			return 'checked="checked"';

@@ -26,14 +26,14 @@
 		<?php endif; ?> -->
 		<div class="col-lg-6">
 			<div class="alert alert-success" role="alert">
-				Level : <?= $level['level']; ?>
+				Username : <?= $user['username']; ?>
 			</div>
 
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th scope="col">No</th>
-						<th scope="col">Menu</th>
+						<th scope="col">Prodi</th>
 						<th scope="col">Akses</th>
 					</tr>
 				</thead>
@@ -42,10 +42,10 @@
 					<?php foreach ($menu as $m) : ?>
 						<tr>
 							<th scope="row"><?= $no; ?></th>
-							<td><?= $m['menu']; ?></td>
+							<td><?= $m['nama_prodi']; ?></td>
 							<td>
 								<div class="form-check">
-									<input class="form-check-input" type="checkbox" <?= cek_akses($level['id'], $m['id']); ?> data-level="<?= $level['id']; ?>" data-menu="<?= $m['id']; ?>">
+									<input class="form-check-input" type="checkbox" <?= cek_akses($user['id_user'], $m['id_prodi']); ?> data-akun="<?= $user['id_user']; ?>" data-prodi="<?= $m['id_prodi']; ?>">
 								</div>
 							</td>
 						</tr>
