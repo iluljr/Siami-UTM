@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2020 pada 05.38
+-- Waktu pembuatan: 05 Jun 2020 pada 08.46
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.4
 
@@ -366,6 +366,42 @@ CREATE TABLE `user_access_data` (
   `prodi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `user_access_data`
+--
+
+INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
+(15, 1, 1),
+(16, 1, 2),
+(17, 1, 3),
+(18, 1, 4),
+(19, 1, 5),
+(20, 1, 6),
+(21, 1, 7),
+(22, 1, 30),
+(23, 1, 8),
+(24, 1, 9),
+(25, 1, 10),
+(26, 1, 11),
+(27, 1, 12),
+(28, 1, 13),
+(29, 1, 14),
+(30, 1, 15),
+(31, 1, 16),
+(32, 1, 17),
+(33, 1, 18),
+(34, 1, 19),
+(35, 1, 20),
+(36, 1, 21),
+(37, 1, 22),
+(38, 1, 23),
+(39, 1, 24),
+(40, 1, 25),
+(41, 1, 26),
+(42, 1, 27),
+(43, 1, 28),
+(44, 1, 29);
+
 -- --------------------------------------------------------
 
 --
@@ -464,7 +500,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (41, 1, 'Table 8.d.2', 'admin/table_8d2', 'fas fa-fw fa-table', 1),
 (42, 1, 'Table 8.e.1', 'admin/table_8e1', 'fas fa-fw fa-table', 1),
 (99, 9, 'Manajemen User', 'admin/user_akun', 'fas fa-fw fa-user', 1),
-(109, 9, 'Level Akses', 'admin/level', 'fas fa-fw fa-user-tie', 1);
+(109, 9, 'Data Akses', 'admin/level', 'fas fa-fw fa-user-tie', 1);
 
 --
 -- Indexes for dumped tables
@@ -667,7 +703,7 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
