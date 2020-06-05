@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2020 pada 09.34
+-- Waktu pembuatan: 05 Jun 2020 pada 05.38
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.4
 
@@ -42,7 +42,8 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
-(1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1);
+(1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1),
+(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 -- --------------------------------------------------------
 
@@ -356,6 +357,18 @@ INSERT INTO `tingkat_prestasi` (`id_tingkat`, `tingkat`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `user_access_data`
+--
+
+CREATE TABLE `user_access_data` (
+  `id` int(11) NOT NULL,
+  `akun` int(11) NOT NULL,
+  `prodi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `user_access_menu`
 --
 
@@ -373,7 +386,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (10, 2, 10),
 (11, 3, 11),
-(12, 4, 12);
+(12, 4, 12),
+(23, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -393,7 +407,7 @@ CREATE TABLE `user_level` (
 
 INSERT INTO `user_level` (`id`, `level`, `ket`) VALUES
 (1, 'admin', 'Akses level tertinggi'),
-(2, 'Adminprodi', 'Akses level admin prodi'),
+(2, 'Admin prodi', 'Akses level admin prodi'),
 (3, 'Dosen', 'Akses level dosen'),
 (4, 'Mahasiswa', 'Akses level mahasiswa');
 
@@ -448,7 +462,9 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (39, 1, 'Table 8.c', 'admin/table_8c', 'fas fa-fw fa-table', 1),
 (40, 1, 'Table 8.d.1', 'admin/table_8d1', 'fas fa-fw fa-table', 1),
 (41, 1, 'Table 8.d.2', 'admin/table_8d2', 'fas fa-fw fa-table', 1),
-(42, 1, 'Table 8.e.1', 'admin/table_8e1', 'fas fa-fw fa-table', 1);
+(42, 1, 'Table 8.e.1', 'admin/table_8e1', 'fas fa-fw fa-table', 1),
+(99, 9, 'Manajemen User', 'admin/user_akun', 'fas fa-fw fa-user', 1),
+(109, 9, 'Level Akses', 'admin/level', 'fas fa-fw fa-user-tie', 1);
 
 --
 -- Indexes for dumped tables
@@ -537,6 +553,14 @@ ALTER TABLE `tingkat_prestasi`
   ADD PRIMARY KEY (`id_tingkat`);
 
 --
+-- Indeks untuk tabel `user_access_data`
+--
+ALTER TABLE `user_access_data`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_access_data_ibfk_1` (`akun`),
+  ADD KEY `user_access_data_ibfk_2` (`prodi`);
+
+--
 -- Indeks untuk tabel `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
@@ -571,7 +595,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
@@ -640,6 +664,24 @@ ALTER TABLE `tingkat_prestasi`
   MODIFY `id_tingkat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT untuk tabel `user_access_data`
+--
+ALTER TABLE `user_access_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT untuk tabel `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
+--
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
@@ -692,6 +734,13 @@ ALTER TABLE `tabel_8c`
 --
 ALTER TABLE `table_8d1`
   ADD CONSTRAINT `table_8d1_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
+
+--
+-- Ketidakleluasaan untuk tabel `user_access_data`
+--
+ALTER TABLE `user_access_data`
+  ADD CONSTRAINT `user_access_data_ibfk_1` FOREIGN KEY (`akun`) REFERENCES `akun` (`id_user`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_access_data_ibfk_2` FOREIGN KEY (`prodi`) REFERENCES `prodi` (`id_prodi`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `user_access_menu`
