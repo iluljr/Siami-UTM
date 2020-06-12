@@ -8,38 +8,14 @@
     </div>
     <div class="card-body">
       <h4>Table 2b. Mahasiswa Asing</h4>
+      <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
       <table align="center">
-        <tr>
-          <td align="right">Tahun Ajaran :</td>
-          <td>
-            <div class="">
-              <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
-              <select name="id_tahun" id="id_tahun" class="custom-select custom-select-sm">
-                <?php
-                  foreach ($tahunsekarang_2b as $ts):
-                ?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
-              <?php endforeach;?>
-              <?php
-                foreach ($dropdown as $dd):
-              ?>
-                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
-              <?php endforeach;?>
-            </select>
-            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
-          </form>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
         <tr>
           <td align="right">Nama Program Studi :</td>
           <td>
             <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih program studi - </option>
+              <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
+              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
@@ -48,8 +24,13 @@
             </select>
           </div>
           </td>
+          <td>&nbsp;</td>
+          <td>
+            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+          </td>
         </tr>
       </table>
+    </form>
 
       <!-- Data Table -->
       <div class="table-responsive">

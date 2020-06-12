@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
       <h4>Table 8.c Masa Studi Lulusan</h4>
-            <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
+      <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>

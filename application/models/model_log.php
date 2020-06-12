@@ -75,13 +75,13 @@ class model_log extends CI_Model
     return $query;
   }
 
-	public function datatable_2a($id_tahun = null)
+	public function datatable_2a($id_tahun = null, $id_prodi = null)
   {
 		if ($id_tahun !== null) {
 				$query =
 								"
 			SELECT SUM(tb.pendaftar) AS 'pendaftar', SUM(tb.lulus_seleksi) AS 'lulus_seleksi', SUM(tb.jmb_reguler) AS 'jmb_reguler', SUM(tb.jmb_transfer) AS 'jmb_transfer'
-			FROM tabel_2a tb WHERE tb.tahun <= $id_tahun and tb.tahun >= ($id_tahun-4)
+			FROM tabel_2a tb WHERE tb.tahun <= $id_tahun and tb.tahun >= ($id_tahun-4) AND tb.id_prodi = $id_prodi
 			";
 		} else {
 			$query =
@@ -93,14 +93,14 @@ class model_log extends CI_Model
 		return $this->db->query($query)->result_array();
   }
 
-	public function gettable2a($id_tahun = null)
+	public function gettable2a($id_tahun = null, $id_prodi = null)
 	 {
 			 if ($id_tahun !== null) {
 
 					 $query =
 							 "
 		 SELECT tb.id_tabel2a AS 'id_tabel2a', tb.tahun, tb.daya_tampung, tb.pendaftar, tb.lulus_seleksi, tb.jmb_reguler, tb.jmb_transfer, tb.jma_reguler, tb.jma_transfer
-		 FROM tabel_2a tb WHERE tb.tahun <= $id_tahun and tb.tahun >= ($id_tahun-4) ORDER BY tb.tahun
+		 FROM tabel_2a tb WHERE tb.tahun <= $id_tahun and tb.tahun >= ($id_tahun-4) AND tb.id_prodi = $id_prodi ORDER BY tb.tahun
 			 ";
 			 } else {
 					 $query =

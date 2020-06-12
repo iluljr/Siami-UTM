@@ -9,19 +9,45 @@
     <div class="card-body">
       <h4>Table 2a. Seleksi Mahasiswa Baru</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-
       <form class="form-inline mb-2" action="<?= base_url('admin/table_2a'); ?>" method="post">
-        <p class="mr-2 pt-2">Tahun Ajaran :</p>
-        <select name="id_tahun" class="custom-select custom-select-sm">
-          <option value="id_tahun" class="dropdown-item"> - pilih tahun ajaran - </option>
-          <?php
-            foreach ($dropdown as $dd):
-          ?>
-            <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
-          <?php endforeach;?>
-        </select>
-        <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
-      </form>
+      <table align="center">
+        <tr>
+          <td align="right">Tahun Ajaran :</td>
+          <td>
+            <div class="">
+              <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
+              <?php foreach ($tahunsekarang_2b as $ts):?>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+              <?php endforeach;?>
+              <?php
+                foreach ($dropdown as $dd):
+              ?>
+                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+              <?php endforeach;?>
+            </select>
+          </div>
+          </td>
+          <td>&nbsp;</td>
+          <td align="right">Nama Program Studi :</td>
+          <td>
+            <div class="">
+              <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
+              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
+              <?php
+                foreach ($prodi as $ps):
+              ?>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+              <?php endforeach;?>
+            </select>
+          </div>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+          </td>
+        </tr>
+      </table>
+    </form>
 
       <!-- Data Table -->
       <div class="table-responsive">
@@ -57,6 +83,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table2a)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table2a as $tb) :
             ?>
@@ -98,35 +133,39 @@
           <?php foreach ($jumlah_data as $jd): ?>
             <td>Rasio pendaftar dan mahasiswa baru</td>
             <td>:</td>
-            <td align="center" bgcolor="#00FF00"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
+            <?php if ($jd['pendaftar']==0) : ?>
+              <td>&nbsp;</td>
+            <?php else: ?>
+              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
+            <?php endif; ?>
           <?php endforeach;?>
-          <td width="50px"></td>
+          <td></td>
           <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
         </tr>
         <tr>
-          <?php foreach ($jumlah_data_MA as $jd2): ?>
             <td>Jumlah Mahasiswa Aktif</td>
             <td>: </td>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
             <td align="center"><?= $jd2['mahasiswa_aktif']?></td>
-          <?php endforeach;?>
+            <?php endforeach;?>
         </tr>
         <tr>
-          <?php foreach ($jumlah_dosen as $jdosen): ?>
             <td>Jumlah Dosen Tetap PS</td>
             <td>: </td>
+            <?php foreach ($jumlah_dosen as $jdosen): ?>
             <td align="center"><?= $jdosen['jumlah_dosen']?></td>
             <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-          <?php endforeach;?>
+            <?php endforeach;?>
         </tr>
         <tr>
-          <?php foreach ($jumlah_data_MA as $jd2): ?>
-            <?php foreach ($jumlah_dosen as $jdosen): ?>
-              <td>Rasio Dosen dan Mahasiswa</td>
-              <td>: </td>
-              <td align="center" bgcolor="#00FF00"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
+            <td>Rasio Dosen dan Mahasiswa</td>
+            <td>: </td>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+              <?php foreach ($jumlah_dosen as $jdosen): ?>
+                <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
+              <?php endforeach;?>
             <?php endforeach;?>
-          <?php endforeach;?>
-          <td></td>
+            <td></td>
           <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
         </tr>
         <tr height="15px">
@@ -135,15 +174,15 @@
             <td></td>
         </tr>
         <tr>
-          <?php foreach ($jumlah_data_MA as $jdA): ?>
-            <?php foreach ($jumlah_data_MB as $jdB): ?>
-              <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
-              <td>: </td>
-              <td align="center" bgcolor="#00FF00"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
-            <?php endforeach;?>
-          <?php endforeach;?>
-          <td></td>
-          <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
+            <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
+            <td>: </td>
+              <?php foreach ($jumlah_data_MA as $jdA): ?>
+                <?php foreach ($jumlah_data_MB as $jdB): ?>
+                  <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
+                <?php endforeach;?>
+              <?php endforeach;?>
+              <td></td>
+              <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
         </tr>
       </table>
       <!-- End Data Table -->

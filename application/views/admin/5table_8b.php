@@ -9,31 +9,16 @@
     <div class="card-body">
       <h4>Table 8.b.1 Prestasi Akademik Mahasiswa</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
+<!--
+      <form class="form-inline mb-2" action="<?= base_url('admin/table_8b'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Ajaran :</td>
-          <td>
-            <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih tahun ajaran - </option>
-              <?php
-                foreach ($dropdown as $dd):
-              ?>
-                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
-              <?php endforeach;?>
-            </select>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
+          <td>&nbsp;</td>
           <td align="right">Nama Program Studi :</td>
           <td>
             <div class="">
-              <select name="dropdown" id="dropdown" class="custom-select custom-select-sm">
-              <option class="dropdown-item" selected> - pilih program studi - </option>
+              <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
+              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
@@ -42,8 +27,14 @@
             </select>
           </div>
           </td>
+          <td>&nbsp;</td>
+          <td>
+            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+          </td>
         </tr>
       </table>
+    </form>
+-->
 
       <!-- Data Table -->
       <div class="table-responsive">

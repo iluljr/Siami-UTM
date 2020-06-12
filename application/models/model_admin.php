@@ -18,12 +18,12 @@ class model_admin extends CI_Model
 		$this->db->update($table,$data);
 	}
 
-	public function datatable_2a_MA($id_tahun = null)
+	public function datatable_2a_MA($id_tahun = null, $id_prodi = null)
   	{
 			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT t.jma_reguler+t.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a t WHERE t.tahun = $id_tahun
+		SELECT t.jma_reguler+t.jma_transfer AS 'mahasiswa_aktif' FROM tabel_2a t WHERE t.tahun = $id_tahun AND t.id_prodi = $id_prodi
 		";} else {
 			$query =
 							"
@@ -33,7 +33,7 @@ class model_admin extends CI_Model
 		return $this->db->query($query)->result_array();
   	}
 
-	public function datatable_2a_Dosen($id_tahun = null)
+	public function datatable_2a_Dosen($id_tahun = null, $id_prodi = null)
   	{
 			$query =
 							"
@@ -42,12 +42,12 @@ class model_admin extends CI_Model
 		return $this->db->query($query)->result_array();
   	}
 
-  	public function datatable_2a_MB($id_tahun = null)
+  	public function datatable_2a_MB($id_tahun = null, $id_prodi = null)
   	{
 			if ($id_tahun !== null) {
 			$query =
 							"
-		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun
+		SELECT tb.jmb_reguler+tb.jmb_transfer AS 'mahasiswa_baru' FROM tabel_2a tb WHERE tb.tahun = $id_tahun AND tb.id_prodi = $id_prodi
 		";} else {
 			$query =
 							"
@@ -384,7 +384,7 @@ class model_admin extends CI_Model
 	 	 {
 	 			 if ($id_tahun !== null && $id_prodi !== null) {
 
-					 $dd = $id_tahun-2;
+					 $dd = $id_tahun;
 
 	 					 $query =
 	 							 "
@@ -408,7 +408,7 @@ class model_admin extends CI_Model
 		{
 				if ($id_tahun !== null && $id_prodi !== null) {
 
-					$dd = $id_tahun-2;
+					$dd = $id_tahun;
 
 						$query =
 								"
@@ -434,7 +434,7 @@ class model_admin extends CI_Model
 	 	 {
 	 			 if ($id_tahun !== null && $id_prodi !== null) {
 
-					 $dd = $id_tahun-2;
+					 $dd = $id_tahun;
 
 	 					 $query =
 	 							 "
@@ -458,7 +458,7 @@ class model_admin extends CI_Model
 	   {
 	 		if ($id_tahun !== null) {
 
-				$dd = $id_tahun-2;
+				$dd = $id_tahun;
 
 	 				$query =
 	 								"
@@ -483,7 +483,7 @@ class model_admin extends CI_Model
 	 	 {
 	 			 if ($id_tahun !== null && $id_prodi !== null) {
 
-					 $dd = $id_tahun-2;
+					 $dd = $id_tahun;
 
 	 					 $query =
 	 							 "
@@ -507,7 +507,7 @@ class model_admin extends CI_Model
 	   {
 	 		if ($id_tahun !== null) {
 
-				$dd = $id_tahun-2;
+				$dd = $id_tahun;
 
 	 				$query =
 	 								"

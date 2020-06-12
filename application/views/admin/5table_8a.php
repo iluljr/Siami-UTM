@@ -27,11 +27,7 @@
             </select>
           </div>
           </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
+          <td>&nbsp;</td>
           <td align="right">Nama Program Studi :</td>
           <td>
             <div class="">
@@ -45,11 +41,6 @@
             </select>
           </div>
           </td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
           <td>&nbsp;</td>
           <td>
             <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
@@ -81,8 +72,8 @@
               <td>4</td>
               <td>5</td>
               <td>6</td>
-              <td> </td>
-              <td> </td>
+              <td>7</td>
+              <td>8</td>
             </tr>
           </thead>
           <tbody>
