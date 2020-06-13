@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2020 pada 10.08
+-- Waktu pembuatan: 13 Jun 2020 pada 13.36
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.4
 
@@ -43,7 +43,8 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1),
-(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1);
+(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1),
+(5, 'dosen', 'ce28eed1511f631af6b2a7bb0a85d636', 1);
 
 -- --------------------------------------------------------
 
@@ -403,7 +404,8 @@ INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
 (44, 1, 29),
 (45, 4, 1),
 (47, 4, 3),
-(48, 4, 2);
+(48, 4, 2),
+(49, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -634,7 +636,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
@@ -646,13 +648,13 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
-  MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenjang`
 --
 ALTER TABLE `jenjang`
-  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `prodi`
@@ -664,7 +666,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_8a`
@@ -706,13 +708,13 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`

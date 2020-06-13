@@ -69,6 +69,17 @@ class model_log extends CI_Model
 		";
     return $this->db->query($query)->result_array();
   }
+	public function fakultas($id)
+	{
+    $query = "
+		SELECT fakultas.nama_fakultas, COUNT(fakultas.id_fakultas)
+		FROM fakultas, prodi JOIN user_access_data
+		ON prodi.id_prodi = user_access_data.prodi
+		WHERE prodi.id_fakultas = fakultas.id_fakultas AND user_access_data.akun = $id
+		GROUP BY prodi.id_fakultas
+		";
+    return $this->db->query($query)->result_array();
+	}
 	public function tingkat()
   {
     $query = $this->db->get('tingkat_prestasi');

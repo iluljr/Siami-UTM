@@ -93,7 +93,7 @@
               </div>
               <div class="font-weight-bold">
                 <div class="text-truncate">Welcome to the website Sistem Audit Mutu Internal.</div>
-                <div class="small text-gray-500">IlulJrDev · 1m</div>
+                <div class="small text-gray-500">ZeroDev · 1m</div>
               </div>
             </a>
             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -105,8 +105,26 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Teknik Informatika</span>
-            <img class="img-profile rounded-circle" src="https://rioarianto1303.files.wordpress.com/2016/03/logo-universitas-trunojoyo-madura.png?w=347&h=347/60x60">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+              <?php
+              $count = COUNT($prodi);
+              if ($count==1): ?>
+                <?php foreach ($prodi as $pd): ?>
+                  <?= $pd['nama_prodi']?>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <?php
+                $ct = COUNT($fakultas);
+                if ($ct==1): ?>
+                  <?php foreach ($fakultas as $ft): ?>
+                    Fakultas <?= $ft['nama_fakultas']?>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  Administrator
+                <?php endif; ?>
+              <?php endif; ?>
+            </span>
+            <img class="img-profile rounded-circle" src="<?= base_url('assets/img/').'default.jpg'; ?>">
           </a>
           <!-- Dropdown - User Information -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

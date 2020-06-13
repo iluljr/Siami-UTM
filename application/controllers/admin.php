@@ -14,6 +14,18 @@ class admin extends CI_Controller
 
 	public function index()
 	{
+		$this->session->unset_userdata('id_tahun');
+		$this->session->unset_userdata('id_prodi');
+		if ($this->input->post('submit')) {
+			$data['id_tahun'] = $this->input->post('id_tahun');
+			$data['id_prodi'] = $this->input->post('id_prodi');
+			$this->session->set_userdata('id_tahun', $data['id_tahun']);
+			$this->session->set_userdata('id_prodi', $data['id_prodi']);
+		} else {
+			$data['id_tahun'] = $this->session->userdata('id_tahun');
+			$data['id_prodi'] = $this->session->userdata('id_prodi');
+		}
+
 		$data['judul'] = 'Data Audit';
 		$data['jumlah_data'] = $this->model_log->datatable_2a();
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
@@ -22,8 +34,10 @@ class admin extends CI_Controller
 		$data['table8a_rata']=$this->model_admin->table8a_rata();
 
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
+		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		//table_8b
 		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI();
 		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN();
@@ -89,6 +103,7 @@ class admin extends CI_Controller
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -201,6 +216,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['view_table2a'] = $this->model_admin->gettable2b($data['id_tahun']);
 		$data['view_table2a_min1'] = $this->model_admin->gettable2b_min1($data['id_tahun']);
 		$data['view_table2a_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun']);
@@ -268,6 +284,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
@@ -359,6 +376,7 @@ class admin extends CI_Controller
 		$data['tingkat']=$this->model_log->tingkat()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['judul'] = 'Table 8.b';
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
 
@@ -443,6 +461,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['judul'] = 'Table 8.c';
 
 		$this->load->view("admin/layout/header_admin");
@@ -555,6 +574,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
@@ -651,6 +671,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
@@ -747,6 +768,7 @@ class admin extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
 		$this->load->view("admin/layout/topbar_admin");
@@ -835,6 +857,9 @@ class admin extends CI_Controller
 		$data['profil'] = $data['user'];
 		$data['profil']['nama'] = 'administrator';
 		$data['profil']['gambar'] = 'default.jpg';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->model('user_model', 'userM');
 		$data['level'] = $this->db->get('user_level')->result_array();
@@ -920,6 +945,9 @@ class admin extends CI_Controller
 		$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->load->model('user_model', 'userM');
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['user'] = $this->userM->get_akun(null);
 
@@ -962,6 +990,9 @@ class admin extends CI_Controller
 		$data['akun'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
 
 		$this->load->model('user_model', 'userM');
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['user'] = $this->db->get_where('akun', ['id_user' => $id])->row_array();
 		$data['menu'] = $this->db->get('prodi')->result_array();
