@@ -42,7 +42,7 @@ class model_log extends CI_Model
 			redirect('admin');
 		}
 		elseif($lvl == 2){
-			redirect('prodi');
+			redirect('admin_prodi');
 		}
 		elseif($lvl == 3){
 			redirect('user');
