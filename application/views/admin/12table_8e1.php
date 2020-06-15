@@ -16,9 +16,7 @@
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-              <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
-              <?php endforeach;?>
+                <option value="" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php
                 foreach ($dropdown as $dd):
               ?>
@@ -78,6 +76,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table8e1)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table8e1 as $tb) :
             ?>
@@ -117,7 +124,11 @@
         <tr>
           <td colspan="6">Persentase lulusan terlacak dari total lulusan</td>
           <td>&nbsp;</td>
-          <td>: <?= ($jd['jml_lulus_ter']/$jd['jml_lulus'])*100/100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;">: <?= ($jd['jml_lulus_ter']/$jd['jml_lulus'])*100/100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td colspan="6">Jumlah lulusan yang bekerja di badan usaha tingkat internasional/multi nasional.</td>
@@ -167,17 +178,29 @@
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>R1</td>
-          <td>: <?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;">: <?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>RN</td>
-          <td>: <?= ($jd['nasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;">: <?= ($jd['nasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
           <td>RL</td>
-          <td>: <?= ($jd['lokal']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;">: <?= ($jd['lokal']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -190,7 +213,11 @@
           <td>IKU No.12</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td><?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['internasional']/$jd['jml_lulus_ter'])*100/100?></td>
+          <?php endif; ?>
           <td>RI >= 5%</td>
         </tr>
         <tr>

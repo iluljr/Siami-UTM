@@ -80,6 +80,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table8b)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table8b as $tb) :
             ?>

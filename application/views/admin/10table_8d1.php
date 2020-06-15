@@ -76,6 +76,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table8d1)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table8d1 as $tb) :
             ?>
@@ -113,22 +122,39 @@
         <tr>
           <td colspan="4">Jumlah lulusan dengan waktu tunggu mendapatkan pekerjaan </td>
           <td>:</td>
-          <td><?= $jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']?></td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td colspan="4"></td>
           <td>:</td>
-          <td><?= (($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih'])?></td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih'])?></td>
+          <?php endif; ?>
+          <td></td>
         </tr>
         <tr>
           <td colspan="4"></td>
           <td>:</td>
-          <td><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td colspan="4">Persentase lulusan dengan waktu tunggu < 6 bulan</td>
           <td>:</td>
-          <td><?= ($jd['wt_6']/$jd['jml_lulus_ter'])*100?></td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['wt_6']/$jd['jml_lulus_ter'])*100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -141,7 +167,11 @@
           <td>IKU No.11</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <?php endif; ?>
           <td>(100%)</td>
         </tr>
         <tr>
@@ -162,12 +192,15 @@
           <td colspan="3">&nbsp;</td>
           <td>Persentase responden minimum</td>
           <td>:</td>
-          <td><?php if ($jd['jml_lulus'] >= 300): ?>
-            30%
+          <?php if ($jd['jml_lulus'] >= 300): ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"> 30% </td>
           <?php elseif($jd['jml_lulus'] < 300): ?>
-            <?= 50-(($jd['jml_lulus']/300)*20) ?>%
+            <?php if ($jd['jml_lulus']==0) : ?>
+              &nbsp;
+            <?php else: ?>
+              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= 50-(($jd['jml_lulus']/300)*20) ?>%</td>
+            <?php endif; ?>
           <?php endif; ?>
-          </td>
         </tr>
       </table>
       <?php endforeach;?>

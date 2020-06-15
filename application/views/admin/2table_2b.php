@@ -94,6 +94,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table2a)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php foreach ($view_table2a as $tb) : ?>
               <?php foreach ($view_table2a_min1 as $tb1) : ?>
                 <?php foreach ($view_table2a_min2 as $tb2) : ?>

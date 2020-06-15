@@ -76,6 +76,15 @@
             </tr>
           </thead>
           <tbody>
+  					<?php if (empty($view_table8d2)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table8d2 as $tb) :
             ?>
@@ -124,7 +133,11 @@
           <td>&nbsp;</td>
           <td colspan="3">Persentase lulusan yang sesuai bidang</td>
           <td>:</td>
-          <td><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+          <?php endif; ?>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -137,7 +150,11 @@
           <td>IKU No.11</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <td><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+          <?php if ($jd['jml_lulus_ter']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+          <?php endif; ?>
           <td>(PBS > = 60%)</td>
         </tr>
         <tr>
