@@ -218,8 +218,8 @@ class model_admin extends CI_Model
 	 					 $query =
 	 							 "
 								 SELECT COUNT(t.id_tingkat) AS 'jumlah_ni'
-					FROM table_8d1 t, prodi p
-					WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+					FROM tabel_8b t, prodi p
+					WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi
 	 			 ";
 			 }else{
 					 $query =
@@ -238,8 +238,8 @@ class model_admin extends CI_Model
 	 					 $query =
 	 							 "
 								 SELECT COUNT(t.id_tingkat) AS 'jumlah_nn'
-					FROM table_8d1 t, prodi p
-					WHERE t.id_tingkat=2 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+								 FROM tabel_8b t, prodi p
+			 					WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi
 	 			 ";
 			 }else{
 					 $query =
@@ -258,8 +258,8 @@ class model_admin extends CI_Model
 	 					 $query =
 	 							 "
 								 SELECT COUNT(t.id_tingkat) AS 'jumlah_nw'
-					FROM table_8d1 t, prodi p
-					WHERE t.id_tingkat=1 and t.id_prodi=p.id_prodi AND t.tahun <= $id_tahun AND t.tahun >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+								 FROM tabel_8b t, prodi p
+			 					WHERE t.id_tingkat=3 and t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi
 	 			 ";
 			 }else{
 					 $query =

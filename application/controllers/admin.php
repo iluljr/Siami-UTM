@@ -369,6 +369,7 @@ class admin extends CI_Controller
 		}
 
 		$data['view_table8b'] = $this->model_admin->gettable8b($data['id_tahun'],$data['id_prodi']);
+		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8b_jumlah_NW'] = $this->model_admin->gettable8b_jumlah_NW($data['id_tahun'],$data['id_prodi']);
