@@ -140,6 +140,11 @@ class admin extends CI_Controller
 			'jma_paruh' => 0,
 		 );
 		 $this->db->insert('tabel_2a',$data);
+		 if($this->db->affected_rows() > 0){
+			 $data['teks'] = 'Tambah Data Berhasil';
+			 $this->session->set_flashdata($data);
+		 }
+		 echo $this->session->flashdata('teks');
 		 redirect('admin/table_2a');
 	}
 	public function edit_tabel2a($id)
@@ -193,6 +198,7 @@ class admin extends CI_Controller
 	{
 		$where = array('id_tabel2a' => $id);
 		$this->model_admin->hapus_data($where,'tabel_2a');
+		$this->session->set_flashdata('pesan', 'Data Berhasil Dihapus');
 		redirect('admin/table_2a');
 	}
 

@@ -36,12 +36,12 @@
                                             containerID: 'toTop', // fading element id
                                             containerHoverID: 'toTopHover', // fading element hover id
                                             scrollSpeed: 1200,
-                                            easingType: 'linear' 
+                                            easingType: 'linear'
                                         };
                                         */
-                                        
+
                                         $().UItoTop({ easingType: 'easeOutQuart' });
-                                        
+
                                     });
                                 </script>
                             <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
@@ -58,7 +58,8 @@
     <script src="<?php echo base_url('asset/'); ?>js/plugins.js"></script>
     <!-- Active js -->
     <script src="<?php echo base_url('asset/'); ?>js/active.js"></script>
-    
+    <script src="<?= base_url('assets/'); ?>js/jsscript.js"></script>
+
 </body>
 
 </html>

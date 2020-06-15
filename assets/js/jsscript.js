@@ -680,7 +680,7 @@ $('.deleteU').on('click', function (e) {
 });
 
 //Delete User (ADMIN Prodi + ADMINISTRATOR)
-if (flashdata == '1 User berhasil dihapus') {
+if (flashdata == 'Data Berhasil Dihapus') {
 	Swal.fire({
 		position: 'center',
 		icon: 'success',
