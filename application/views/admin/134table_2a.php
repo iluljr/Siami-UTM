@@ -214,6 +214,19 @@
             </div>
 						<input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun Ajaran" required>
 					</div>
+          <div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                  <?php endforeach;?>
+                </select>
+  					</div>
 					<div class="form-group">
             <div class="invalid-feedback>">
               Jumlah Daya Tampung

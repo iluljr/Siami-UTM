@@ -117,6 +117,7 @@ class admin extends CI_Controller
 	public function tambah_data2a()
 	{
 		 $tahun = $this->input->post('tahun');
+		 $id_prodi = $this->input->post('id_prodi');
 		 $dayatampung = $this->input->post('dayatampung');
 		 $pendaftar = $this->input->post('pendaftar');
 		 $lulusseleksi = $this->input->post('lulusseleksi');
@@ -127,7 +128,7 @@ class admin extends CI_Controller
 
 		 $data = array(
 		 	'tahun' => $tahun,
-			'id_prodi' => 1,
+			'id_prodi' => $id_prodi,
 		 	'daya_tampung' => $dayatampung,
 		 	'pendaftar' => $pendaftar,
 		 	'lulus_seleksi' => $lulusseleksi,

@@ -11,6 +11,22 @@
       <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
       <table align="center">
         <tr>
+          <td align="right">Tahun Ajaran :</td>
+          <td>
+            <div class="">
+              <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
+              <?php foreach ($tahunsekarang_2b as $ts):?>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+              <?php endforeach;?>
+              <?php
+                foreach ($dropdown as $dd):
+              ?>
+                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+              <?php endforeach;?>
+            </select>
+          </div>
+          </td>
+          <td>&nbsp;</td>
           <td align="right">Nama Program Studi :</td>
           <td>
             <div class="">
