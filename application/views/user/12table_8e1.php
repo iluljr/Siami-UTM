@@ -9,7 +9,7 @@
     <div class="card-body">
       <h4>Table 8.e.1 Tempat Kerja Lulusan</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_8e1'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('user/table_8e1'); ?>" method="post">
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -96,8 +96,8 @@
               <td><?= $tb['lokal']?></td>
               <td><?= $tb['nasional']?></td>
               <td><?= $tb['internasional']?></td>
-              <td><?php echo anchor('admin/edit_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?php echo anchor('user/edit_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('user/hapus_table8e1/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>
@@ -252,7 +252,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data8e1'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('user/tambah_data8e1'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">

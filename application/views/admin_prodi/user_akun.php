@@ -30,7 +30,7 @@
     				}
     				?>
 
-    				<form class="form-inline" action="<?= base_url('admin/user_akun'); ?>" method="post">
+    				<form class="form-inline" action="<?= base_url('admin_prodi/user_akun'); ?>" method="post">
     					<input class="form-control mr-sm-2" type="search" placeholder="Search Name" name="keyword" autocomplete="off" autofocus>
     					<input type="submit" class="btn btn-primary" name="submit" value="Search">
 
@@ -67,7 +67,7 @@
     							<td><?= $u['level']; ?></td>
     							<td>
     								<a href="" data-toggle="modal" data-target="#Edit_akun<?= $u['id_user'] ?>" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i>Edit</a>
-    								<a href="<?= base_url() . 'admin/hapus_akun/' . $u['id_user'] ?>" data-nama="<?= $u['username']; ?>" class="btn btn-danger btn-sm deleteU"><i class="fa fa-fw fa-trash"></i>Delete</a>
+    								<a href="<?= base_url() . 'admin_prodi/hapus_akun/' . $u['id_user'] ?>" data-nama="<?= $u['username']; ?>" class="btn btn-danger btn-sm deleteU"><i class="fa fa-fw fa-trash"></i>Delete</a>
     							</td>
     						</tr>
     					<?php endforeach; ?>
@@ -98,7 +98,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="<?= base_url('admin/edit_akun/' . $u['id_user']); ?>" method="POST">
+				<form action="<?= base_url('admin_prodi/edit_akun/' . $u['id_user']); ?>" method="POST">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="username">Username</label>
@@ -147,7 +147,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_akun'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_akun'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
 						<input type="text" class="form-control cekkarakter req" name="username" id="username" placeholder="Username" required>

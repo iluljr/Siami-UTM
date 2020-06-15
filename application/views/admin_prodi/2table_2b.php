@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
       <h4>Table 2b. Mahasiswa Asing</h4>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('user/table_2b'); ?>" method="post">
       <table align="center">
         <tr>
           <td align="right">Tahun Ajaran :</td>
@@ -118,9 +118,9 @@
               <td><?= $tb2['jma_paruh']?></td>
               <td><?= $tb1['jma_paruh']?></td>
               <td><?= $tb['jma_paruh']?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-2),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-1),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.$tb['tahun'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('user/edit_tabel2b/'.($tb['tahun']-2),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('user/edit_tabel2b/'.($tb['tahun']-1),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('user/edit_tabel2b/'.$tb['tahun'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
               </td>
             </tr>
               <?php endforeach;?>

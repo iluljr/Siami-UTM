@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
-        <form class="form-inline mb-2" action="<?= base_url('admin'); ?>" method="post">
+        <form class="form-inline mb-2" action="<?= base_url('user'); ?>" method="post">
           <table align="center">
             <tr>
               <td align="right">Tahun Ajaran :</td>

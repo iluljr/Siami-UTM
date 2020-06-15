@@ -10,7 +10,7 @@
 			<div class="col-md-2">
 				<nav aria-label="breadcrumb">
 					<p>
-						<span class="posisi"><i class="fa fa-dashboard fa-md"></i> &nbsp<b><a href="<?= base_url('admin');  ?>">Dashboard</a></b>
+						<span class="posisi"><i class="fa fa-dashboard fa-md"></i> &nbsp<b><a href="<?= base_url('user');  ?>">Dashboard</a></b>
 							&nbsp<i class="fa fa-angle-right fa-md"></i>&nbsp<span><b>Level</b></span>
 						</span>
 					</p>
@@ -39,7 +39,7 @@
               <td scope="row"><?= $ak['username'];?></td>
 							<td><?= $ak['level']; ?></td>
 							<td>
-								<a href="<?= base_url('admin/levelakses/') . $ak['id_user']; ?>" class="btn btn-success btn-sm delete"><i class="fa fa-fw fa-user-check"></i> Akses</a>
+								<a href="<?= base_url('user/levelakses/') . $ak['id_user']; ?>" class="btn btn-success btn-sm delete"><i class="fa fa-fw fa-user-check"></i> Akses</a>
 							</td>
 						</tr>
 						<?php $no++; ?>
@@ -68,7 +68,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('administrator/level'); ?>" method="POST">
+			<form action="<?= base_url('useristrator/level'); ?>" method="POST">
 				<div class="modal-body">
 					<div class="form-group">
 						<input type="text" class="form-control" name="level" id="level" placeholder="Level baru">

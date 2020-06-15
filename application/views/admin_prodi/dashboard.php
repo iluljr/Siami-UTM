@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
-        <form class="form-inline mb-2" action="<?= base_url('admin'); ?>" method="post">
+        <form class="form-inline mb-2" action="<?= base_url('admin_prodi'); ?>" method="post">
           <table align="center">
             <tr>
               <td align="right">Tahun Ajaran :</td>
@@ -76,7 +76,7 @@
                 <?php foreach ($jumlah_data as $jd): ?>
                   <td>1</td>
                   <td>K3</td>
-                  <td><a href="<?= base_url("admin_prodi/table_2a")?>">C.3. Mahasiswa <br>C.3.4 Indikator Kinerja Utama <br>C.3.4 a) Kualitas input Mahasiswa <br>Tabel 2.a LKA Seleksi Mahasiswa </a></td>
+                  <td><a href="<?= base_url("admin_prodi_prodi/table_2a")?>">C.3. Mahasiswa <br>C.3.4 Indikator Kinerja Utama <br>C.3.4 a) Kualitas input Mahasiswa <br>Tabel 2.a LKA Seleksi Mahasiswa </a></td>
                   <td>Rasio jumlah pendaftar terhadap jumlah mahasiswa baru</td>
                   <td>Rasio >= 5</td>
                   <td></td>
@@ -94,7 +94,7 @@
               <tr>
                 <td>2</td>
                 <td>K3</td>
-                <td><a href="<?= base_url("admin_prodi/table_2b")?>">Tabel 2.b Mahasiswa Asing</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_2b")?>">Tabel 2.b Mahasiswa Asing</a></td>
                 <td>Persentase jumlah mahasiswa asing terhadap jumlah seluruh mahasiswa</td>
                 <td>PMA >=1%</td>
                 <td></td>
@@ -117,7 +117,7 @@
                   <?php foreach ($jumlah_dosen as $jdosen): ?>
                     <td>3</td>
                     <td>K4</td>
-                    <td><a href="<?= base_url("admin_prodi/table_2a")?>">C.4. Sumber Daya Manusia <br> C.4.4. Indikator Kinerja Utama <br> C.4.4.a) Profil Dosen <br> Tabel 3.a. LKA Dosen</a></td>
+                    <td><a href="<?= base_url("admin_prodi_prodi/table_2a")?>">C.4. Sumber Daya Manusia <br> C.4.4. Indikator Kinerja Utama <br> C.4.4.a) Profil Dosen <br> Tabel 3.a. LKA Dosen</a></td>
                     <td>Rasio jumlah mahasiswa PS terhadap jumlah DTPS. </td>
                     <td>15 <= RMD <= 25 (eksakta/sains tehnologi) 25 <= RMD <= 35 (sosial humaniora)</td>
                     <td></td>
@@ -140,7 +140,7 @@
                   <?php foreach ($jumlah_data_MB as $jdB): ?>
                     <td>4</td>
                     <td>K4</td>
-                    <td><a href="<?= base_url("admin_prodi/table_2a")?>">C.4. Sumber Daya Manusia <br> C.4.4. Indikator Kinerja Utama <br> C.4.4.a) Profil Dosen <br> Tabel 3.a. LKA Dosen</a></td>
+                    <td><a href="<?= base_url("admin_prodi_prodi/table_2a")?>">C.4. Sumber Daya Manusia <br> C.4.4. Indikator Kinerja Utama <br> C.4.4.a) Profil Dosen <br> Tabel 3.a. LKA Dosen</a></td>
                     <td>Rasio total mahasiswa baru pada TS, terhadap total mahasiswa dalam lima tahun terakhir</td>
                     <td>0.18 ≤ RM < 0.22</td>
                     <td></td>
@@ -161,7 +161,7 @@
               <tr>
                 <td>5</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8a")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8a")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Rata Rata IPK lulusan </td>
                 <td>RIPK >= 3.25</td>
                 <td></td>
@@ -184,7 +184,7 @@
               <tr>
                 <td>6</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8b")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8b")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Jumlah penghargaan atau prestasi di bidang akademik mahasiswa dalam 3 tahun terakhir.</td>
                 <td>RI>=0,01%</td>
                 <td>RI = NI / NM<br>
@@ -217,7 +217,7 @@
               <tr>
                 <td>7</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Masa studi dalam 3 tahun terakhir</td>
                 <td>3.5 < MS <= 4.5 </td>
                 <td></td>
@@ -240,7 +240,7 @@
               <tr>
                 <td>8</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Persentase kelulusan tepat waktu.</td>
                 <td>PTW >= 50%</td>
                 <td></td>
@@ -262,7 +262,7 @@
               <tr>
                 <td>9</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8c")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Persentase keberhasilan studi</td>
                 <td>PPS >= 85%</td>
                 <td></td>
@@ -286,7 +286,7 @@
               <tr>
                 <td>10</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8d1")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8d1")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Waktu tunggu lulusan untuk bekerja (mendapatkan pekerjaan atau berwirausaha) yang relevan dengan bidang studi</td>
                 <td>WT <= 6 bulan</td>
                 <td></td>
@@ -308,7 +308,7 @@
               <tr>
                 <td>11</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8d2")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8d2")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Kesesuaian bidang kerja lulusan dengan bidang studi (instrumen tracer studi)</td>
                 <td>PBS ≥ 60%</td>
                 <td></td>
@@ -330,7 +330,7 @@
               <tr>
                 <td>12</td>
                 <td>K9</td>
-                <td><a href="<?= base_url("admin_prodi/table_8e1")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
+                <td><a href="<?= base_url("admin_prodi_prodi/table_8e1")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Tingkat dan ukuran tempat kerja lulusan.</td>
                 <td>RI >= 5%</td>
                 <td>RI = (NI / NA) x 100%

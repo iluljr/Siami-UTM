@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Jun 2020 pada 14.18
+-- Waktu pembuatan: 16 Jun 2020 pada 01.27
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -41,7 +41,10 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1),
-(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1);
+(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1),
+(5, 'Teknik Informatika', '300fd72d94299cf3b208e3f7b8973f7d', 2),
+(6, 'industri', '81c61ae494fde99edfab359621d9e895', 2),
+(7, 'iluljr', 'f174b74b9c79ef717aa9bb2063d9571b', 3);
 
 -- --------------------------------------------------------
 
@@ -187,8 +190,7 @@ INSERT INTO `tabel_2a` (`id_tabel2a`, `tahun`, `id_prodi`, `daya_tampung`, `pend
 (4, 2019, 1, 240, 1960, 247, 187, 6, 631, 26, 0, 0),
 (5, 2020, 1, 120, 1403, 166, 141, 18, 645, 30, 0, 0),
 (7, 2015, 1, 654, 343, 235, 532, 235, 674, 45, 0, 0),
-(8, 2021, 1, 550, 3123, 3131, 321, 17, 674, 46, 0, 0),
-(22, 2014, 1, 140, 1200, 138, 251, 251, 620, 49, 0, 0);
+(8, 2021, 1, 550, 3123, 3131, 321, 17, 674, 46, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -402,7 +404,10 @@ INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
 (42, 1, 27),
 (43, 1, 28),
 (44, 1, 29),
-(60, 4, 1);
+(60, 4, 1),
+(61, 5, 1),
+(62, 6, 3),
+(64, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -423,8 +428,8 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (10, 2, 10),
-(11, 3, 11),
-(12, 4, 12),
+(11, 4, 11),
+(12, 3, 12),
 (23, 1, 9);
 
 -- --------------------------------------------------------
@@ -446,8 +451,8 @@ CREATE TABLE `user_level` (
 INSERT INTO `user_level` (`id`, `level`, `ket`) VALUES
 (1, 'admin', 'Akses level tertinggi'),
 (2, 'Admin prodi', 'Akses level admin prodi'),
-(3, 'Dosen', 'Akses level dosen'),
-(4, 'Mahasiswa', 'Akses level mahasiswa');
+(3, 'User', 'Akses level user'),
+(4, 'Dosen', 'Akses level dosen');
 
 -- --------------------------------------------------------
 
@@ -633,7 +638,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
@@ -663,7 +668,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_8a`
@@ -705,7 +710,7 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`

@@ -10,8 +10,8 @@
 			<div class="col-md-3">
 				<nav aria-label="breadcrumb">
 					<p>
-						<span class="posisi"><i class="fa fa-dashboard fa-md"></i> &nbsp<b><a href="<?= base_url('admin');  ?>">Dashboard</a></b>
-							&nbsp<i class="fa fa-angle-right fa-md"></i>&nbsp<span><b><a href="<?= base_url('admin/level');  ?>">Level</a></b></span>
+						<span class="posisi"><i class="fa fa-dashboard fa-md"></i> &nbsp<b><a href="<?= base_url('admin_prodi');  ?>">Dashboard</a></b>
+							&nbsp<i class="fa fa-angle-right fa-md"></i>&nbsp<span><b><a href="<?= base_url('admin_prodi/level');  ?>">Level</a></b></span>
 							&nbsp<i class="fa fa-angle-right fa-md"></i>&nbsp<span><b>Level akses</b></span>
 						</span>
 					</p>

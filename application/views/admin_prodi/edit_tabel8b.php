@@ -11,7 +11,7 @@
                 foreach ($tabel_8b as $tb ){
               ?>
 
-              <form method="post" action="<?php echo base_url('admin/update_tabel8b'); ?>">
+              <form method="post" action="<?php echo base_url('admin_prodi/update_tabel8b'); ?>">
               <div class="form-group">
                 <label>Masukan Nama Kegiatan</label>
                 <input type="hidden" name="id_tabel8b" value="<?php echo $tb->id_tabel8b;?>">

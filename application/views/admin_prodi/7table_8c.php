@@ -67,8 +67,8 @@
               <td><?= $tb['ts']?></td>
               <td><?= $tb['ts_6']+$tb['ts_5']+$tb['ts_4']+$tb['ts_3']+$tb['ts_2']+$tb['ts_1']+$tb['ts']?></td>
               <td><?= $tb['rata_studi']?></td>
-              <td><?php echo anchor('admin/edit_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?php echo anchor('admin_prodi/edit_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin_prodi/hapus_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>
@@ -234,7 +234,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data8c'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_data8c'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">
