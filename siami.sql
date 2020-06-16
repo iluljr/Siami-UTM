@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jun 2020 pada 01.27
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Waktu pembuatan: 16 Jun 2020 pada 03.56
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `siami`
 --
+CREATE DATABASE IF NOT EXISTS `siami` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `siami`;
 
 -- --------------------------------------------------------
 
@@ -41,7 +43,7 @@ CREATE TABLE `akun` (
 
 INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1),
-(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 1),
+(4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 2),
 (5, 'Teknik Informatika', '300fd72d94299cf3b208e3f7b8973f7d', 2),
 (6, 'industri', '81c61ae494fde99edfab359621d9e895', 2),
 (7, 'iluljr', 'f174b74b9c79ef717aa9bb2063d9571b', 3);
@@ -428,9 +430,8 @@ CREATE TABLE `user_access_menu` (
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (10, 2, 10),
-(11, 4, 11),
-(12, 3, 12),
-(23, 1, 9);
+(23, 1, 9),
+(26, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -474,8 +475,7 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (2, 'Menu'),
 (9, 'User'),
 (10, 'Admin'),
-(11, 'Dosen'),
-(12, 'Mahasiswa');
+(11, 'Dosen');
 
 -- --------------------------------------------------------
 
@@ -507,7 +507,18 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (41, 1, 'Table 8.d.2', 'admin/table_8d2', 'fas fa-fw fa-table', 1),
 (42, 1, 'Table 8.e.1', 'admin/table_8e1', 'fas fa-fw fa-table', 1),
 (99, 9, 'Manajemen User', 'admin/user_akun', 'fas fa-fw fa-user', 1),
-(109, 9, 'Data Akses', 'admin/level', 'fas fa-fw fa-user-tie', 1);
+(109, 9, 'Data Akses', 'admin/level', 'fas fa-fw fa-user-tie', 1),
+(110, 10, 'Data Audit', 'admin_prodi', 'fas fa-fw fa-table', 1),
+(111, 10, 'Table 2.a', 'admin_prodi/table_2a', 'fas fa-fw fa-table', 1),
+(112, 10, 'Table 2.b', 'admin_prodi/table_2b', 'fas fa-fw fa-table', 1),
+(113, 10, 'Table 8.a', 'admin_prodi/table_8a', 'fas fa-fw fa-table', 1),
+(114, 10, 'Table 8.b', 'admin_prodi/table_8b', 'fas fa-fw fa-table', 1),
+(115, 10, 'Table 8.c', 'admin_prodi/table_8c', 'fas fa-fw fa-table', 1),
+(116, 10, 'Table 8.d.1', 'admin_prodi/table_8d1', 'fas fa-fw fa-table', 1),
+(117, 10, 'Table 8.d.2', 'admin_prodi/table_8d2', 'fas fa-fw fa-table', 1),
+(118, 10, 'Table 8.e.1', 'admin_prodi/table_8e1', 'fas fa-fw fa-table', 1),
+(119, 2, 'Manajemen Menu', 'menu', 'fas fa-fw fa-folder', 1),
+(120, 2, 'Manajemen Submenu', 'menu/submenu', 'fas fa-fw fa-folder-open', 1);
 
 --
 -- Indexes for dumped tables
@@ -716,13 +727,13 @@ ALTER TABLE `user_access_data`
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -56,6 +56,9 @@
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('asset/js/demo/'); ?>datatables-demo.js"></script>
+<script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?= base_url('assets/'); ?>js/sweet/sweetalert2.all.min.js"></script>
+<script src="<?= base_url('assets/'); ?>js/jsscript.js"></script>
 <script>
   $('.form-check-input').on('click', function() {
     const akun = $(this).data('akun');

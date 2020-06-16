@@ -884,11 +884,11 @@ class admin extends CI_Controller
 		$this->db->from('akun');
 		$config['total_rows'] = $this->db->count_all_results();
 		$data['total_rows'] = $config['total_rows'];
-		//$config['base_url'] = 'http://localhost/Siami-UTM/admin/user_akun';
+		$config['base_url'] = 'http://localhost/Siami-UTM/admin/user_akun';
 
 		$config['per_page'] = 5;
 
-		//$this->pagination->initialize($config);
+		$this->pagination->initialize($config);
 
 		if ($this->uri->segment(3) !== null) {
 			$data['start'] = $this->uri->segment(3);
