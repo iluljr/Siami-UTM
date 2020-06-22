@@ -164,7 +164,7 @@
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
-          <td>IKU No.11</td>
+          <td>IKU No.10</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
           <?php if ($jd['wt_6']==0) : ?>
