@@ -150,6 +150,9 @@ class admin extends CI_Controller
 	public function edit_tabel2a($id)
 	{
 		$data['judul'] = 'Table 2.a';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$where = array('id_tabel2a' => $id );
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
@@ -243,6 +246,9 @@ class admin extends CI_Controller
 	{
 		$where = array('tahun' => $tahun );
 		$data['judul'] = 'Table 2.b';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['tabel_2a'] = $this->model_admin->edit_data($where,'tabel_2a')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -331,6 +337,9 @@ class admin extends CI_Controller
 	{
 		$where = array('id_tabel8a' => $id );
 		$data['judul'] = 'Table 8.a';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['tabel_8a'] = $this->model_admin->edit_data($where,'tabel_8a')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -418,6 +427,9 @@ class admin extends CI_Controller
 	{
 		$where = array('id_tabel8b' => $id );
 		$data['judul'] = 'Table 8.b';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['tabel_8b'] = $this->model_admin->edit_data($where,'tabel_8b')->result();
 		$data['tingkat']=$this->model_log->tingkat()->result();
 		$this->load->view("admin/layout/header_admin");
@@ -513,6 +525,10 @@ class admin extends CI_Controller
 	public function edit_tabel8c($id)
 	{
 		$where = array('id_tabel8c' => $id );
+		$data['judul'] = 'Table 8.c';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['tabel_8c'] = $this->model_admin->edit_data($where,'tabel_8c')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -602,6 +618,9 @@ class admin extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.d.1';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -723,6 +742,9 @@ class admin extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.d.2';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -822,6 +844,9 @@ class admin extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.e.1';
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
+		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['table_8d1'] = $this->model_admin->edit_data($where,'table_8d1')->result();
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
