@@ -25,35 +25,34 @@ class user extends CI_Controller
 			$data['id_tahun'] = $this->session->userdata('id_tahun');
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
+		$data['id_akses'] = $this->session->userdata('id_user');
+		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 
 		$data['judul'] = 'Data Audit';
-		$data['jumlah_data'] = $this->model_log->datatable_2a();
-		$data['jumlah_data_MA'] = $this->model_user->datatable_2a_MA();
-		$data['jumlah_dosen'] = $this->model_user->datatable_2a_Dosen();
-		$data['jumlah_data_MB'] = $this->model_user->datatable_2a_MB();
-		$data['table8a_rata']=$this->model_user->table8a_rata();
+		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data_MA'] = $this->model_user->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_dosen'] = $this->model_user->datatable_2a_Dosen($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data_MB'] = $this->model_user->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
+		$data['table8a_rata']=$this->model_user->table8a_rata($data['id_tahun'],$data['id_prodi']);
 
 		$data['tahunsekarang_2b']=$this->model_user->tahunsekarang_2b($data['id_tahun']);
 		$data['dropdown']=$this->model_log->dropdown()->result();
-		$data['id_akses'] = $this->session->userdata('id_user');
-		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		//table_8b
-		$data['view_table8b_jumlah_NI'] = $this->model_user->gettable8b_jumlah_NI();
-		$data['view_table8b_jumlah_NN'] = $this->model_user->gettable8b_jumlah_NN();
-		$data['view_table8b_jumlah_NW'] = $this->model_user->gettable8b_jumlah_NW();
+		$data['view_table8b_jumlah_NI'] = $this->model_user->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NN'] = $this->model_user->gettable8b_jumlah_NN($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NW'] = $this->model_user->gettable8b_jumlah_NW($data['id_tahun'],$data['id_prodi']);
 		//table_8c
-		$data['view_table8c_jml'] = $this->model_user->gettable8c_jml_rata();
-		$data['view_table8c_jml_ts3'] = $this->model_user->gettable8c_jml_ts3();
-		$data['view_table8c_jml_ts3_ts6'] = $this->model_user->gettable8c_jml_ts3_ts6();
+		$data['view_table8c_jml'] = $this->model_user->gettable8c_jml_rata($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c_jml_ts3'] = $this->model_user->gettable8c_jml_ts3($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c_jml_ts3_ts6'] = $this->model_user->gettable8c_jml_ts3_ts6($data['id_tahun'],$data['id_prodi']);
 		//table_8d1
-		$data['jumlah_data_8d1'] = $this->model_user->datatable_8d1();
+		$data['jumlah_data_8d1'] = $this->model_user->datatable_8d1($data['id_tahun'],$data['id_prodi']);
 		//table_8d2
-		$data['jumlah_data_8d2'] = $this->model_user->datatable_8d2();
+		$data['jumlah_data_8d2'] = $this->model_user->datatable_8d2($data['id_tahun'],$data['id_prodi']);
 		//table_8e1
-		$data['jumlah_data_8e'] = $this->model_user->datatable_8e1();
+		$data['jumlah_data_8e'] = $this->model_user->datatable_8e1($data['id_tahun'],$data['id_prodi']);
 
-		$data['view_table2a_jumlahmhs'] = $this->model_user->gettable2b_jumlahmhs();
+		$data['view_table2a_jumlahmhs'] = $this->model_user->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -103,7 +102,6 @@ class user extends CI_Controller
 		$data['tahunsekarang_2b']=$this->model_user->tahunsekarang_2b($data['id_tahun']);
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$this->load->view("user/layout/header_admin");
@@ -155,7 +153,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -228,7 +225,6 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['view_table2a'] = $this->model_user->gettable2b($data['id_tahun']);
 		$data['view_table2a_min1'] = $this->model_user->gettable2b_min1($data['id_tahun']);
 		$data['view_table2a_min2'] = $this->model_user->gettable2b_min2($data['id_tahun']);
@@ -252,7 +248,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -301,7 +296,6 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
 		$this->load->view("user/layout/topbar_admin");
@@ -345,7 +339,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -399,7 +392,7 @@ class user extends CI_Controller
 		$data['tingkat']=$this->model_log->tingkat()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 		$data['judul'] = 'Table 8.b';
 		$data['jumlah_data_MA'] = $this->model_user->datatable_2a_MA();
 
@@ -438,7 +431,7 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -489,7 +482,7 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 		$data['judul'] = 'Table 8.c';
 
 		$this->load->view("user/layout/header_admin");
@@ -539,7 +532,6 @@ class user extends CI_Controller
 		$data['judul'] = 'Table 8.c';
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -609,7 +601,7 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
 		$this->load->view("user/layout/topbar_admin");
@@ -633,7 +625,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -711,7 +702,7 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
 		$this->load->view("user/layout/topbar_admin");
@@ -759,7 +750,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -813,7 +803,7 @@ class user extends CI_Controller
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
 		$this->load->view("user/layout/topbar_admin");
@@ -863,7 +853,6 @@ class user extends CI_Controller
 
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$this->load->view("user/layout/header_admin");
 		$this->load->view("user/layout/sidebar",$data);
@@ -909,7 +898,7 @@ class user extends CI_Controller
 		$data['profil']['gambar'] = 'default.jpg';
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
+
 
 		$this->load->model('user_model', 'userM');
 		$data['level'] = $this->db->get('user_level')->result_array();
@@ -997,7 +986,6 @@ class user extends CI_Controller
 		$this->load->model('user_model', 'userM');
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['user'] = $this->userM->get_akun(null);
 
@@ -1042,7 +1030,6 @@ class user extends CI_Controller
 		$this->load->model('user_model', 'userM');
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
-		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['user'] = $this->db->get_where('akun', ['id_user' => $id])->row_array();
 		$data['menu'] = $this->db->get('prodi')->result_array();

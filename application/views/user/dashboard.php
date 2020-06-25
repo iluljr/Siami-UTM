@@ -21,7 +21,9 @@
               </select>
             </div>
             </td>
-            <td>&nbsp;</td>
+            <?php foreach ($prodi as $p): ?>
+              <td><input type="hidden" name="id_prodi" value="<?= $p['id_prodi']?>" id="prodi"></td>
+            <?php endforeach; ?>
             <td>
               <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
             </td>
