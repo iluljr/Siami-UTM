@@ -86,6 +86,14 @@
 			<form action="<?= base_url('menu/submenu'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
+						<select name="level" id="level" class="form-control" required>
+							<option value="">- Select User Level -</option>
+							<?php foreach ($level as $l) : ?>
+								<option value="<?= $l['id']; ?>"><?= $l['level']; ?></option>
+							<?php endforeach; ?>
+					</select>
+					</div>
+					<div class="form-group">
 						<input type="text" class="form-control" name="title" id="title" placeholder="Nama Sub Menu" required>
 						<div class="invalid-feedback">
 							Masukan Nama Submenu

@@ -93,7 +93,9 @@ class Menu extends CI_Controller
 
 		$data['subMenu'] = $this->menu->getSubMenu($config['per_page'], $data['start']);
 		$data['menu'] = $this->db->get('user_menu')->result_array();
+		$data['level'] = $this->db->get('user_level')->result_array();
 
+		$this->form_validation->set_rules('level', 'Level', 'required');
 		$this->form_validation->set_rules('title', 'Title', 'required');
 		$this->form_validation->set_rules('menu_id', 'Menu', 'required');
 		$this->form_validation->set_rules('url', 'URL', 'required');
@@ -106,6 +108,14 @@ class Menu extends CI_Controller
 				$this->load->view("menu/submenu",$data);
 				$this->load->view("admin/layout/footer_admin");
 		} else {
+			// $dataac = [
+			// 	'role_id' => $this->input->post('level'),
+			// 	'menu_id' => $this->input->post('menu_id')
+			// ];
+			// $data['ac']= $this->db->get('user_access_menu')->result_array();
+			// if ($dataac['role_id'] == $data['ac']['role_id']) {
+			// 	$this->db->insert('user_access_menu', $dataac);
+			// }
 			$data = [
 				'title' => $this->input->post('title'),
 				'menu_id' => $this->input->post('menu_id'),

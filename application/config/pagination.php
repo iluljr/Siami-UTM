@@ -1,6 +1,6 @@
 <?php
-$config['base_url'] = 'http://localhost/sms-utm/administrator/index';
-$config['num_links'] = 3;
+$config['base_url'] = 'http://localhost/Siami-UTM/admin/index';
+$config['num_links'] = 10;
 //$config['use_page_numbers'] = TRUE;
 
 $config['full_tag_open'] = '<nav><ul class="pagination justify-content-end">';

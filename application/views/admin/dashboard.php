@@ -12,9 +12,7 @@
             <td>
               <div class="">
                 <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                <?php foreach ($tahunsekarang_2b as $ts):?>
-                  <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
-                <?php endforeach;?>
+                  <option value="" class="dropdown-item" selected> - pilih tahun ajaran - </option>
                 <?php
                   foreach ($dropdown as $dd):
                 ?>
@@ -240,7 +238,6 @@
                 <td></td>
                 <?php foreach ($view_table8c_jml_ts3 as $ts3) : ?>
                   <td><?= $ts3['ts']/$ts3['mhs_diterima']*100?></td>
-
                 <?php if (($ts3['ts']/$ts3['mhs_diterima']*100) >= 50): ?>
                   <td align="center" bgcolor="blue"><p style="color: white;">4</p></td>
                 <?php else: ?>

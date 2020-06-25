@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jun 2020 pada 03.56
+-- Waktu pembuatan: 25 Jun 2020 pada 07.21
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.4
 
@@ -46,7 +46,8 @@ INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 (4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 2),
 (5, 'Teknik Informatika', '300fd72d94299cf3b208e3f7b8973f7d', 2),
 (6, 'industri', '81c61ae494fde99edfab359621d9e895', 2),
-(7, 'iluljr', 'f174b74b9c79ef717aa9bb2063d9571b', 3);
+(7, 'iluljr', 'f174b74b9c79ef717aa9bb2063d9571b', 3),
+(8, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 3);
 
 -- --------------------------------------------------------
 
@@ -274,10 +275,10 @@ CREATE TABLE `tabel_8c` (
 --
 
 INSERT INTO `tabel_8c` (`id_tabel8c`, `tahun_masuk`, `id_prodi`, `mhs_diterima`, `ts_6`, `ts_5`, `ts_4`, `ts_3`, `ts_2`, `ts_1`, `ts`, `rata_studi`) VALUES
-(1, 2017, 1, 134, 0, 0, 0, 0, 0, 0, 11, 4),
-(2, 2016, 1, 174, NULL, NULL, NULL, NULL, NULL, 2, 29, 4.94),
-(3, 2015, 1, 149, NULL, NULL, NULL, NULL, 5, 40, 27, 5.31),
-(4, 2014, 1, 124, NULL, NULL, NULL, 2, 83, 18, 16, 5.4);
+(1, 2020, 1, 134, 0, 0, 0, 0, 0, 0, 11, 4),
+(2, 2019, 1, 174, NULL, NULL, NULL, NULL, NULL, 2, 29, 4.94),
+(3, 2018, 1, 149, NULL, NULL, NULL, NULL, 5, 40, 27, 5.31),
+(4, 2017, 1, 124, NULL, NULL, NULL, 2, 83, 18, 16, 5.4);
 
 -- --------------------------------------------------------
 
@@ -409,7 +410,11 @@ INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
 (60, 4, 1),
 (61, 5, 1),
 (62, 6, 3),
-(64, 7, 5);
+(64, 7, 5),
+(65, 4, 2),
+(67, 4, 3),
+(68, 4, 4),
+(69, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -431,7 +436,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (10, 2, 10),
 (23, 1, 9),
-(26, 1, 2);
+(26, 1, 2),
+(30, 3, 11);
 
 -- --------------------------------------------------------
 
@@ -517,8 +523,17 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (116, 10, 'Table 8.d.1', 'admin_prodi/table_8d1', 'fas fa-fw fa-table', 1),
 (117, 10, 'Table 8.d.2', 'admin_prodi/table_8d2', 'fas fa-fw fa-table', 1),
 (118, 10, 'Table 8.e.1', 'admin_prodi/table_8e1', 'fas fa-fw fa-table', 1),
-(119, 2, 'Manajemen Menu', 'menu', 'fas fa-fw fa-folder', 1),
-(120, 2, 'Manajemen Submenu', 'menu/submenu', 'fas fa-fw fa-folder-open', 1);
+(124, 2, 'Manajemen Submenu', 'menu/submenu', '	\r\nfas fa-fw fa-folder-open', 1),
+(125, 2, 'Manajemen Menu', 'menu', 'fas fa-fw fa-folder', 1),
+(128, 11, 'Data Audit', 'user', 'fas fa-fw fa-table', 1),
+(129, 11, 'Table 2.a', 'user/table_2a', 'fas fa-fw fa-table', 1),
+(130, 11, 'Table 2.b', 'user/table_2b', 'fas fa-fw fa-table', 1),
+(131, 11, 'Table 8.a', 'user/table_8a', 'fas fa-fw fa-table', 1),
+(132, 11, 'Table 8.b', 'user/table_8b', 'fas fa-fw fa-table', 1),
+(133, 11, 'Table 8.c', 'user/table_8c', 'fas fa-fw fa-table', 1),
+(134, 11, 'Table 8.d.1', 'user/table_8d1', 'fas fa-fw fa-table', 1),
+(135, 11, 'Table 8.d.2', 'user/table_8d2', 'fas fa-fw fa-table', 1),
+(136, 11, 'Table 8.e.1', 'user/table_8e1', 'fas fa-fw fa-table', 1);
 
 --
 -- Indexes for dumped tables
@@ -649,7 +664,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
@@ -661,13 +676,13 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT untuk tabel `fakultas`
 --
 ALTER TABLE `fakultas`
-  MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenjang`
 --
 ALTER TABLE `jenjang`
-  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `prodi`
@@ -679,7 +694,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_8a`
@@ -721,19 +736,19 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

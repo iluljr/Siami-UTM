@@ -27,11 +27,11 @@ class admin extends CI_Controller
 		}
 
 		$data['judul'] = 'Data Audit';
-		$data['jumlah_data'] = $this->model_log->datatable_2a();
-		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
-		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen();
-		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB();
-		$data['table8a_rata']=$this->model_admin->table8a_rata();
+		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
+		$data['table8a_rata']=$this->model_admin->table8a_rata($data['id_tahun'],$data['id_prodi']);
 
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['dropdown']=$this->model_log->dropdown()->result();
@@ -39,21 +39,21 @@ class admin extends CI_Controller
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		//table_8b
-		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI();
-		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN();
-		$data['view_table8b_jumlah_NW'] = $this->model_admin->gettable8b_jumlah_NW();
+		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NN'] = $this->model_admin->gettable8b_jumlah_NN($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b_jumlah_NW'] = $this->model_admin->gettable8b_jumlah_NW($data['id_tahun'],$data['id_prodi']);
 		//table_8c
-		$data['view_table8c_jml'] = $this->model_admin->gettable8c_jml_rata();
-		$data['view_table8c_jml_ts3'] = $this->model_admin->gettable8c_jml_ts3();
-		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin->gettable8c_jml_ts3_ts6();
+		$data['view_table8c_jml'] = $this->model_admin->gettable8c_jml_rata($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c_jml_ts3'] = $this->model_admin->gettable8c_jml_ts3($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin->gettable8c_jml_ts3_ts6($data['id_tahun'],$data['id_prodi']);
 		//table_8d1
-		$data['jumlah_data_8d1'] = $this->model_admin->datatable_8d1();
+		$data['jumlah_data_8d1'] = $this->model_admin->datatable_8d1($data['id_tahun'],$data['id_prodi']);
 		//table_8d2
-		$data['jumlah_data_8d2'] = $this->model_admin->datatable_8d2();
+		$data['jumlah_data_8d2'] = $this->model_admin->datatable_8d2($data['id_tahun'],$data['id_prodi']);
 		//table_8e1
-		$data['jumlah_data_8e'] = $this->model_admin->datatable_8e1();
+		$data['jumlah_data_8e'] = $this->model_admin->datatable_8e1($data['id_tahun'],$data['id_prodi']);
 
-		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs();
+		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
 
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
