@@ -3,12 +3,35 @@
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
-    </div>
     <div class="card-body">
       <h4>Table 8.c Masa Studi Lulusan</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
+      <form class="form-inline mb-2" action="<?= base_url('user/table_8c'); ?>" method="post">
+      <table align="center" class="mt-4">
+        <tr>
+          <td align="right">Tahun Ajaran :</td>
+          <td>
+            <div class="">
+              <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
+                <option value="" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+              <?php
+                foreach ($dropdown as $dd):
+              ?>
+                <option value="<?php echo $dd->tahun;?>" class="dropdown-item"><?php echo $dd->tahun; ?>/<?php echo $dd->tahun+1; ?></option>
+              <?php endforeach;?>
+            </select>
+          </div>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </form>
 
       <!-- Data Table -->
       <div class="table-responsive">
@@ -26,13 +49,13 @@
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
+              <th>Akhir<br><?= $ts['tahun_masuk']-6?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']-5?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']-4?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']-3?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-2?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-1?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']+1?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']+1?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']+2?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']+3?></th>
               <?php endforeach;?>
             </tr>
             <tr align="center">
@@ -53,10 +76,11 @@
           </thead>
           <tbody>
             <?php
+            $n = 0;
             foreach ($view_table8c as $tb) :
             ?>
             <tr align="center">
-              <td><?= $tb['tahun_masuk']?></td>
+              <td><?= $tb['tahun_masuk']-3?></td>
               <td><?= $tb['mhs_diterima']?></td>
               <td><?= $tb['ts_6']?></td>
               <td><?= $tb['ts_5']?></td>
@@ -71,7 +95,9 @@
               <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('user/hapus_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
-          <?php endforeach;?>
+          <?php
+            endforeach;
+          ?>
           </tbody>
           <tfoot>
             <tr align="center">

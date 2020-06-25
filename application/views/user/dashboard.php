@@ -22,23 +22,12 @@
             </div>
             </td>
             <td>&nbsp;</td>
-            <td align="right">Nama Program Studi :</td>
-            <td>
-              <div class="">
-                <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
-                <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
-                <?php
-                  foreach ($prodi as $ps):
-                ?>
-                  <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
-                <?php endforeach;?>
-              </select>
-            </div>
-            </td>
-            <td>&nbsp;</td>
             <td>
               <input type="submit" name="submit" value="Tampil Data" class="btn btn-sm  btn-primary ml-2">
             </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
           </tr>
         </table>
       </form>

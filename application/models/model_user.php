@@ -279,16 +279,16 @@ class model_user extends CI_Model
 
 	 					 $query =
 	 							 "
-								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
-								 FROM tabel_8b t, prodi p
-								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+								 SELECT t.id_tabel8c, t.tahun_masuk, t.mhs_diterima, t.ts_6, t.ts_5, t.ts_4, t.ts_3, t.ts_2, t.ts_1, t.ts, t.rata_studi
+								 FROM tabel_8c t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= $id_tahun AND t.tahun_masuk >= ($id_tahun-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 	 			 ";
 			 }else{
 					 $query =
 							 "
 							 SELECT t.id_tabel8c, t.tahun_masuk, t.mhs_diterima, t.ts_6, t.ts_5, t.ts_4, t.ts_3, t.ts_2, t.ts_1, t.ts, t.rata_studi
 							 FROM tabel_8c t, prodi p
-							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')-3) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -300,16 +300,16 @@ class model_user extends CI_Model
 
 	 					 $query =
 	 							 "
-								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
-								 FROM tabel_8b t, prodi p
-								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+								 SELECT t.id_tabel8c, sum(t.rata_studi) AS 'rata_rata', sum(t.mhs_diterima) AS 'jumlah_mhs'
+								 FROM tabel_8c t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= $id_tahun AND t.tahun_masuk >= ($id_tahun-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 	 			 ";
 			 }else{
 					 $query =
 							 "
 							 SELECT t.id_tabel8c, sum(t.rata_studi) AS 'rata_rata', sum(t.mhs_diterima) AS 'jumlah_mhs'
 							 FROM tabel_8c t, prodi p
-							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')-3) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -322,16 +322,16 @@ class model_user extends CI_Model
 
 	 					 $query =
 	 							 "
-								 SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
-								 FROM tabel_8b t, prodi p
-								 WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+								 SELECT t.id_tabel8c, t.mhs_diterima, t.ts
+								 FROM tabel_8c t, prodi p
+								 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk = ($id_tahun) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 	 			 ";
 			 }else{
 					 $query =
 							 "
 							 SELECT t.id_tabel8c, t.mhs_diterima, t.ts
 							 FROM tabel_8c t, prodi p
-							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk = (SELECT date_format(curdate(),'%Y')-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+							 WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk = (SELECT date_format(curdate(),'%Y')) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 			 ";
 			 }
 	 			 return $this->db->query($query)->result_array();
@@ -343,16 +343,16 @@ class model_user extends CI_Model
 
 								$query =
 										"
-										SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
-										FROM tabel_8b t, prodi p
-										WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+										SELECT t.id_tabel8c, SUM(t.ts) AS 'jmb',SUM(t.ts_1) AS 'jmb1', SUM(t.ts_2) AS 'jmb2', SUM(t.ts_3) AS 'jmb3', SUM(t.ts_4) AS 'jmb4', SUM(t.ts_5) AS 'jmb5', SUM(t.ts_6) AS 'jmb6'
+										FROM tabel_8c t, prodi p
+										WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= $id_tahun AND t.tahun_masuk >= ($id_tahun-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 						";
 					}else{
 							$query =
 									"
 									SELECT t.id_tabel8c, SUM(t.ts) AS 'jmb',SUM(t.ts_1) AS 'jmb1', SUM(t.ts_2) AS 'jmb2', SUM(t.ts_3) AS 'jmb3', SUM(t.ts_4) AS 'jmb4', SUM(t.ts_5) AS 'jmb5', SUM(t.ts_6) AS 'jmb6'
 									FROM tabel_8c t, prodi p
-									WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')-3) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-6) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
+									WHERE t.id_prodi=p.id_prodi AND t.tahun_masuk <= (SELECT date_format(curdate(),'%Y')) AND t.tahun_masuk >= (SELECT date_format(curdate(),'%Y')-3) AND t.id_prodi = 1 ORDER BY t.tahun_masuk
 					";
 					}
 					return $this->db->query($query)->result_array();
@@ -364,16 +364,16 @@ class model_user extends CI_Model
 
 								$query =
 										"
-										SELECT t.id_tabel8b, t.nama_kegiatan, t.waktu_perolehan, t.id_tingkat, t.prestasi
-										FROM tabel_8b t, prodi p
-										WHERE t.id_prodi=p.id_prodi AND t.waktu_perolehan <= $id_tahun AND t.waktu_perolehan >= ($id_tahun-2) AND t.id_prodi = $id_prodi ORDER BY t.waktu_perolehan
+										SELECT t.tahun_masuk
+										FROM tabel_8c t
+										WHERE t.tahun_masuk = $id_tahun
 						";
 					}else{
 							$query =
 									"
 									SELECT t.tahun_masuk
 									FROM tabel_8c t
-									WHERE t.tahun_masuk = (SELECT date_format(curdate(),'%Y')-3)
+									WHERE t.tahun_masuk = (SELECT date_format(curdate(),'%Y'))
 					";
 					}
 					return $this->db->query($query)->result_array();
