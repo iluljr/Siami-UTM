@@ -76,7 +76,7 @@
                   <?php if (($jd['pendaftar']/$jd['jmb_reguler']) >= 5): ?>
                     <td align="center" bgcolor="blue"><p style="color: white;">4</p></td>
                   <?php else: ?>
-                    <td align="center" bgcolor="red"><p style="color: white;">1</p></td>
+                    <td align="center" bgcolor="red"><p style="color: white;"><?=(4*($jd['pendaftar']/$jd['jmb_reguler']))/5?></p></td>
                   <?php endif; ?>
                   <td></td>
                 <?php endforeach;?>
