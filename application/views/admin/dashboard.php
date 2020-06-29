@@ -117,10 +117,14 @@
                     <td>Pasal 49 ayat 2 (tetapi fakultas bukan PS)</td>
                     <td><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
 
-                    <?php if (($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) >= 15): ?>
+                    <?php if (($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) >= 15 && ($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) <= 25): ?>
                       <td align="center" bgcolor="blue"><p style="color: white;">4</p></td>
+                    <?php elseif ( ($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) < 15 ): ?>
+                      <td align="center" bgcolor="yellow"><p style="color: white;"><?=(4*($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']))/15?></p></td>
+                    <?php elseif ( ($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) > 25 && ($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']) <= 35 ): ?>
+                      <td align="center" bgcolor="yellow"><p style="color: white;"><?=(70-(2*($jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen'])))/5?></p></td>
                     <?php else: ?>
-                      <td align="center" bgcolor="red"><p style="color: white;">1</p></td>
+                      <td align="center" bgcolor="red"><p style="color: white;">0</p></td>
                     <?php endif;?>
 
                     <td></td>
@@ -165,8 +169,10 @@
 
                 <?php if ($rt['IPK_rata'] >= 3.25): ?>
                   <td align="center" bgcolor="blue"><p style="color: white;">4</p></td>
+                <?php elseif ($rt['IPK_rata'] < 3.25 && $rt['IPK_rata'] >= 2.00): ?>
+                  <td align="center" bgcolor="yellow"><p style="color: white;"><?=((8*($rt['IPK_rata']))-6)/5?></p></td>
                 <?php else: ?>
-                  <td align="center" bgcolor="red"><p style="color: white;">1</p></td>
+                  <td align="center" bgcolor="white"><p style="color: black;">2</p></td>
                 <?php endif;?>
 
                 <?php endforeach; ?>
@@ -178,7 +184,7 @@
                 <td>K9</td>
                 <td><a href="<?= base_url("admin/table_8b")?>">C.9. Luaran dan Capaian Tridharma<br>C.9.4. Indikator Kinerja Utama<br>C.9.4.a) Pendidikan</a></td>
                 <td>Jumlah penghargaan atau prestasi di bidang akademik mahasiswa dalam 3 tahun terakhir.</td>
-                <td>RI>=0,01%</td>
+                <td>RI>=0,1%</td>
                 <td>RI = NI / NM<br>
                   RN = NN / NM<br>
                   RW = NW / NM<br>
