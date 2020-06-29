@@ -204,9 +204,11 @@
                     <?php elseif (($tb['jumlah_ni']/$jd2['mahasiswa_aktif']) < 0.001 && ($tb2['jumlah_nn']/$jd2['mahasiswa_aktif']) >= 0.01): ?>
                       <td align="center" bgcolor="yellow"><p style="color: white;"><?=(3+(($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])/0.001))?></p></td>
                     <?php elseif (($tb['jumlah_ni']/$jd2['mahasiswa_aktif']) < 0.001 && ($tb['jumlah_ni']/$jd2['mahasiswa_aktif']) > 0 && ($tb2['jumlah_nn']/$jd2['mahasiswa_aktif']) < 0.01 && ($tb2['jumlah_nn']/$jd2['mahasiswa_aktif']) > 0 ): ?>
-                      <td align="center" bgcolor="yellow"><p style="color: white;"><?=(2+(($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])/0.001))?></p></td>
+                      <td align="center" bgcolor="yellow"><p style="color: white;"><?=(2+(2*(($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])/0.001))+(($tb2['jumlah_nn']/$jd2['mahasiswa_aktif'])/0.01)-((($tb['jumlah_ni']/$jd2['mahasiswa_aktif'])*($tb2['jumlah_nn']/$jd2['mahasiswa_aktif']))/(0.001*0.01)) )?></p></td>
+                    <?php elseif (($tb['jumlah_ni']/$jd2['mahasiswa_aktif']) == 0 && ($tb2['jumlah_nn']/$jd2['mahasiswa_aktif']) == 0 && ($tb3['jumlah_nw']/$jd2['mahasiswa_aktif']) >= 0.02 ): ?>
+                      <td align="center" bgcolor="white"><p style="color: black;">2</p></td>
                     <?php else: ?>
-                      <td align="center" bgcolor="red"><p style="color: white;">1</p></td>
+                      <td align="center" bgcolor="red"><p style="color: white;"><?=(2*($tb3['jumlah_nw']/$jd2['mahasiswa_aktif']))/0.02?></p></td>
                     <?php endif;?>
 
                   <?php endforeach;?>
