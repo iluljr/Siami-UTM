@@ -427,9 +427,9 @@
                 <td bgcolor="yellow">Tingkat dan ukuran tempat kerja lulusan. Adalah 0.02 %</td>
                 <td>Tracer Study/UPKK</td>
                 <?php foreach ($jumlah_data_8e as $jd8e): ?>
-                    <td><?= ($jd8e['nasional']/$jd8e['jml_lulus_ter'])*100/100?></td>
+                    <td><?= ($jd8e['internasional']/$jd8e['jml_lulus_ter'])*100/100?></td>
 
-                    <?php if ((($jd8e['nasional']/$jd8e['jml_lulus_ter'])*100/100) >= 5): ?>
+                    <?php if ((($jd8e['internasional']/$jd8e['jml_lulus_ter'])*100/100) >= 5): ?>
                       <td align="center" bgcolor="blue"><p style="color: white;">4</p></td>
                     <?php else: ?>
                       <td align="center" bgcolor="red"><p style="color: white;">1</p></td>
