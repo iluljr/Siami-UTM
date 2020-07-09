@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jun 2020 pada 07.21
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.4
+-- Waktu pembuatan: 09 Jul 2020 pada 23.10
+-- Versi server: 10.4.8-MariaDB
+-- Versi PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,10 +44,10 @@ CREATE TABLE `akun` (
 INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'Admin', '21232f297a57a5a743894a0e4a801fc3', 1),
 (4, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 2),
-(5, 'Teknik Informatika', '300fd72d94299cf3b208e3f7b8973f7d', 2),
+(5, 'teknik informatika', '270007185d0f4b290ded51f9345a7f29', 2),
 (6, 'industri', '81c61ae494fde99edfab359621d9e895', 2),
-(7, 'iluljr', 'f174b74b9c79ef717aa9bb2063d9571b', 3),
-(8, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 3);
+(9, 'akuntansi', '1139f90d50ba3bb7ff4b2602ad03aa26', 2),
+(10, 'admin_feb', '21232f297a57a5a743894a0e4a801fc3', 2);
 
 -- --------------------------------------------------------
 
@@ -57,6 +57,7 @@ INSERT INTO `akun` (`id_user`, `username`, `password`, `level`) VALUES
 
 CREATE TABLE `dosen` (
   `id_dosen` int(11) NOT NULL,
+  `id_prodi` int(11) NOT NULL,
   `jumlah_dosen` int(11) NOT NULL,
   `tahun_ajaran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -65,8 +66,34 @@ CREATE TABLE `dosen` (
 -- Dumping data untuk tabel `dosen`
 --
 
-INSERT INTO `dosen` (`id_dosen`, `jumlah_dosen`, `tahun_ajaran`) VALUES
-(1, 32, 5);
+INSERT INTO `dosen` (`id_dosen`, `id_prodi`, `jumlah_dosen`, `tahun_ajaran`) VALUES
+(1, 1, 32, 2020),
+(2, 2, 30, 2020),
+(3, 3, 32, 2020),
+(4, 4, 32, 2020),
+(5, 5, 32, 2020),
+(6, 6, 32, 2020),
+(7, 7, 32, 2020),
+(8, 8, 32, 2020),
+(9, 9, 32, 2020),
+(10, 10, 32, 2020),
+(11, 11, 32, 2020),
+(12, 12, 32, 2020),
+(13, 13, 32, 2020),
+(14, 14, 32, 2020),
+(15, 15, 32, 2020),
+(16, 16, 32, 2020),
+(17, 17, 32, 2020),
+(18, 18, 32, 2020),
+(19, 19, 32, 2020),
+(20, 20, 32, 2020),
+(21, 21, 32, 2020),
+(22, 22, 32, 2020),
+(23, 23, 32, 2020),
+(24, 24, 32, 2020),
+(25, 25, 32, 2020),
+(26, 1, 32, 2019),
+(27, 1, 31, 2018);
 
 -- --------------------------------------------------------
 
@@ -219,7 +246,9 @@ INSERT INTO `tabel_8a` (`id_tabel8a`, `id_prodi`, `tahun_lulus`, `jumlah_lulusan
 (1, 1, 2020, 92, 3.01, 3.39, 3.86),
 (2, 1, 2019, 100, 2.71, 3.35, 3.36),
 (3, 1, 2018, 128, 1.9, 3.2, 3.85),
-(4, 3, 2021, 152, 3.01, 3.39, 4);
+(4, 3, 2021, 152, 3.01, 3.39, 4),
+(6, 1, 2016, 100, 1.9, 3.2, 3.4),
+(7, 1, 2017, 100, 1.9, 3, 3.9);
 
 -- --------------------------------------------------------
 
@@ -242,12 +271,12 @@ CREATE TABLE `tabel_8b` (
 
 INSERT INTO `tabel_8b` (`id_tabel8b`, `id_prodi`, `nama_kegiatan`, `waktu_perolehan`, `id_tingkat`, `prestasi`) VALUES
 (1, 1, 'A', 2020, 1, NULL),
-(2, 1, 'B', 2018, 3, NULL),
-(3, 1, 'C', 2018, 3, NULL),
+(2, 1, 'B', 2018, 1, ''),
+(3, 1, 'C', 2018, 1, ''),
 (4, 1, 'D', 2018, 2, 'Juara 2 Membuat Game sederhana dengan Unity3D'),
 (5, 1, 'A', 2017, 3, ''),
-(6, 1, 'A', 2019, 3, ''),
-(7, 1, 'Lomba Cooding', 2019, 2, '');
+(6, 1, 'A', 2019, 1, ''),
+(7, 1, 'Lomba Cooding', 2019, 3, '');
 
 -- --------------------------------------------------------
 
@@ -275,10 +304,14 @@ CREATE TABLE `tabel_8c` (
 --
 
 INSERT INTO `tabel_8c` (`id_tabel8c`, `tahun_masuk`, `id_prodi`, `mhs_diterima`, `ts_6`, `ts_5`, `ts_4`, `ts_3`, `ts_2`, `ts_1`, `ts`, `rata_studi`) VALUES
-(1, 2020, 1, 134, 0, 0, 0, 0, 0, 0, 11, 4),
-(2, 2019, 1, 174, NULL, NULL, NULL, NULL, NULL, 2, 29, 4.94),
-(3, 2018, 1, 149, NULL, NULL, NULL, NULL, 5, 40, 27, 5.31),
-(4, 2017, 1, 124, NULL, NULL, NULL, 2, 83, 18, 16, 5.4);
+(1, 2017, 1, 134, 0, 0, 0, 0, 0, 0, 11, 4),
+(2, 2016, 1, 174, NULL, NULL, NULL, NULL, NULL, 2, 29, 4.94),
+(3, 2015, 1, 149, 0, 0, 0, 0, 5, 40, 27, 5.31),
+(4, 2014, 1, 124, 0, 0, 0, 2, 83, 18, 16, 5.4),
+(5, 2020, 1, 134, 0, 0, 0, 0, 0, 0, 11, 4),
+(6, 2019, 1, 134, NULL, NULL, NULL, NULL, NULL, NULL, 11, 4),
+(7, 2018, 1, 134, NULL, NULL, NULL, NULL, NULL, NULL, 11, 4),
+(8, 2017, 2, 134, NULL, NULL, NULL, NULL, NULL, NULL, 11, 4);
 
 -- --------------------------------------------------------
 
@@ -315,30 +348,6 @@ INSERT INTO `table_8d1` (`id_table8d1`, `tahun`, `id_prodi`, `jml_lulus`, `jml_l
 (4, 2016, 3, 200, 108, 42, 13, 8, 0, 0, 0, 0, 0, 0, 0),
 (6, 2018, 1, 124, 89, 10, 46, 33, 25, 48, 16, 76, 41, 46, 2),
 (7, 2017, 1, 105, 74, 13, 38, 23, 21, 39, 14, 65, 35, 38, 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tahun_ajaran`
---
-
-CREATE TABLE `tahun_ajaran` (
-  `id_tahun_ajaran` int(11) NOT NULL,
-  `tahun` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tahun_ajaran`
---
-
-INSERT INTO `tahun_ajaran` (`id_tahun_ajaran`, `tahun`) VALUES
-(1, 2016),
-(2, 2017),
-(3, 2018),
-(4, 2019),
-(5, 2020),
-(6, 2015),
-(7, 2014);
 
 -- --------------------------------------------------------
 
@@ -407,14 +416,20 @@ INSERT INTO `user_access_data` (`id`, `akun`, `prodi`) VALUES
 (42, 1, 27),
 (43, 1, 28),
 (44, 1, 29),
-(60, 4, 1),
 (61, 5, 1),
-(62, 6, 3),
-(64, 7, 5),
-(65, 4, 2),
-(67, 4, 3),
-(68, 4, 4),
-(69, 8, 1);
+(71, 6, 3),
+(73, 9, 9),
+(76, 4, 1),
+(77, 4, 2),
+(78, 4, 3),
+(79, 4, 4),
+(80, 4, 5),
+(81, 4, 6),
+(82, 10, 8),
+(83, 10, 9),
+(84, 10, 10),
+(85, 10, 11),
+(86, 10, 12);
 
 -- --------------------------------------------------------
 
@@ -436,8 +451,7 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
 (10, 2, 10),
 (23, 1, 9),
-(26, 1, 2),
-(30, 3, 11);
+(26, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -458,7 +472,6 @@ CREATE TABLE `user_level` (
 INSERT INTO `user_level` (`id`, `level`, `ket`) VALUES
 (1, 'admin', 'Akses level tertinggi'),
 (2, 'Admin prodi', 'Akses level admin prodi'),
-(3, 'User', 'Akses level user'),
 (4, 'Dosen', 'Akses level dosen');
 
 -- --------------------------------------------------------
@@ -551,7 +564,8 @@ ALTER TABLE `akun`
 --
 ALTER TABLE `dosen`
   ADD PRIMARY KEY (`id_dosen`),
-  ADD KEY `dosen_ibfk_1` (`tahun_ajaran`);
+  ADD KEY `dosen_ibfk_1` (`tahun_ajaran`),
+  ADD KEY `prodi_id` (`id_prodi`);
 
 --
 -- Indeks untuk tabel `fakultas`
@@ -610,12 +624,6 @@ ALTER TABLE `table_8d1`
   ADD KEY `id_prodi` (`id_prodi`);
 
 --
--- Indeks untuk tabel `tahun_ajaran`
---
-ALTER TABLE `tahun_ajaran`
-  ADD PRIMARY KEY (`id_tahun_ajaran`);
-
---
 -- Indeks untuk tabel `tingkat_prestasi`
 --
 ALTER TABLE `tingkat_prestasi`
@@ -664,13 +672,13 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `fakultas`
@@ -694,13 +702,13 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT untuk tabel `tabel_2a`
 --
 ALTER TABLE `tabel_2a`
-  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_tabel2a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_8a`
 --
 ALTER TABLE `tabel_8a`
-  MODIFY `id_tabel8a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tabel8a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_8b`
@@ -712,19 +720,13 @@ ALTER TABLE `tabel_8b`
 -- AUTO_INCREMENT untuk tabel `tabel_8c`
 --
 ALTER TABLE `tabel_8c`
-  MODIFY `id_tabel8c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tabel8c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `table_8d1`
 --
 ALTER TABLE `table_8d1`
   MODIFY `id_table8d1` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT untuk tabel `tahun_ajaran`
---
-ALTER TABLE `tahun_ajaran`
-  MODIFY `id_tahun_ajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tingkat_prestasi`
@@ -736,7 +738,7 @@ ALTER TABLE `tingkat_prestasi`
 -- AUTO_INCREMENT untuk tabel `user_access_data`
 --
 ALTER TABLE `user_access_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
@@ -748,7 +750,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -764,7 +766,7 @@ ALTER TABLE `akun`
 -- Ketidakleluasaan untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
-  ADD CONSTRAINT `dosen_ibfk_1` FOREIGN KEY (`tahun_ajaran`) REFERENCES `tahun_ajaran` (`id_tahun_ajaran`);
+  ADD CONSTRAINT `prodi_id` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`);
 
 --
 -- Ketidakleluasaan untuk tabel `prodi`
