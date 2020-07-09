@@ -33,6 +33,7 @@ class admin_prodi extends CI_Controller
 		$data['jumlah_data_MB'] = $this->model_admin_prodi->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
 		$data['table8a_rata']=$this->model_admin_prodi->table8a_rata($data['id_tahun'],$data['id_prodi']);
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin_prodi->tahunsekarang_2b($data['id_tahun']);
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
@@ -55,11 +56,21 @@ class admin_prodi extends CI_Controller
 
 		$data['view_table2a_jumlahmhs'] = $this->model_admin_prodi->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		//view_tabel
+		$data['view_table2a'] = $this->model_admin_prodi->gettable2a($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8a'] = $this->model_admin_prodi->gettable8a($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b'] = $this->model_admin_prodi->gettable8b($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c'] = $this->model_admin_prodi->gettable8c($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8d1'] = $this->model_admin_prodi->gettable8d1($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8d2'] = $this->model_admin_prodi->gettable8d2($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8e1'] = $this->model_admin_prodi->gettable8e1($data['id_tahun'],$data['id_prodi']);
+
+
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/dashboard",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	//table 2a
@@ -93,6 +104,7 @@ class admin_prodi extends CI_Controller
 			}
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table2a'] = $this->model_admin_prodi->gettable2a($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin_prodi->datatable_2a($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data_MA'] = $this->model_admin_prodi->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
@@ -106,12 +118,31 @@ class admin_prodi extends CI_Controller
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 
 		$data['dropdown']=$this->model_log->dropdown()->result();
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/134table_2a",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
+	}
+	public function tambah_dosen()
+	{
+		 $tahun = $this->input->post('tahun');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $jumlah_dosen = $this->input->post('jumlah_dosen');
+
+		 $data = array(
+		 	'tahun_ajaran' => $tahun,
+			'id_prodi' => $id_prodi,
+		 	'jumlah_dosen' => $jumlah_dosen,
+		 );
+		 $this->db->insert('dosen',$data);
+		 if($this->db->affected_rows() > 0){
+			 $data['teks'] = 'Tambah Data Berhasil';
+			 $this->session->set_flashdata($data);
+		 }
+		 echo $this->session->flashdata('teks');
+		 redirect('admin_prodi/table_2a');
 	}
 
 	public function tambah_data2a()
@@ -150,18 +181,16 @@ class admin_prodi extends CI_Controller
 	public function edit_tabel2a($id)
 	{
 		$data['judul'] = 'Table 2.a';
-		$where = array('id_tabel2a' => $id );
-		$data['tabel_2a'] = $this->model_admin_prodi->edit_data($where,'tabel_2a')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$where = array('id_tabel2a' => $id );
+		$data['tabel_2a'] = $this->model_admin_prodi->edit_data($where,'tabel_2a')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel2a', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function edit_tabel2a_dosen($id)
 	{
@@ -229,18 +258,19 @@ class admin_prodi extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$data['view_table2a'] = $this->model_admin_prodi->gettable2b($data['id_tahun']);
-		$data['view_table2a_min1'] = $this->model_admin_prodi->gettable2b_min1($data['id_tahun']);
-		$data['view_table2a_min2'] = $this->model_admin_prodi->gettable2b_min2($data['id_tahun']);
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b'] = $this->model_admin_prodi->gettable2b($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b_min1'] = $this->model_admin_prodi->gettable2b_min1($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b_min2'] = $this->model_admin_prodi->gettable2b_min2($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin_prodi->tahunsekarang_2b($data['id_tahun']);
-		$data['view_table2a_jumlahmhs'] = $this->model_admin_prodi->gettable2b_jumlahmhs($data['id_tahun']);
+		$data['view_table2b_jumlahmhs'] = $this->model_admin_prodi->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 2.b';
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/2table_2b",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
 	}
 
@@ -248,17 +278,15 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('tahun' => $tahun );
 		$data['judul'] = 'Table 2.b';
-		$data['tabel_2a'] = $this->model_admin_prodi->edit_data($where,'tabel_2a')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['tabel_2a'] = $this->model_admin_prodi->edit_data($where,'tabel_2a')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel2b', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	public function update_tabel2b()
@@ -293,6 +321,7 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8a'] = $this->model_admin_prodi->gettable8a($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin_prodi->tahunsekarang_2b($data['id_tahun']);
 		$data['table8a_rata']=$this->model_admin_prodi->table8a_rata($data['id_tahun'],$data['id_prodi']);
@@ -302,11 +331,11 @@ class admin_prodi extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/5table_8a",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
 	}
 	public function tambah_data8a()
@@ -328,7 +357,7 @@ class admin_prodi extends CI_Controller
 		 	'ipk_max' => $ipk_max,
 		 );
 		 $this->db->insert('tabel_8a',$data);
-		 redirect('admin/table_8a');
+		 redirect('admin_prodi/table_8a');
 	}
 	public function hapus_tabel8a($id)
 	{
@@ -341,17 +370,15 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('id_tabel8a' => $id );
 		$data['judul'] = 'Table 8.a';
-		$data['tabel_8a'] = $this->model_admin_prodi->edit_data($where,'tabel_8a')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['tabel_8a'] = $this->model_admin_prodi->edit_data($where,'tabel_8a')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8a', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function update_tabel8a()
 	{
@@ -389,6 +416,7 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8b'] = $this->model_admin_prodi->gettable8b($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin_prodi->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table8b_jumlah_NI'] = $this->model_admin_prodi->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
@@ -401,13 +429,13 @@ class admin_prodi extends CI_Controller
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['judul'] = 'Table 8.b';
-		$data['jumlah_data_MA'] = $this->model_admin_prodi->datatable_2a_MA();
+		$data['jumlah_data_MA'] = $this->model_admin_prodi->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/5table_8b",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function tambah_data8b()
 	{
@@ -433,18 +461,16 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('id_tabel8b' => $id );
 		$data['judul'] = 'Table 8.b';
-		$data['tabel_8b'] = $this->model_admin_prodi->edit_data($where,'tabel_8b')->result();
-		$data['tingkat']=$this->model_log->tingkat()->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['tabel_8b'] = $this->model_admin_prodi->edit_data($where,'tabel_8b')->result();
+		$data['tingkat']=$this->model_log->tingkat()->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8b', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function update_tabel8b()
 	{
@@ -464,6 +490,12 @@ class admin_prodi extends CI_Controller
 		$this->model_admin_prodi->update_data($where,$data,'tabel_8b');
 		redirect('admin_prodi/table_8b');
 	}
+	public function hapus_tabel8b($id)
+	{
+		$where = array('id_tabel8b' => $id);
+		$this->model_admin_prodi->hapus_data($where,'tabel_8b');
+		redirect('admin_prodi/table_8b');
+	}
 
 	//table 8c
 	public function table_8c()
@@ -480,8 +512,10 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c'] = $this->model_admin_prodi->gettable8c($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml'] = $this->model_admin_prodi->gettable8c_jml_rata($data['id_tahun'],$data['id_prodi']);
+		$data['tahunsekarang_2b']=$this->model_admin_prodi->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table8c_jml_ts3'] = $this->model_admin_prodi->gettable8c_jml_ts3($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin_prodi->gettable8c_jml_ts3_ts6($data['id_tahun'],$data['id_prodi']);
 		$data['tahun_ms'] = $this->model_admin_prodi->tahun_ms($data['id_tahun'],$data['id_prodi']);
@@ -492,11 +526,11 @@ class admin_prodi extends CI_Controller
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['judul'] = 'Table 8.c';
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/7table_8c",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	public function tambah_data8c()
@@ -533,18 +567,16 @@ class admin_prodi extends CI_Controller
 	public function edit_tabel8c($id)
 	{
 		$where = array('id_tabel8c' => $id );
-		$data['tabel_8c'] = $this->model_admin_prodi->edit_data($where,'tabel_8c')->result();
 		$data['judul'] = 'Table 8.c';
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['tabel_8c'] = $this->model_admin_prodi->edit_data($where,'tabel_8c')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8c', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	public function update_tabel8c()
@@ -600,6 +632,7 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8d1'] = $this->model_admin_prodi->gettable8d1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin_prodi->datatable_8d1($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.d.1';
@@ -609,11 +642,11 @@ class admin_prodi extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/10table_8d1",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
 	}
 
@@ -628,17 +661,15 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.d.1';
-		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8d1', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function update_table8d1()
 	{
@@ -702,6 +733,7 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8d2'] = $this->model_admin_prodi->gettable8d2($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin_prodi->datatable_8d2($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.d.2';
@@ -711,11 +743,11 @@ class admin_prodi extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/11table_8d2",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
 	}
 
@@ -754,17 +786,15 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.d.2';
-		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8d2', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function update_table8d2()
 	{
@@ -804,6 +834,7 @@ class admin_prodi extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin_prodi->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8e1'] = $this->model_admin_prodi->gettable8e1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin_prodi->datatable_8e1($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.e.1';
@@ -813,11 +844,11 @@ class admin_prodi extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view("admin_prodi/12table_8e1",$data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 
 	}
 
@@ -858,17 +889,15 @@ class admin_prodi extends CI_Controller
 	{
 		$where = array('id_table8d1' => $id );
 		$data['judul'] = 'Table 8.e.1';
-		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
-
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-
-		$this->load->view("admin_prodi/layout/header_admin");
+		$data['table_8d1'] = $this->model_admin_prodi->edit_data($where,'table_8d1')->result();
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/edit_tabel8e1', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 	public function update_table8e1()
 	{
@@ -904,7 +933,7 @@ class admin_prodi extends CI_Controller
 		$data['judul'] = 'Manajemen User';
 		$data['user'] = $this->db->get_where('akun', ['username' => $this->session->userdata('username')])->row_array();
 		$data['profil'] = $data['user'];
-		$data['profil']['nama'] = 'administrator';
+		$data['profil']['nama'] = 'admin_prodiistrator';
 		$data['profil']['gambar'] = 'default.jpg';
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
@@ -925,11 +954,11 @@ class admin_prodi extends CI_Controller
 		$this->db->from('akun');
 		$config['total_rows'] = $this->db->count_all_results();
 		$data['total_rows'] = $config['total_rows'];
-		//$config['base_url'] = 'http://localhost/Siami-UTM/admin/user_akun';
+		$config['base_url'] = 'http://localhost/Siami-UTM/admin_prodi/user_akun';
 
 		$config['per_page'] = 5;
 
-		//$this->pagination->initialize($config);
+		$this->pagination->initialize($config);
 
 		if ($this->uri->segment(3) !== null) {
 			$data['start'] = $this->uri->segment(3);
@@ -939,11 +968,11 @@ class admin_prodi extends CI_Controller
 
 		$data['users'] = $this->userM->getUsers($config['per_page'], $data['start'], $data['keyword'], $data['user']['level']);
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/user_akun', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	public function tambah_akun()
@@ -1002,11 +1031,11 @@ class admin_prodi extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 
-			$this->load->view("admin/layout/header_admin");
-			$this->load->view("admin/layout/sidebar",$data);
-			$this->load->view("admin/layout/topbar_admin");
-			$this->load->view('admin/level', $data);
-			$this->load->view("admin/layout/footer_admin");
+			$this->load->view("admin_prodi/layout/header_admin_prodi");
+			$this->load->view("admin_prodi/layout/sidebar",$data);
+			$this->load->view("admin_prodi/layout/topbar_admin_prodi");
+			$this->load->view('admin_prodi/level', $data);
+			$this->load->view("admin_prodi/layout/footer_admin_prodi");
 		} else {
 			$this->db->insert('user_level', ['level' => $this->input->post('level')]);
 			$this->session->set_flashdata('pesan', 'Level baru berhasil ditambahkan');
@@ -1023,14 +1052,14 @@ class admin_prodi extends CI_Controller
 		$this->db->where('id', $id);
 		$this->db->update('user_level', $data);
 		$this->session->set_flashdata('pesan', 'Edit data Level');
-		redirect('administrator/level');
+		redirect('admin_prodiistrator/level');
 	}
 
 	public function delete_lvl($id)
 	{
 		$this->db->delete('user_level', array('id' => $id));
 		$this->session->set_flashdata('pesan', 'Level berhasil dihapus');
-		redirect('administrator/level');
+		redirect('admin_prodiistrator/level');
 	}
 
 	public function levelakses($id)
@@ -1046,11 +1075,11 @@ class admin_prodi extends CI_Controller
 		$data['user'] = $this->db->get_where('akun', ['id_user' => $id])->row_array();
 		$data['menu'] = $this->db->get('prodi')->result_array();
 
-		$this->load->view("admin_prodi/layout/header_admin");
+		$this->load->view("admin_prodi/layout/header_admin_prodi");
 		$this->load->view("admin_prodi/layout/sidebar",$data);
-		$this->load->view("admin_prodi/layout/topbar_admin");
+		$this->load->view("admin_prodi/layout/topbar_admin_prodi");
 		$this->load->view('admin_prodi/level-akses', $data);
-		$this->load->view("admin_prodi/layout/footer_admin");
+		$this->load->view("admin_prodi/layout/footer_admin_prodi");
 	}
 
 	public function rubahakses()

@@ -76,9 +76,17 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table8d1)) : ?>
+            <?php if (empty($pilih_data)) : ?>
   						<tr>
-  							<td colspan="12">
+  							<td colspan="7">
+  								<div class="alert alert-primary" role="alert">
+  									Silahkan Pilih Prodi terlebih dahulu!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8d1)) : ?>
+  						<tr>
+  							<td colspan="7">
   								<div class="alert alert-danger" role="alert">
   									Data not found!
   								</div>
@@ -117,6 +125,13 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
     <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
@@ -204,6 +219,7 @@
         </tr>
       </table>
       <?php endforeach;?>
+      <?php endif; ?>
     </br>
     <p>Ketentuan persentase responden lulusan:
         <br>- untuk program studi dengan jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) ≥ 300 orang, maka Prmin = 30%.
@@ -250,7 +266,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <<option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>

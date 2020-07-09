@@ -16,7 +16,9 @@
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                <option value="" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <?php foreach ($tahunsekarang_2b as $ts):?>
+                  <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
               ?>
@@ -76,9 +78,17 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table8e1)) : ?>
+            <?php if (empty($pilih_data)) : ?>
   						<tr>
-  							<td colspan="12">
+  							<td colspan="7">
+  								<div class="alert alert-primary" role="alert">
+  									Silahkan Pilih Prodi terlebih dahulu!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8e1)) : ?>
+  						<tr>
+  							<td colspan="7">
   								<div class="alert alert-danger" role="alert">
   									Data not found!
   								</div>
@@ -119,6 +129,13 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
     <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
@@ -230,6 +247,7 @@
         </tr>
       </table>
       <?php endforeach;?>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -265,7 +283,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>

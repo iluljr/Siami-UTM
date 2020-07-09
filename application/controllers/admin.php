@@ -33,6 +33,7 @@ class admin extends CI_Controller
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
 		$data['table8a_rata']=$this->model_admin->table8a_rata($data['id_tahun'],$data['id_prodi']);
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['dropdown']=$this->model_log->dropdown()->result();
 		$data['id_akses'] = $this->session->userdata('id_user');
@@ -54,6 +55,16 @@ class admin extends CI_Controller
 		$data['jumlah_data_8e'] = $this->model_admin->datatable_8e1($data['id_tahun'],$data['id_prodi']);
 
 		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
+
+		//view_tabel
+		$data['view_table2a'] = $this->model_admin->gettable2a($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8a'] = $this->model_admin->gettable8a($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8b'] = $this->model_admin->gettable8b($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8c'] = $this->model_admin->gettable8c($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8d1'] = $this->model_admin->gettable8d1($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8d2'] = $this->model_admin->gettable8d2($data['id_tahun'],$data['id_prodi']);
+		$data['view_table8e1'] = $this->model_admin->gettable8e1($data['id_tahun'],$data['id_prodi']);
+
 
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -148,6 +159,25 @@ class admin extends CI_Controller
 		 echo $this->session->flashdata('teks');
 		 redirect('admin/table_2a');
 	}
+	public function tambah_dosen()
+	{
+		 $tahun = $this->input->post('tahun');
+		 $id_prodi = $this->input->post('id_prodi');
+		 $jumlah_dosen = $this->input->post('jumlah_dosen');
+
+		 $data = array(
+		 	'tahun_ajaran' => $tahun,
+			'id_prodi' => $id_prodi,
+		 	'jumlah_dosen' => $jumlah_dosen,
+		 );
+		 $this->db->insert('dosen',$data);
+		 if($this->db->affected_rows() > 0){
+			 $data['teks'] = 'Tambah Data Berhasil';
+			 $this->session->set_flashdata($data);
+		 }
+		 echo $this->session->flashdata('teks');
+		 redirect('admin/table_2a');
+	}
 	public function edit_tabel2a($id)
 	{
 		$data['judul'] = 'Table 2.a';
@@ -228,11 +258,12 @@ class admin extends CI_Controller
 		$data['id_akses'] = $this->session->userdata('id_user');
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
-		$data['view_table2a'] = $this->model_admin->gettable2b($data['id_tahun']);
-		$data['view_table2a_min1'] = $this->model_admin->gettable2b_min1($data['id_tahun']);
-		$data['view_table2a_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun']);
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b'] = $this->model_admin->gettable2b($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b_min1'] = $this->model_admin->gettable2b_min1($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2b_min2'] = $this->model_admin->gettable2b_min2($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
-		$data['view_table2a_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun']);
+		$data['view_table2b_jumlahmhs'] = $this->model_admin->gettable2b_jumlahmhs($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 2.b';
 
 		$this->load->view("admin/layout/header_admin");
@@ -385,6 +416,7 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8b'] = $this->model_admin->gettable8b($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table8b_jumlah_NI'] = $this->model_admin->gettable8b_jumlah_NI($data['id_tahun'],$data['id_prodi']);
@@ -397,7 +429,7 @@ class admin extends CI_Controller
 		$data['prodi']=$this->model_log->prodi($data['id_akses']);
 		$data['fakultas']=$this->model_log->fakultas($data['id_akses']);
 		$data['judul'] = 'Table 8.b';
-		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA();
+		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
 
 		$this->load->view("admin/layout/header_admin");
 		$this->load->view("admin/layout/sidebar",$data);
@@ -458,6 +490,12 @@ class admin extends CI_Controller
 		$this->model_admin->update_data($where,$data,'tabel_8b');
 		redirect('admin/table_8b');
 	}
+	public function hapus_tabel8b($id)
+	{
+		$where = array('id_tabel8b' => $id);
+		$this->model_admin->hapus_data($where,'tabel_8b');
+		redirect('admin/table_8b');
+	}
 
 	//table 8c
 	public function table_8c()
@@ -474,8 +512,10 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c'] = $this->model_admin->gettable8c($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml'] = $this->model_admin->gettable8c_jml_rata($data['id_tahun'],$data['id_prodi']);
+		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['view_table8c_jml_ts3'] = $this->model_admin->gettable8c_jml_ts3($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8c_jml_ts3_ts6'] = $this->model_admin->gettable8c_jml_ts3_ts6($data['id_tahun'],$data['id_prodi']);
 		$data['tahun_ms'] = $this->model_admin->tahun_ms($data['id_tahun'],$data['id_prodi']);
@@ -592,6 +632,7 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8d1'] = $this->model_admin->gettable8d1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8d1($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.d.1';
@@ -692,6 +733,7 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8d2'] = $this->model_admin->gettable8d2($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8d2($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.d.2';
@@ -792,6 +834,7 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8e1'] = $this->model_admin->gettable8e1($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data'] = $this->model_admin->datatable_8e1($data['id_tahun'],$data['id_prodi']);
 		$data['judul'] = 'Table 8.e.1';

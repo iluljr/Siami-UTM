@@ -12,12 +12,12 @@
       <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_8a'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Ajaran :</td>
+          <td align="right">Tahun Sekarang :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -32,11 +32,11 @@
           <td>
             <div class="">
               <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
-              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
+              <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
-                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
               <?php endforeach;?>
             </select>
           </div>
@@ -77,6 +77,23 @@
             </tr>
           </thead>
           <tbody>
+            <?php if (empty($pilih_data)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-primary" role="alert">
+  										Silahkan pilih tahun dan Tampil data untuk menampilkan data!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8a)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             foreach ($view_table8a as $tb) :
             ?>
@@ -96,12 +113,19 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
       <table class="">
         <tr>
           <?php foreach ($table8a_rata as $jml) : ?>
           <td>Rata-rata</td>
           <td>:</td>
-          <td><?= $jml['IPK_rata']?></td>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jml['IPK_rata']?></td>
           <?php endforeach;?>
         </tr>
         <tr>
@@ -109,6 +133,7 @@
           <td></td>
         </tr>
       </table>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -144,11 +169,11 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>
-                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
                   <?php endforeach;?>
                 </select>
   					</div>

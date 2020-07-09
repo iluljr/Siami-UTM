@@ -113,16 +113,19 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
       <table class="">
         <tr>
           <?php foreach ($table8a_rata as $jml) : ?>
           <td>Rata-rata</td>
           <td>:</td>
-          <?php if ($jml['IPK_rata']==0) : ?>
-            <td>&nbsp;</td>
-          <?php else: ?>
             <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jml['IPK_rata']?></td>
-          <?php endif; ?>
           <?php endforeach;?>
         </tr>
         <tr>
@@ -130,6 +133,7 @@
           <td></td>
         </tr>
       </table>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -165,7 +169,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>

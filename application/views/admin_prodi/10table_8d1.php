@@ -32,11 +32,11 @@
           <td>
             <div class="">
               <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
-              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
+              <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
-                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
               <?php endforeach;?>
             </select>
           </div>
@@ -76,9 +76,17 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table8d1)) : ?>
+            <?php if (empty($pilih_data)) : ?>
   						<tr>
-  							<td colspan="12">
+  							<td colspan="7">
+  								<div class="alert alert-primary" role="alert">
+  										Silahkan pilih tahun dan Tampil data untuk menampilkan data!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8d1)) : ?>
+  						<tr>
+  							<td colspan="7">
   								<div class="alert alert-danger" role="alert">
   									Data not found!
   								</div>
@@ -117,6 +125,13 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
     <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
@@ -164,7 +179,7 @@
         </tr>
         <tr>
           <td colspan="2">&nbsp;</td>
-          <td>IKU No.11</td>
+          <td>IKU No.10</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
           <?php if ($jd['wt_6']==0) : ?>
@@ -176,11 +191,11 @@
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
-          <td colspan="2">Jika PBS < 60% , tuliskan 0</td>
+          <td colspan="2">Jika WT < 100% , tuliskan 0</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
-          <td colspan="2">Jika PBS >= 60%  tuliskan nilainya</td>
+          <td colspan="2">Jika WT >= 100%  tuliskan nilainya</td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -204,6 +219,7 @@
         </tr>
       </table>
       <?php endforeach;?>
+      <?php endif; ?>
     </br>
     <p>Ketentuan persentase responden lulusan:
         <br>- untuk program studi dengan jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) ≥ 300 orang, maka Prmin = 30%.
@@ -250,11 +266,11 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>
-                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
                   <?php endforeach;?>
                 </select>
   					</div>

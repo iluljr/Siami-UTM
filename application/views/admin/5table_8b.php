@@ -80,7 +80,15 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table8b)) : ?>
+            <?php if (empty($pilih_data)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-primary" role="alert">
+  									Silahkan Pilih Prodi terlebih dahulu!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8b)) : ?>
   						<tr>
   							<td colspan="12">
   								<div class="alert alert-danger" role="alert">
@@ -133,6 +141,13 @@
         </table>
       </div>
     </br>
+      <?php if (empty($pilih_data)) : ?>
+        <tr>
+          <td colspan="12">
+            &nbsp;
+          </td>
+        </tr>
+      <?php else: ?>
       <table class="">
         <tr>
           <?php foreach ($jumlah_data_MA as $jd2): ?>
@@ -233,6 +248,7 @@
           <td colspan="3">Jika RI ≥IKU, tuliskan nilainya</td>
         </tr>
       </table>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -274,7 +290,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>

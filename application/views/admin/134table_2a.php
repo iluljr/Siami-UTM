@@ -155,6 +155,7 @@
           <?php endif; ?>
         <?php endforeach;?>
         <td></td>
+        <td></td>
         <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
       </tr>
       <tr>
@@ -170,6 +171,7 @@
           <?php foreach ($jumlah_dosen as $jdosen): ?>
           <td align="center"><?= $jdosen['jumlah_dosen']?></td>
           <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+          <td align="center"><a href="" data-toggle="modal" data-target="#databaru_dosen" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i></td>
           <?php endforeach;?>
       </tr>
       <tr>
@@ -180,6 +182,7 @@
               <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
             <?php endforeach;?>
           <?php endforeach;?>
+          <td></td>
           <td></td>
         <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
       </tr>
@@ -196,6 +199,7 @@
                 <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
               <?php endforeach;?>
             <?php endforeach;?>
+            <td></td>
             <td></td>
             <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
       </tr>
@@ -235,7 +239,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>
@@ -270,6 +274,55 @@
             <input type="text" class="form-control mb-2" name="regulera" id="regulera" placeholder="Reguler" required>
             <input type="text" class="form-control" name="transfera" id="transfera" placeholder="Transfer" required>
           </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal Tambah Dosen -->
+<div class="modal fade" id="databaru_dosen" tabindex="-1" role="dialog" aria-labelledby="DataBaru_dosen" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data dosen Tetap PS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin/tambah_dosen'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukan Tahun Ajaran
+            </div>
+						<input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun Ajaran" required>
+					</div>
+          <div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                  <?php endforeach;?>
+                </select>
+  					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah dosen
+            </div>
+						<input type="text" class="form-control" name="jumlah_dosen" id="jumlah_dosen" placeholder="Jumlah Dosen" required>
+					</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Tambah</button>

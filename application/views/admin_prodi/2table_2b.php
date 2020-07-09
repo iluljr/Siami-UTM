@@ -11,12 +11,12 @@
       <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_2b'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Ajaran :</td>
+          <td align="right">Tahun Sekarang :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -31,11 +31,11 @@
           <td>
             <div class="">
               <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
-              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
+              <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
-                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
               <?php endforeach;?>
             </select>
           </div>
@@ -94,18 +94,26 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table2a)) : ?>
+            <?php if (empty($pilih_data)) : ?>
   						<tr>
-  							<td colspan="12">
+  							<td colspan="14">
+  								<div class="alert alert-primary" role="alert">
+  											Silahkan pilih tahun dan Tampil data untuk menampilkan data!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table2b)) : ?>
+  						<tr>
+  							<td colspan="14">
   								<div class="alert alert-danger" role="alert">
   									Data not found!
   								</div>
   							</td>
   						</tr>
   					<?php endif; ?>
-            <?php foreach ($view_table2a as $tb) : ?>
-              <?php foreach ($view_table2a_min1 as $tb1) : ?>
-                <?php foreach ($view_table2a_min2 as $tb2) : ?>
+            <?php foreach ($view_table2b as $tb) : ?>
+              <?php foreach ($view_table2b_min1 as $tb1) : ?>
+                <?php foreach ($view_table2b_min2 as $tb2) : ?>
             <tr align="center">
               <td> </td>
               <td><?= $tb['nama_prodi']?></td>
@@ -128,7 +136,7 @@
           <?php endforeach;?>
           </tbody>
           <tfoot>
-            <?php foreach ($view_table2a_jumlahmhs as $jmblh) : ?>
+            <?php foreach ($view_table2b_jumlahmhs as $jmblh) : ?>
             <tr align="center">
               <th colspan="2">Total</th>
               <th colspan="3"><?= $jmblh['jmblh_jma_reg']?></th>
@@ -141,8 +149,15 @@
         </table>
       </div>
     </br>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+    <?php else: ?>
       <table class="">
-        <?php foreach ($view_table2a_jumlahmhs as $jmblh) : ?>
+        <?php foreach ($view_table2b_jumlahmhs as $jmblh) : ?>
         <tr>
           <td>Jumlah Mahasiswa Asing</td>
           <td>:</td>
@@ -156,12 +171,17 @@
         <tr>
           <td>Persentase mahasiswa asing dan total mahasiswa</td>
           <td >:</td>
-          <td align="center" bgcolor="#00FF00"><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
+          <?php if(empty($tss['jmb'])) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00"><?= ($jmblh['jmblh_jma_penuh']+$jmblh['jmblh_jma_paruh'])/$jmblh['jmblh_jma_reg']?></td>
+          <?php endif; ?>
           <td width="100px"></td>
           <td align="center" bgcolor="#FAEBD7">IKU No.2</td>
         </tr>
         <?php endforeach;?>
       </table>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>

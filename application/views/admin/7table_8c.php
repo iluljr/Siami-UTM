@@ -13,7 +13,9 @@
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                <option value="" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <?php foreach ($tahunsekarang_2b as $ts):?>
+                  <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
               ?>
@@ -55,18 +57,18 @@
               <th rowspan="2">Tahun Masuk</th>
               <th rowspan="2">Jumlah Mahasiswa Diterima</th>
               <th colspan="7">Jumlah Mahasiswa Yang Lulus Pada</th>
-              <th rowspan="2">Jumlah Lulusan s.d. akhir <?= $ts['tahun_masuk']?></th>
+              <th rowspan="2">Jumlah Lulusan s.d. akhir <?= $ts['tahun_masuk']+3?></th>
               <th rowspan="2">Rata-rata Masa Studi</th>
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
-              <th>Akhir<br><?= $ts['tahun_masuk']-6?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']-5?></th>
-              <th>Akhir<br><?= $ts['tahun_masuk']-4?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-3?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-2?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']-1?></th>
               <th>Akhir<br><?= $ts['tahun_masuk']?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+1?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+2?></th>
+              <th>Akhir<br><?= $ts['tahun_masuk']+3?></th>
               <?php endforeach;?>
             </tr>
             <tr align="center">
@@ -86,12 +88,29 @@
             </tr>
           </thead>
           <tbody>
+            <?php if (empty($pilih_data)) : ?>
+  						<tr>
+  							<td colspan="13">
+  								<div class="alert alert-primary" role="alert">
+  									Silahkan Pilih Prodi terlebih dahulu!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table8c)) : ?>
+  						<tr>
+  							<td colspan="13">
+  								<div class="alert alert-danger" role="alert">
+  									Data not found!
+  								</div>
+  							</td>
+  						</tr>
+  					<?php endif; ?>
             <?php
             $n = 0;
             foreach ($view_table8c as $tb) :
             ?>
             <tr align="center">
-              <td><?= $tb['tahun_masuk']-3?></td>
+              <td><?= $tb['tahun_masuk']?></td>
               <td><?= $tb['mhs_diterima']?></td>
               <td><?= $tb['ts_6']?></td>
               <td><?= $tb['ts_5']?></td>
@@ -123,6 +142,13 @@
         </table>
       </div>
     </br>
+      <?php if (empty($pilih_data)) : ?>
+        <tr>
+          <td colspan="12">
+            &nbsp;
+          </td>
+        </tr>
+      <?php else: ?>
       <table class="">
         <tr>
           <?php foreach ($view_table8c_jml_ts3 as $ts3) : ?>
@@ -217,7 +243,11 @@
               <td colspan="3">&nbsp;</td>
               <<td>Persentase Keberhasislan Studi</td>
               <td>:</td>
+              <?php if(empty($tss['jmb'])) : ?>
+                <td>&nbsp;</td>
+              <?php else: ?>
               <td align="center"><?= ((($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+($tss['jmb6'])+($tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']))*0.5))/$tb['jumlah_mhs'])*100?></td>
+              <?php endif; ?>
               <td>(B+C)/A</td>
             <?php endforeach;?>
           <?php endforeach;?>
@@ -235,7 +265,11 @@
               <td align="center" bgcolor="#FAEBD7">IKU No. 9</td>
               <td>Pemenuhan IKU </td>
               <td>:</td>
+              <?php if(empty($tss['jmb'])) : ?>
+                <td>&nbsp;</td>
+              <?php else: ?>
               <td bgcolor="#00FF00" align="center"><?= ((($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+($tss['jmb6'])+($tb['jumlah_mhs']-($tss['jmb']+$tss['jmb1']+$tss['jmb2']+$tss['jmb3']+$tss['jmb4']+$tss['jmb5']+$tss['jmb6']))*0.5))/$tb['jumlah_mhs'])*100?></td>
+              <?php endif; ?>
               <td align="right">85%</td>
             <?php endforeach;?>
           <?php endforeach;?>
@@ -249,6 +283,7 @@
           <td colspan="2">Jika PPS >=85%  tuliskan nilainya </td>
         </tr>
       </table>
+      <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -290,7 +325,7 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>

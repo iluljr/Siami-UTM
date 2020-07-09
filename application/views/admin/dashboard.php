@@ -12,7 +12,9 @@
             <td>
               <div class="">
                 <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                  <option value="" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                  <?php foreach ($tahunsekarang_2b as $ts):?>
+                    <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                  <?php endforeach;?>
                 <?php
                   foreach ($dropdown as $dd):
                 ?>
@@ -62,6 +64,79 @@
               </tr>
             </thead>
             <tbody>
+              <?php if (empty($pilih_data)) : ?>
+    						<tr>
+    							<td colspan="11">
+    								<div class="alert alert-primary" role="alert">
+    									Silahkan Pilih Prodi terlebih dahulu!
+    								</div>
+    							</td>
+    						</tr>
+            <?php elseif (empty($view_table2a)) : ?>
+    						<tr>
+    							<td colspan="11">
+    								<div class="alert alert-danger" role="alert">
+    									Data tabel2a pada tahun dan prodi yang dipilih belum terisi data !
+    								</div>
+    							</td>
+    						</tr>
+            <?php elseif (empty($jumlah_dosen)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-warning" role="alert">
+                        Pada tabel2a jumlah dosen pada tahun atau prodi yang di pilih belum terinput !
+                      </div>
+                    </td>
+                </tr>
+            <?php elseif (empty($view_table8a)) : ?>
+      						<tr>
+      							<td colspan="11">
+      								<div class="alert alert-success" role="alert">
+      									Semua Data tabel8a pada tahun dan prodi yang dipilih belum terisi data !
+      								</div>
+      							</td>
+      						</tr>
+            <?php elseif (empty($view_table8b)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-success" role="alert">
+                        Semua Data tabel8b pada tahun dan prodi yang dipilih belum terisi data !
+                      </div>
+                    </td>
+                  </tr>
+            <?php elseif (empty($view_table8c)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-success" role="alert">
+                        Semua Data tabel8c pada tahun dan prodi yang dipilih belum terisi data !
+                      </div>
+                    </td>
+                  </tr>
+            <?php elseif (empty($view_table8d1)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-success" role="alert">
+                        Semua Data tabel8d1 pada tahun dan prodi yang dipilih belum terisi data !
+                      </div>
+                    </td>
+                  </tr>
+            <?php elseif (empty($view_table8d2)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-success" role="alert">
+                        Semua Data tabel8d2 pada tahun dan prodi yang dipilih belum terisi data !
+                      </div>
+                    </td>
+                  </tr>
+            <?php elseif (empty($view_table8e1)) : ?>
+                  <tr>
+                    <td colspan="11">
+                      <div class="alert alert-success" role="alert">
+                        Semua Data tabel8e1 pada tahun dan prodi yang dipilih belum terisi data !
+                      </div>
+                    </td>
+                  </tr>
+    				<?php else: ?>
               <tr>
                 <?php foreach ($jumlah_data as $jd): ?>
                   <td>1</td>
@@ -364,6 +439,7 @@
 
                 <td></td>
               </tr>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>

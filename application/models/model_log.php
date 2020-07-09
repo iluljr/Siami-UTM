@@ -44,9 +44,6 @@ class model_log extends CI_Model
 		elseif($lvl == 2){
 			redirect('admin_prodi');
 		}
-		elseif($lvl == 3){
-			redirect('user');
-		}
 		}
 		else{
 			redirect('auth');

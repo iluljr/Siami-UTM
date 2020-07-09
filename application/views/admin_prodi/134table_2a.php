@@ -12,12 +12,12 @@
       <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_2a'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Ajaran :</td>
+          <td align="right">Tahun Sekarang :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -32,11 +32,11 @@
           <td>
             <div class="">
               <select name="id_prodi" id="dropdown" class="custom-select custom-select-sm">
-              <option value="1" class="dropdown-item" selected> - pilih program studi - </option>
+              <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
               <?php
                 foreach ($prodi as $ps):
               ?>
-                <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
               <?php endforeach;?>
             </select>
           </div>
@@ -83,7 +83,15 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table2a)) : ?>
+  					<?php if (empty($pilih_data)) : ?>
+  						<tr>
+  							<td colspan="12">
+  								<div class="alert alert-primary" role="alert">
+  									Silahkan pilih tahun dan Tampil data untuk menampilkan data!
+  								</div>
+  							</td>
+  						</tr>
+          <?php elseif (empty($view_table2a)) : ?>
   						<tr>
   							<td colspan="12">
   								<div class="alert alert-danger" role="alert">
@@ -128,63 +136,75 @@
         </table>
       </div>
     </br>
-      <table class="">
-        <tr>
-          <?php foreach ($jumlah_data as $jd): ?>
-            <td>Rasio pendaftar dan mahasiswa baru</td>
-            <td>:</td>
-            <?php if ($jd['pendaftar']==0) : ?>
-              <td>&nbsp;</td>
-            <?php else: ?>
-              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
-            <?php endif; ?>
+    <?php if (empty($pilih_data)) : ?>
+      <tr>
+        <td colspan="12">
+          &nbsp;
+        </td>
+      </tr>
+  <?php else: ?>
+    <table class="">
+      <tr>
+        <?php foreach ($jumlah_data as $jd): ?>
+          <td>Rasio pendaftar dan mahasiswa baru</td>
+          <td>:</td>
+          <?php if ($jd['pendaftar']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
+          <?php endif; ?>
+        <?php endforeach;?>
+        <td></td>
+        <td></td>
+        <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
+      </tr>
+      <tr>
+          <td>Jumlah Mahasiswa Aktif</td>
+          <td>: </td>
+          <?php foreach ($jumlah_data_MA as $jd2): ?>
+          <td align="center"><?= $jd2['mahasiswa_aktif']?></td>
+          <?php endforeach;?>
+      </tr>
+      <tr>
+          <td>Jumlah Dosen Tetap PS</td>
+          <td>: </td>
+          <?php foreach ($jumlah_dosen as $jdosen): ?>
+          <td align="center"><?= $jdosen['jumlah_dosen']?></td>
+          <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+          <td align="center"><a href="" data-toggle="modal" data-target="#databaru_dosen" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i></td>
+          <?php endforeach;?>
+      </tr>
+      <tr>
+          <td>Rasio Dosen dan Mahasiswa</td>
+          <td>: </td>
+          <?php foreach ($jumlah_data_MA as $jd2): ?>
+            <?php foreach ($jumlah_dosen as $jdosen): ?>
+              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
+            <?php endforeach;?>
           <?php endforeach;?>
           <td></td>
-          <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
-        </tr>
-        <tr>
-            <td>Jumlah Mahasiswa Aktif</td>
-            <td>: </td>
-            <?php foreach ($jumlah_data_MA as $jd2): ?>
-            <td align="center"><?= $jd2['mahasiswa_aktif']?></td>
-            <?php endforeach;?>
-        </tr>
-        <tr>
-            <td>Jumlah Dosen Tetap PS</td>
-            <td>: </td>
-            <?php foreach ($jumlah_dosen as $jdosen): ?>
-            <td align="center"><?= $jdosen['jumlah_dosen']?></td>
-            <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-            <?php endforeach;?>
-        </tr>
-        <tr>
-            <td>Rasio Dosen dan Mahasiswa</td>
-            <td>: </td>
-            <?php foreach ($jumlah_data_MA as $jd2): ?>
-              <?php foreach ($jumlah_dosen as $jdosen): ?>
-                <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
+          <td></td>
+        <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
+      </tr>
+      <tr height="15px">
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
+          <td>: </td>
+            <?php foreach ($jumlah_data_MA as $jdA): ?>
+              <?php foreach ($jumlah_data_MB as $jdB): ?>
+                <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
               <?php endforeach;?>
             <?php endforeach;?>
             <td></td>
-          <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
-        </tr>
-        <tr height="15px">
             <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
-            <td>: </td>
-              <?php foreach ($jumlah_data_MA as $jdA): ?>
-                <?php foreach ($jumlah_data_MB as $jdB): ?>
-                  <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
-                <?php endforeach;?>
-              <?php endforeach;?>
-              <td></td>
-              <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
-        </tr>
-      </table>
+            <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
+      </tr>
+    </table>
+    <?php endif; ?>
       <!-- End Data Table -->
 
     </div>
@@ -219,11 +239,11 @@
                 Nama Program Studi
               </div>
                 <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
-                  <option class="dropdown-item" selected> - pilih program studi - </option>
+                  <option value="0" disabled="disabled" class="dropdown-item"> - pilih program studi - </option>
                   <?php
                     foreach ($prodi as $ps):
                   ?>
-                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item" selected><?= $ps['nama_prodi']?></option>
                   <?php endforeach;?>
                 </select>
   					</div>
@@ -254,6 +274,55 @@
             <input type="text" class="form-control mb-2" name="regulera" id="regulera" placeholder="Reguler" required>
             <input type="text" class="form-control" name="transfera" id="transfera" placeholder="Transfer" required>
           </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal Tambah Dosen -->
+<div class="modal fade" id="databaru_dosen" tabindex="-1" role="dialog" aria-labelledby="DataBaru_dosen" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="DataBaru">Tambah Data dosen Tetap PS</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<form action="<?= base_url('admin_prodi/tambah_dosen'); ?>" method="POST" class="needs-validation" novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Masukan Tahun Ajaran
+            </div>
+						<input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun Ajaran" required>
+					</div>
+          <div class="form-group">
+              <div class="invalid-feedback>">
+                Nama Program Studi
+              </div>
+                <select name="id_prodi" id="id_prodi" class="custom-select custom-select-sm">
+                  <option disabled="disabled" class="dropdown-item" selected> - pilih program studi - </option>
+                  <?php
+                    foreach ($prodi as $ps):
+                  ?>
+                    <option value="<?= $ps['id_prodi']?>" class="dropdown-item"><?= $ps['nama_prodi']?></option>
+                  <?php endforeach;?>
+                </select>
+  					</div>
+					<div class="form-group">
+            <div class="invalid-feedback>">
+              Jumlah dosen
+            </div>
+						<input type="text" class="form-control" name="jumlah_dosen" id="jumlah_dosen" placeholder="Jumlah Dosen" required>
+					</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Tambah</button>

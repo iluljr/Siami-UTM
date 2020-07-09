@@ -167,7 +167,7 @@
 					</div>
 					<div class="form-group">
 						<select name="level" id="level" class="form-control" required>
-							<option>- Pilih Level -</option>
+							<option disabled="disabled" selected>- Pilih Level -</option>
 							<?php foreach ($level as $l) : ?>
 								<option value="<?= $l['id']; ?>"><?= $l['level']; ?></option>
 							<?php endforeach; ?>
