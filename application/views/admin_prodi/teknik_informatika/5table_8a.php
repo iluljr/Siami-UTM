@@ -9,15 +9,15 @@
     <div class="card-body">
       <h4>Table 8a. IPK Lulusan</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_8a'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_8a'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Sekarang :</td>
+          <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -77,23 +77,6 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (empty($pilih_data)) : ?>
-  						<tr>
-  							<td colspan="12">
-  								<div class="alert alert-primary" role="alert">
-  									Silahkan Pilih Prodi terlebih dahulu!
-  								</div>
-  							</td>
-  						</tr>
-          <?php elseif (empty($view_table8a)) : ?>
-  						<tr>
-  							<td colspan="12">
-  								<div class="alert alert-danger" role="alert">
-  									Data not found!
-  								</div>
-  							</td>
-  						</tr>
-  					<?php endif; ?>
             <?php
             foreach ($view_table8a as $tb) :
             ?>
@@ -104,8 +87,8 @@
               <td><?= $tb['ipk_min']?></td>
               <td><?= $tb['ipk_rata']?></td>
               <td><?= $tb['ipk_max']?></td>
-              <td><?php echo anchor('admin/edit_tabel8a/'.$tb['id_tabel8a'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel8a/'.$tb['id_tabel8a'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?php echo anchor('admin_prodi/edit_tabel8a/'.$tb['id_tabel8a'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin_prodi/hapus_tabel8a/'.$tb['id_tabel8a'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>
@@ -118,11 +101,7 @@
           <?php foreach ($table8a_rata as $jml) : ?>
           <td>Rata-rata</td>
           <td>:</td>
-          <?php if ($jml['IPK_rata']==0) : ?>
-            <td>&nbsp;</td>
-          <?php else: ?>
-            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jml['IPK_rata']?></td>
-          <?php endif; ?>
+          <td><?= $jml['IPK_rata']?></td>
           <?php endforeach;?>
         </tr>
         <tr>
@@ -152,7 +131,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data8a'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_data8a'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">

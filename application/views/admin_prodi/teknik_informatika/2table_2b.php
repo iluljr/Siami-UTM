@@ -8,15 +8,15 @@
     </div>
     <div class="card-body">
       <h4>Table 2b. Mahasiswa Asing</h4>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_2b'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_2b'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Sekarang :</td>
+          <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -118,9 +118,9 @@
               <td><?= $tb2['jma_paruh']?></td>
               <td><?= $tb1['jma_paruh']?></td>
               <td><?= $tb['jma_paruh']?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-2),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.($tb['tahun']-1),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><?php echo anchor('admin/edit_tabel2b/'.$tb['tahun'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('admin_prodi/edit_tabel2b/'.($tb['tahun']-2),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('admin_prodi/edit_tabel2b/'.($tb['tahun']-1),('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><?php echo anchor('admin_prodi/edit_tabel2b/'.$tb['tahun'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
               </td>
             </tr>
               <?php endforeach;?>

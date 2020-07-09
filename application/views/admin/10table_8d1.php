@@ -176,11 +176,11 @@
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
-          <td colspan="2">Jika PBS < 60% , tuliskan 0</td>
+          <td colspan="2">Jika WT < 100% , tuliskan 0</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
-          <td colspan="2">Jika PBS >= 60%  tuliskan nilainya</td>
+          <td colspan="2">Jika WT >= 100%  tuliskan nilainya</td>
         </tr>
         <tr>
           <td>&nbsp;</td>

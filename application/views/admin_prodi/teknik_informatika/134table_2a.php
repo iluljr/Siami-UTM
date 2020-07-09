@@ -9,15 +9,15 @@
     <div class="card-body">
       <h4>Table 2a. Seleksi Mahasiswa Baru</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_2a'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_2a'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Sekarang :</td>
+          <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -83,15 +83,7 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($pilih_data)) : ?>
-  						<tr>
-  							<td colspan="12">
-  								<div class="alert alert-primary" role="alert">
-  									Silahkan Pilih Prodi terlebih dahulu!
-  								</div>
-  							</td>
-  						</tr>
-          <?php elseif (empty($view_table2a)) : ?>
+  					<?php if (empty($view_table2a)) : ?>
   						<tr>
   							<td colspan="12">
   								<div class="alert alert-danger" role="alert">
@@ -112,8 +104,8 @@
               <td><?= $tb['jmb_transfer']?></td>
               <td><?= $tb['jma_reguler']?></td>
               <td><?= $tb['jma_transfer']?></td>
-              <td><?php echo anchor('admin/edit_tabel2a/'.$tb['id_tabel2a'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel2a/'.$tb['id_tabel2a'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?php echo anchor('admin_prodi/edit_tabel2a/'.$tb['id_tabel2a'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin_prodi/hapus_tabel2a/'.$tb['id_tabel2a'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>
@@ -136,71 +128,63 @@
         </table>
       </div>
     </br>
-    <?php if (empty($pilih_data)) : ?>
-      <tr>
-        <td colspan="12">
-          &nbsp;
-        </td>
-      </tr>
-  <?php else: ?>
-    <table class="">
-      <tr>
-        <?php foreach ($jumlah_data as $jd): ?>
-          <td>Rasio pendaftar dan mahasiswa baru</td>
-          <td>:</td>
-          <?php if ($jd['pendaftar']==0) : ?>
-            <td>&nbsp;</td>
-          <?php else: ?>
-            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
-          <?php endif; ?>
-        <?php endforeach;?>
-        <td></td>
-        <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
-      </tr>
-      <tr>
-          <td>Jumlah Mahasiswa Aktif</td>
-          <td>: </td>
-          <?php foreach ($jumlah_data_MA as $jd2): ?>
-          <td align="center"><?= $jd2['mahasiswa_aktif']?></td>
+      <table class="">
+        <tr>
+          <?php foreach ($jumlah_data as $jd): ?>
+            <td>Rasio pendaftar dan mahasiswa baru</td>
+            <td>:</td>
+            <?php if ($jd['pendaftar']==0) : ?>
+              <td>&nbsp;</td>
+            <?php else: ?>
+              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['pendaftar']/$jd['jmb_reguler']?></td>
+            <?php endif; ?>
           <?php endforeach;?>
-      </tr>
-      <tr>
-          <td>Jumlah Dosen Tetap PS</td>
-          <td>: </td>
-          <?php foreach ($jumlah_dosen as $jdosen): ?>
-          <td align="center"><?= $jdosen['jumlah_dosen']?></td>
-          <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-          <?php endforeach;?>
-      </tr>
-      <tr>
-          <td>Rasio Dosen dan Mahasiswa</td>
-          <td>: </td>
-          <?php foreach ($jumlah_data_MA as $jd2): ?>
-            <?php foreach ($jumlah_dosen as $jdosen): ?>
-              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
+          <td></td>
+          <td align="center" bgcolor="#FAEBD7">IKU No.1</td>
+        </tr>
+        <tr>
+            <td>Jumlah Mahasiswa Aktif</td>
+            <td>: </td>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+            <td align="center"><?= $jd2['mahasiswa_aktif']?></td>
             <?php endforeach;?>
-          <?php endforeach;?>
-          <td></td>
-        <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
-      </tr>
-      <tr height="15px">
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
-          <td>: </td>
-            <?php foreach ($jumlah_data_MA as $jdA): ?>
-              <?php foreach ($jumlah_data_MB as $jdB): ?>
-                <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
+        </tr>
+        <tr>
+            <td>Jumlah Dosen Tetap PS</td>
+            <td>: </td>
+            <?php foreach ($jumlah_dosen as $jdosen): ?>
+            <td align="center"><?= $jdosen['jumlah_dosen']?></td>
+            <td align="center"><a href="" data-toggle="modal" data-target="#dosenEdit<?= $jdosen['id_dosen']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+            <?php endforeach;?>
+        </tr>
+        <tr>
+            <td>Rasio Dosen dan Mahasiswa</td>
+            <td>: </td>
+            <?php foreach ($jumlah_data_MA as $jd2): ?>
+              <?php foreach ($jumlah_dosen as $jdosen): ?>
+                <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd2['mahasiswa_aktif']/$jdosen['jumlah_dosen']?></td>
               <?php endforeach;?>
             <?php endforeach;?>
             <td></td>
-            <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
-      </tr>
-    </table>
-    <?php endif; ?>
+          <td align="center" bgcolor="#FAEBD7">IKU No.3</td>
+        </tr>
+        <tr height="15px">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Rasio mahasiswa baru terhadap total mahasiswa</td>
+            <td>: </td>
+              <?php foreach ($jumlah_data_MA as $jdA): ?>
+                <?php foreach ($jumlah_data_MB as $jdB): ?>
+                  <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jdB['mahasiswa_baru']/$jdA['mahasiswa_aktif']?></td>
+                <?php endforeach;?>
+              <?php endforeach;?>
+              <td></td>
+              <td align="center" bgcolor="#FAEBD7">IKU No.4</td>
+        </tr>
+      </table>
       <!-- End Data Table -->
 
     </div>
@@ -222,7 +206,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data2a'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_data2a'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">
@@ -292,7 +276,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('admin/edit_tabel2a_dosen/' . $jdosen['id_dosen']); ?>" method="POST">
+      <form action="<?= base_url('admin_prodi/edit_tabel2a_dosen/' . $jdosen['id_dosen']); ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
             <label for="username">Jumlah Dosen</label>

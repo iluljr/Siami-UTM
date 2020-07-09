@@ -12,11 +12,11 @@
       <form class="form-inline mb-2" action="<?= base_url('admin/table_8e1'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Ajaran :</td>
+          <td align="right">Tahun Sekarang :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                <option value="" class="dropdown-item" selected> - pilih tahun ajaran - </option>
+                <option value="" class="dropdown-item" selected> - pilih tahun sekarang - </option>
               <?php
                 foreach ($dropdown as $dd):
               ?>

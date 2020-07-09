@@ -7,17 +7,17 @@
       <h6 class="m-0 font-weight-bold text-primary">Sistem Audit Mutu Internal IAPS 4.0</h6>
     </div>
     <div class="card-body">
-      <h4>Table 8.d.2 Kesesuaian Bidang Kerja Kuliah</h4>
+      <h4>Table 8.d.1 Waktu Tunggu Lulusan</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_8d2'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_8d1'); ?>" method="post">
       <table align="center">
         <tr>
-          <td align="right">Tahun Sekarang :</td>
+          <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
               <?php foreach ($tahunsekarang_2b as $ts):?>
-                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <option value="<?= $ts['tahun']?>" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php endforeach;?>
               <?php
                 foreach ($dropdown as $dd):
@@ -61,9 +61,9 @@
               <th rowspan="2" colspan="2">Update</th>
             </tr>
             <tr>
-              <th>Rendah</th>
-              <th>Sedang</th>
-              <th>Tinggi</th>
+              <th>WT < 6 bulan</th>
+              <th>6 ≤ WT ≤ 18 bulan</th>
+              <th>WT > 18 bulan</th>
             </tr>
             <tr align="center">
               <td>1</td>
@@ -76,7 +76,7 @@
             </tr>
           </thead>
           <tbody>
-  					<?php if (empty($view_table8d2)) : ?>
+  					<?php if (empty($view_table8d1)) : ?>
   						<tr>
   							<td colspan="12">
   								<div class="alert alert-danger" role="alert">
@@ -86,17 +86,17 @@
   						</tr>
   					<?php endif; ?>
             <?php
-            foreach ($view_table8d2 as $tb) :
+            foreach ($view_table8d1 as $tb) :
             ?>
             <tr>
               <td width="150px"><?= $tb['tahun']?> / <?= $tb['tahun']+1?></td>
               <td><?= $tb['jml_lulus']?></td>
               <td><?= $tb['jml_lulus_ter']?></td>
-              <td><?= $tb['rendah']?></td>
-              <td><?= $tb['sedang']?></td>
-              <td><?= $tb['tinggi']?></td>
-              <td><?php echo anchor('admin/edit_table8d2/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_table8d2/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?= $tb['wt_6']?></td>
+              <td><?= $tb['wt_18']?></td>
+              <td><?= $tb['wt_lebih']?></td>
+              <td><?php echo anchor('admin_prodi/edit_table8d1/'.$tb['id_table8d1'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin_prodi/hapus_table8d1/'.$tb['id_table8d1'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php endforeach;?>
@@ -107,9 +107,9 @@
               <?php foreach ($jumlah_data as $jd): ?>
               <th><?= $jd['jml_lulus']?></th>
               <th><?= $jd['jml_lulus_ter']?></th>
-              <th><?= $jd['rendah']?></th>
-              <th><?= $jd['sedang']?></th>
-              <th><?= $jd['tinggi']?></th>
+              <th><?= $jd['wt_6']?></th>
+              <th><?= $jd['wt_18']?></th>
+              <th><?= $jd['wt_lebih']?></th>
               <?php endforeach;?>
               <th colspan="2">&nbsp;</th>
             </tr>
@@ -117,26 +117,43 @@
         </table>
       </div>
     </br>
-      <?php foreach ($jumlah_data as $jd): ?>
+    <?php foreach ($jumlah_data as $jd): ?>
       <table class="">
         <tr>
-          <td colspan="4">Jumlah lulusan yang sesuai bidang kategori tinggi</td>
+          <td colspan="4">Jumlah lulusan dengan waktu tunggu mendapatkan pekerjaan </td>
           <td>:</td>
-          <td><?= $jd['tinggi']?></td>
-        </tr>
-        <tr>
-          <td colspan="4">Jumlah lulusan terlacak</td>
-          <td>:</td>
-          <td><?= $jd['jml_lulus_ter']?></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td colspan="3">Persentase lulusan yang sesuai bidang</td>
-          <td>:</td>
-          <?php if ($jd['jml_lulus_ter']==0) : ?>
+          <?php if ($jd['wt_6']==0) : ?>
             <td>&nbsp;</td>
           <?php else: ?>
-            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= $jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']?></td>
+          <?php endif; ?>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+          <td>:</td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih'])?></td>
+          <?php endif; ?>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+          <td>:</td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
+          <?php endif; ?>
+        </tr>
+        <tr>
+          <td colspan="4">Persentase lulusan dengan waktu tunggu < 6 bulan</td>
+          <td>:</td>
+          <?php if ($jd['wt_6']==0) : ?>
+            <td>&nbsp;</td>
+          <?php else: ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['wt_6']/$jd['jml_lulus_ter'])*100?></td>
           <?php endif; ?>
         </tr>
         <tr>
@@ -150,12 +167,12 @@
           <td>IKU No.11</td>
           <td>Pemenuhan IKU </td>
           <td>:</td>
-          <?php if ($jd['jml_lulus_ter']==0) : ?>
+          <?php if ($jd['wt_6']==0) : ?>
             <td>&nbsp;</td>
           <?php else: ?>
-            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= ($jd['tinggi']/$jd['jml_lulus_ter'])*100?></td>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= (18-(($jd['wt_6']*3)+($jd['wt_18']*12)+($jd['wt_lebih']*24))/($jd['wt_6']+$jd['wt_18']+$jd['wt_lebih']))/3?></td>
           <?php endif; ?>
-          <td>(PBS > = 60%)</td>
+          <td>(100%)</td>
         </tr>
         <tr>
           <td colspan="3">&nbsp;</td>
@@ -165,15 +182,38 @@
           <td colspan="3">&nbsp;</td>
           <td colspan="2">Jika PBS >= 60%  tuliskan nilainya</td>
         </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td>Persentase responden minimum</td>
+          <td>:</td>
+          <?php if ($jd['jml_lulus'] >= 300): ?>
+            <td align="center" bgcolor="#00FF00" style="color:#ffffff;"> 30% </td>
+          <?php elseif($jd['jml_lulus'] < 300): ?>
+            <?php if ($jd['jml_lulus']==0) : ?>
+              &nbsp;
+            <?php else: ?>
+              <td align="center" bgcolor="#00FF00" style="color:#ffffff;"><?= 50-(($jd['jml_lulus']/300)*20) ?>%</td>
+            <?php endif; ?>
+          <?php endif; ?>
+        </tr>
       </table>
       <?php endforeach;?>
-      </br>
-      <p>RENDAH: jenis pekerjaan/posisi jabatan dalam pekerjaan tidak sesuai atau kurang sesuai
-        dengan profil lulusan yang direncanakan dalam dokumen kurikulum.
-        <br>SEDANG : Jenis pekerjaan/posisi jabatan dalam pekerjaan cukup sesuai dengan profil lulusan
-        yang direncanakan dalam dokumen kurikulum.
-        <br>TINGGI:  Jenis pekerjaan/posisi jabatan dalam pekerjaan sesuai atau sangat sesuai dengan
-        profil lulusan yang direncanakan dalam dokumen kurikulum</p>
+    </br>
+    <p>Ketentuan persentase responden lulusan:
+        <br>- untuk program studi dengan jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) ≥ 300 orang, maka Prmin = 30%.
+        <br>- untuk program studi dengan jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) < 300 orang, maka Prmin = 50% - ((NL / 300) x 20%)
+        <br>Jika persentase responden memenuhi ketentuan diatas, maka Skor akhir = Skor.
+        <br>Jika persentase responden tidak memenuhi ketentuan diatas, maka berlaku penyesuaian sebagai berikut: Skor akhir = (PJ / Prmin) x Skor.
+        <br>NL = Jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2)
+        <br>NJ = Jumlah lulusan dalam 3 tahun (TS-4 s.d. TS-2) yang terlacak
+        <br>PJ = Persentase lulusan yang terlacak = (NL / NJ) x 100%
+        <br>Prmin = Persentase responden minimum</p>
       <!-- End Data Table -->
 
     </div>
@@ -186,7 +226,7 @@
 <!-- End of Main Content -->
 
 
-<!-- Modal Tambah data table_8d2 -->
+<!-- Modal Tambah Mahasiswa -->
 <div class="modal fade" id="databaru" tabindex="-1" role="dialog" aria-labelledby="DataBaru" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -197,7 +237,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data8d2'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_data8d1'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">
@@ -234,9 +274,9 @@
               <div class="invalid-feedback>">
                 Jumlah lulusan dengan waktu tunggu mendapatkan pekerjaan
               </div>
-              <input type="text" class="form-control mb-2" name="rendah" id="wt_6" placeholder="Rendah" required>
-              <input type="text" class="form-control mb-2" name="sedang" id="wt_18" placeholder="Sedang" required>
-              <input type="text" class="form-control" name="tinggi" id="wt_lebih" placeholder="Tinggi" required>
+              <input type="text" class="form-control mb-2" name="wt_6" id="wt_6" placeholder="WT < 6 bulan" required>
+              <input type="text" class="form-control mb-2" name="wt_18" id="wt_18" placeholder="6 ≤ WT ≤ 18 bulan" required>
+              <input type="text" class="form-control" name="wt_lebih" id="wt_lebih" placeholder="WT > 18 bulan" required>
             </div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -6,14 +6,14 @@
     <div class="card-body">
       <h4>Table 8.c Masa Studi Lulusan</h4>
       <a href="" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#databaru"><i class="fas fa-fw fa-plus-square"></i> Tambah Data</a>
-      <form class="form-inline mb-2" action="<?= base_url('admin/table_8c'); ?>" method="post">
+      <form class="form-inline mb-2" action="<?= base_url('admin_prodi/table_8c'); ?>" method="post">
       <table align="center" class="mt-4">
         <tr>
-          <td align="right">Tahun Sekarang :</td>
+          <td align="right">Tahun Ajaran :</td>
           <td>
             <div class="">
               <select name="id_tahun" id="dropdown" class="custom-select custom-select-sm">
-                <option value="" class="dropdown-item" selected> - pilih tahun sekarang - </option>
+                <option value="" class="dropdown-item" selected> - pilih tahun ajaran - </option>
               <?php
                 foreach ($dropdown as $dd):
               ?>
@@ -102,8 +102,8 @@
               <td><?= $tb['ts']?></td>
               <td><?= $tb['ts_6']+$tb['ts_5']+$tb['ts_4']+$tb['ts_3']+$tb['ts_2']+$tb['ts_1']+$tb['ts']?></td>
               <td><?= $tb['rata_studi']?></td>
-              <td><?php echo anchor('admin/edit_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
-              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin/hapus_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
+              <td><?php echo anchor('admin_prodi/edit_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></div>'));?></td>
+              <td><div onclick="javascript: return confirm('Anda yakin ingin menghapus data ini ?')"><?php echo anchor('admin_prodi/hapus_tabel8c/'.$tb['id_tabel8c'],('<div class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></div>'));?></div>
               </td>
             </tr>
           <?php
@@ -271,7 +271,7 @@
 				</button>
 			</div>
 
-			<form action="<?= base_url('admin/tambah_data8c'); ?>" method="POST" class="needs-validation" novalidate>
+			<form action="<?= base_url('admin_prodi/tambah_data8c'); ?>" method="POST" class="needs-validation" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
             <div class="invalid-feedback>">

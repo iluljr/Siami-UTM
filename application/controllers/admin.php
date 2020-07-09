@@ -27,7 +27,7 @@ class admin extends CI_Controller
 		}
 
 		$data['judul'] = 'Data Audit';
-		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data'] = $this->model_admin->datatable_2a($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
@@ -93,8 +93,9 @@ class admin extends CI_Controller
 			}
 		}
 
-		$data['view_table2a'] = $this->model_log->gettable2a($data['id_tahun'],$data['id_prodi']);
-		$data['jumlah_data'] = $this->model_log->datatable_2a($data['id_tahun'],$data['id_prodi']);
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
+		$data['view_table2a'] = $this->model_admin->gettable2a($data['id_tahun'],$data['id_prodi']);
+		$data['jumlah_data'] = $this->model_admin->datatable_2a($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data_MA'] = $this->model_admin->datatable_2a_MA($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_dosen'] = $this->model_admin->datatable_2a_Dosen($data['id_tahun'],$data['id_prodi']);
 		$data['jumlah_data_MB'] = $this->model_admin->datatable_2a_MB($data['id_tahun'],$data['id_prodi']);
@@ -289,6 +290,7 @@ class admin extends CI_Controller
 			$data['id_prodi'] = $this->session->userdata('id_prodi');
 		}
 
+		$data['pilih_data'] = $this->model_admin->pilih_data($data['id_tahun'],$data['id_prodi']);
 		$data['view_table8a'] = $this->model_admin->gettable8a($data['id_tahun'],$data['id_prodi']);
 		$data['tahunsekarang_2b']=$this->model_admin->tahunsekarang_2b($data['id_tahun']);
 		$data['table8a_rata']=$this->model_admin->table8a_rata($data['id_tahun'],$data['id_prodi']);
