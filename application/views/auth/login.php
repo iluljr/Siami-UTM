@@ -17,13 +17,13 @@
             <input class="input100" type="password" name="password" placeholder="Masukkan Password">
             <span class="focus-input100" data-symbol="&#xf190;"></span>
           </div>
-          
+
           <div class="text-right p-t-8 p-b-31">
             <a href="#">
               Lupa Password?
             </a>
           </div>
-          
+
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="text-center">
-            <br><p><a class="small" href="<?= base_url('auth/regis'); ?>">Belum Memiliki Akun? Buat Sekarang</a></p>
+            <br><p><a class="small" href="#">Belum Memiliki Akun? Silahkan Hubungi admin untuk pembuatan akun</a></p>
           </div>
         </form>
       </div>
